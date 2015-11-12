@@ -1,0 +1,11 @@
+body {
+  background-color: #333;
+  margin: 0 !important;
+}
+
+#netmag-phaser {
+  width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  cursor: pointer;
+}
