@@ -1,0 +1,1313 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"sp",
+				"speed"
+			],
+			[
+				"cu",
+				"currentFrame"
+			],
+			[
+				"at",
+				"attackAnimation"
+			],
+			[
+				"dol",
+				"dolphinExp"
+			],
+			[
+				"socket",
+				"socketId"
+			],
+			[
+				"sock",
+				"socketId"
+			],
+			[
+				"so",
+				"socketId"
+			],
+			[
+				"app",
+				"apply"
+			],
+			[
+				"create",
+				"createInfo"
+			],
+			[
+				"sh",
+				"showCreation"
+			],
+			[
+				"border",
+				"border-color: "
+			],
+			[
+				"l",
+				"LogArray"
+			],
+			[
+				"inval",
+				"invalidSquaresWithoutSpace"
+			],
+			[
+				"e",
+				"errors"
+			],
+			[
+				"sq",
+				"squareSize"
+			],
+			[
+				"GetAr",
+				"GetArrayToSolve"
+			],
+			[
+				"cl",
+				"clientWidth"
+			],
+			[
+				"Set",
+				"SetFixedNumbers"
+			],
+			[
+				"GetA",
+				"GetArrayToSolve"
+			],
+			[
+				"lo",
+				"logArray"
+			],
+			[
+				"GetRem",
+				"GetRemovableCase"
+			],
+			[
+				"va",
+				"validNumbers"
+			],
+			[
+				"numberTo",
+				"numberToPlace"
+			],
+			[
+				"num",
+				"numberToPlace"
+			],
+			[
+				"pro",
+				"propertyName"
+			],
+			[
+				"li",
+				"listContact"
+			],
+			[
+				"cmb",
+				"cmbOrderDir"
+			],
+			[
+				"cmbOrd",
+				"cmbOrderBy"
+			],
+			[
+				"siz",
+				"font-size"
+			],
+			[
+				"btn",
+				"btnNew"
+			],
+			[
+				"getE",
+				"getElementById"
+			],
+			[
+				"h",
+				"href	Attr"
+			],
+			[
+				"t",
+				"type	Attr"
+			],
+			[
+				"back",
+				"background-color"
+			],
+			[
+				"for",
+				"forEach"
+			],
+			[
+				"st",
+				"strokeStyle"
+			],
+			[
+				"scr",
+				"screenX1"
+			],
+			[
+				"getS",
+				"getSentence"
+			],
+			[
+				"isN",
+				"isNum"
+			],
+			[
+				"isOp",
+				"isValidOperator"
+			],
+			[
+				"sc",
+				"screenX1"
+			],
+			[
+				"delete",
+				"deleteLink"
+			],
+			[
+				"lines",
+				"getLines"
+			],
+			[
+				"get",
+				"getLineByIndex"
+			],
+			[
+				"inne",
+				"innerText"
+			],
+			[
+				"defa",
+				"defaultNoValueText"
+			],
+			[
+				"val",
+				"value"
+			],
+			[
+				"new",
+				"newString"
+			],
+			[
+				"name",
+				"data-name"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"si",
+				"sizeY"
+			],
+			[
+				"scre",
+				"screenY1"
+			],
+			[
+				"scree",
+				"screenY2"
+			],
+			[
+				"scn",
+				"screenX1"
+			],
+			[
+				"value",
+				"valueToDo"
+			],
+			[
+				"par",
+				"parserTest"
+			],
+			[
+				"ope",
+				"operators"
+			],
+			[
+				"number",
+				"numbersToParse"
+			],
+			[
+				"numb",
+				"numbersToParse"
+			],
+			[
+				"opera",
+				"operators"
+			],
+			[
+				"ret",
+				"retVal"
+			],
+			[
+				"op",
+				"operator"
+			],
+			[
+				"getL",
+				"getLineByIndex"
+			],
+			[
+				"s",
+				"screenY"
+			],
+			[
+				"i",
+				"innerHeight"
+			],
+			[
+				"data",
+				"dataTransfer"
+			],
+			[
+				"key",
+				"keyCode"
+			],
+			[
+				"inn",
+				"innerText"
+			],
+			[
+				"an",
+				"anotherpage"
+			],
+			[
+				"mar",
+				"margin"
+			],
+			[
+				"addL",
+				"addLine"
+			],
+			[
+				"dele",
+				"deleteLine"
+			],
+			[
+				"prot",
+				"prototype"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "Il était une fois une petite licorne qui avait fai",
+			"settings":
+			{
+				"buffer_size": 2506,
+				"line_ending": "Windows",
+				"name": "Il était une fois une petite licorne qui avait fai"
+			}
+		},
+		{
+			"file": "package.json",
+			"settings":
+			{
+				"buffer_size": 529,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "game/states/play.js",
+			"settings":
+			{
+				"buffer_size": 589,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "manifest.json",
+			"settings":
+			{
+				"buffer_size": 313,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Gruntfile.js",
+			"settings":
+			{
+				"buffer_size": 2945,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "dist/js/game.js",
+			"settings":
+			{
+				"buffer_size": 11681,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "game/states/preload.js",
+			"settings":
+			{
+				"buffer_size": 1187,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "css/main.css",
+			"settings":
+			{
+				"buffer_size": 5955,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "css/styles.css",
+			"settings":
+			{
+				"buffer_size": 157,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "game/states/menu.js",
+			"settings":
+			{
+				"buffer_size": 979,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "game/main.js",
+			"settings":
+			{
+				"buffer_size": 460,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "dist/index.html",
+			"settings":
+			{
+				"buffer_size": 509,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "game/objects/entity/player.js",
+			"settings":
+			{
+				"buffer_size": 506,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "game/objects/entity/friend.js",
+			"settings":
+			{
+				"buffer_size": 485,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "game/objects/sprites/dolphin.js",
+			"settings":
+			{
+				"buffer_size": 5663,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 81.0,
+		"last_filter": "Package Control: insta",
+		"selected_items":
+		[
+			[
+				"Package Control: insta",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 400.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/Users/spaquet/Documents/Chrome_app/dolphin",
+		"/C/Users/spaquet/Documents/Chrome_app/dolphin/dist",
+		"/C/Users/spaquet/Documents/Chrome_app/dolphin/dist/js",
+		"/C/Users/spaquet/Documents/Chrome_app/dolphin/game",
+		"/C/Users/spaquet/Documents/Chrome_app/dolphin/game/objects",
+		"/C/Users/spaquet/Documents/Chrome_app/dolphin/game/objects/entity",
+		"/C/Users/spaquet/Documents/Chrome_app/dolphin/game/objects/sprites",
+		"/C/Users/spaquet/Documents/Chrome_app/dolphin/game/states"
+	],
+	"file_history":
+	[
+		"/C/Users/spaquet/Documents/Chrome_app/github/dolphin/README.md",
+		"/C/Users/spaquet/Documents/Chrome_app/dolphin/README.md",
+		"/C/Users/spaquet/Documents/Chrome_app/dolphin/index.html",
+		"/C/Users/spaquet/Documents/Chrome_app/dolphin/assets/sprites.json",
+		"/C/Users/spaquet/Documents/Chrome_app/desktop draw/javascript/shapes/square.js",
+		"/C/Users/spaquet/Documents/Chrome_app/desktop draw/html/index.html",
+		"/C/Users/spaquet/Documents/Chrome_app/desktop draw/javascript/shapes/circle.js",
+		"/C/Users/spaquet/Documents/Chrome_app/desktop draw/javascript/shapes/paper.js",
+		"/C/Users/spaquet/Documents/Chrome_app/desktop draw/javascript/drawing.js",
+		"/C/Users/spaquet/Documents/Chrome_app/mandala/index.html",
+		"/C/Users/spaquet/Documents/Chrome_app/nodejs/tcpServer/client/view/menu.html",
+		"/C/Users/spaquet/Documents/Chrome_app/basic angular boostrap/css/online.css",
+		"/C/Users/spaquet/Documents/Chrome_app/basic angular boostrap/html/index.html",
+		"/C/Users/spaquet/Documents/Chrome_app/basic angular boostrap/javascript/main.js",
+		"/C/Users/spaquet/Documents/Chrome_app/nodejs/tcpServer/server/server.js",
+		"/C/Users/spaquet/Documents/Chrome_app/nodejs/tcpServer/client/javascript/controller.js",
+		"/C/Users/spaquet/Documents/Chrome_app/nodejs/tcpServer/server/main.js",
+		"/C/Users/spaquet/Documents/Chrome_app/nodejs/tcpServer/server/index.html",
+		"/C/Users/spaquet/Documents/Chrome_app/nodejs/tcpServer/client/javascript/main.js",
+		"/C/Users/spaquet/Documents/Chrome_app/nodejs/tcpServer/client/dist/es6-shim.js",
+		"/C/Users/spaquet/Documents/Chrome_app/nodejs/tcpServer/client/html/index.html",
+		"/C/Users/spaquet/Documents/Chrome_app/nodejs/tcpServer/client/server/server.js",
+		"/C/Users/spaquet/Documents/Chrome_app/nodejs/tcpServer/client/javascript/view.js",
+		"/C/Users/spaquet/Documents/Chrome_app/nodejs/tcpServer/server/manifest.json",
+		"/C/Users/spaquet/Documents/Chrome_app/nodejs/tcpServer/server/tcpserver.js",
+		"/C/Users/spaquet/Documents/Chrome_app/nodejs/tcpServer/client/dist/es6-module-loader.js",
+		"/C/Users/spaquet/Documents/Chrome_app/nodejs/tcpServer/client/dist/traceur.js",
+		"/C/Users/spaquet/Documents/Chrome_app/nodejs/tcpServer/client/app/system.config.js",
+		"/C/Users/spaquet/Documents/Chrome_app/nodejs/tcpServer/client/app/index.html",
+		"/C/Users/spaquet/Documents/Chrome_app/nodejs/tcpServer/client/app/app.es6",
+		"/C/Users/spaquet/Documents/Chrome_app/nodejs/tcpServer/client/dist/es6-module-loader-sans-promises.js",
+		"/C/Users/spaquet/Documents/Chrome_app/nodejs/tcpServer/client/dist/system-csp-production.js",
+		"/C/Users/spaquet/Documents/Chrome_app/nodejs/tcpServer/client/javascript/system@0.16.js",
+		"/C/Users/spaquet/Documents/Chrome_app/nodejs/agar/client/game/states/boot.js",
+		"/C/Users/spaquet/Desktop/maze/phaser.min.js",
+		"/C/Users/spaquet/Documents/Chrome_app/nodejs/agar/client/game/main.js",
+		"/C/Users/spaquet/Documents/Chrome_app/nodejs/agar/client/game/states/play.js",
+		"/C/Users/spaquet/Documents/Chrome_app/nodejs/agar/client/Gruntfile.js",
+		"/C/Users/spaquet/Documents/Chrome_app/nodejs/agar/client/dist/index.html",
+		"/C/Users/spaquet/Documents/Chrome_app/desktop inspection/javascript/main.js",
+		"/C/Users/spaquet/Documents/Chrome_app/nodejs/websocket/server/server.js",
+		"/C/Users/spaquet/Documents/Chrome_app/nodejs/websocket/client/html/index.html",
+		"/C/Users/spaquet/Documents/Chrome_app/minions/www/javascript/directive/sound.js",
+		"/C/Users/spaquet/Documents/Chrome_app/minions/www/scss/main.scss",
+		"/C/Users/spaquet/Documents/Chrome_app/minions/www/html/index.html",
+		"/C/Users/spaquet/Documents/Chrome_app/minions/www/javascript/app.js",
+		"/C/Users/spaquet/Documents/Chrome_app/minions/www/view/app.html",
+		"/C/Users/spaquet/Documents/Chrome_app/minions/www/view/partials/off-sidebar.html",
+		"/C/Users/spaquet/Documents/Chrome_app/minions/www/angular_plugins/angular-ui-switch/angular-ui-switch.js",
+		"/C/Users/spaquet/Documents/Chrome_app/minions/www/css/main.css",
+		"/C/Users/spaquet/Documents/Chrome_app/timesheets/www/javascript/directive/ripple.js",
+		"/C/Users/spaquet/Documents/Chrome_app/timesheets/node_modules/gulp/index.js",
+		"/C/Users/spaquet/Documents/Chrome_app/timesheets/www/javascript/controller.js",
+		"/C/Documents and Settings/spaquet/Mes documents/Chrome app/sudoku desktop/javascript/desktop maze.sublime-project",
+		"/C/Documents and Settings/spaquet/Mes documents/Chrome app/contactDictionnary desktop/javascript/controllerEvent.js",
+		"/C/Documents and Settings/spaquet/Mes documents/Chrome app/contactDictionnary desktop/javascript/formValidation.js",
+		"/C/Documents and Settings/spaquet/Mes documents/Chrome app/contactDictionnary desktop/javascript/contact.js",
+		"/C/Documents and Settings/spaquet/Mes documents/Chrome app/contactDictionnary desktop/javascript/model.js",
+		"/C/Documents and Settings/spaquet/Application Data/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
+		"/C/Documents and Settings/spaquet/Application Data/Sublime Text 3/Packages/Default/Default (Windows).sublime-keymap",
+		"/C/Documents and Settings/spaquet/Mes documents/Chrome app/contactDictionnary desktop/alertBoxCont.js",
+		"/C/Documents and Settings/spaquet/Application Data/Sublime Text 2/Packages/User/Distraction Free.sublime-settings",
+		"/C/Documents and Settings/spaquet/Mes documents/Chrome app/desktop test 21354432/line.js",
+		"/C/Documents and Settings/spaquet/Application Data/Sublime Text 2/Packages/User/Default (Windows).sublime-keymap",
+		"/C/Documents and Settings/spaquet/Mes documents/Chrome app/desktop test 21354432/index.html"
+	],
+	"find":
+	{
+		"height": 38.0
+	},
+	"find_in_files":
+	{
+		"height": 90.0,
+		"where_history":
+		[
+			"C:\\Users\\spaquet\\Documents\\Chrome_app\\nodejs\\tcpServer\\client\\javascript",
+			"C:\\Users\\spaquet\\Documents\\Chrome_app\\nodejs\\tcpServer\\client",
+			"C:\\Users\\spaquet\\Documents\\Chrome_app\\nodejs\\tcpServer\\client\\javascript",
+			"C:\\Users\\spaquet\\Documents\\Chrome_app\\nodejs\\tcpServer",
+			"C:\\Users\\spaquet\\Documents\\Chrome_app\\minions\\www",
+			"",
+			"selection",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"arcad",
+			"this.game.input.activePointer",
+			"function d",
+			"dolph",
+			"game",
+			"dolhpin",
+			"client",
+			"to_client",
+			"ab2str",
+			"str2ab",
+			"chrome.sockets.tcp.onReceive.addListener",
+			"send",
+			"str2ab",
+			"socketListener",
+			"chrome.sockets.tcp.send",
+			"sendMessage",
+			"connect",
+			"timeApp",
+			"function assign(target, source)",
+			"= void 0",
+			"var key = void 0",
+			"System.registerModule(\"traceur@0.0.82/src/semantics/VariableBinder",
+			"getVariableBindingNames",
+			"getLexicalBindingNames",
+			"getVariableBindingNames",
+			"function (root, factory) {",
+			"// UMD (Universal Module Definition)",
+			"getVariableBindingNames",
+			"document.write",
+			"commandWindow",
+			"_onWriteComplete",
+			"sendMessage",
+			"pause",
+			"create",
+			"listen",
+			"0x000000",
+			"mazeHeight",
+			"mazeGraphics",
+			"game",
+			"Statesupdate",
+			"stateUpdate",
+			"slider",
+			"off-s",
+			"sound",
+			"inlin",
+			"#d43f3a",
+			"btn",
+			"current",
+			"active",
+			"datepick",
+			"datepicker",
+			"getEm",
+			"length",
+			"SetNumber",
+			"LogArray",
+			"Math",
+			"GetEmptyPosition",
+			"SetValidNumbers",
+			"console.log",
+			"GetEmptyPosition",
+			"getNumber",
+			"GenerateGrid",
+			"arr[0][",
+			"for",
+			"sortContactBy",
+			"redrawUI",
+			"redra",
+			"40",
+			"lineTemplate",
+			"	var maxId = 0;",
+			"NO_ID",
+			"setInputValue",
+			"storageLoad",
+			"none",
+			"drawLi",
+			".value",
+			"displa",
+			"none",
+			"style",
+			"isNumber",
+			"canvas",
+			"formatNumber",
+			"drawLine",
+			"keyup",
+			"drawLi",
+			"isNumber",
+			"isN",
+			"key",
+			"[x]",
+			"execute",
+			"append",
+			"addLin",
+			"drawLin",
+			"refreshCanvas",
+			"refreshC",
+			"refreshCanvas",
+			"execute",
+			"execut",
+			"execu",
+			"block",
+			"isValidOperator",
+			"Line",
+			"innerT",
+			"clear",
+			"console",
+			"lineTemplate",
+			"todo",
+			"getId",
+			"getLine",
+			"getIndexOfLine",
+			"getId",
+			"getLine",
+			"setTodos",
+			"function",
+			"notifyListeners",
+			"reset",
+			"addTodo",
+			"clearTodos",
+			"addListener",
+			"archiveDone"
+		],
+		"highlight": false,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"arr[1][",
+			"function2"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": false
+	},
+	"folders":
+	[
+		{
+			"path": "C:\\Users\\spaquet\\Documents\\Chrome_app\\dolphin"
+		}
+	],
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "Il était une fois une petite licorne qui avait fai",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2506,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2213,
+								2213
+							]
+						],
+						"settings":
+						{
+							"auto_name": "Il était une fois une petite licorne qui avait fai",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 14,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "package.json",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 529,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								20,
+								20
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 13,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "game/states/play.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 589,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								321,
+								321
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "manifest.json",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 313,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								170,
+								170
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "Gruntfile.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2945,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2684,
+								2684
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1320.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "dist/js/game.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 11681,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1093,
+								1093
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "game/states/preload.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1187,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								261,
+								261
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "css/main.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5955,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								404,
+								383
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 12,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "css/styles.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 157,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								76,
+								76
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 11,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "game/states/menu.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 979,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								249,
+								249
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "game/main.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 460,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								460
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 9.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "dist/index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 509,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 12,
+					"file": "game/objects/entity/player.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 506,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								231,
+								231
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 66.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "game/objects/entity/friend.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 485,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								223,
+								223
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 14,
+					"file": "game/objects/sprites/dolphin.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5663,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								631,
+								631
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 30.0
+	},
+	"input":
+	{
+		"height": 32.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.151576123407,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "",
+	"replace":
+	{
+		"height": 56.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"mainc",
+				"www\\javascript\\controller\\mainCtrl.js"
+			],
+			[
+				"top-na",
+				"www\\view\\partials\\top-navbar.html"
+			],
+			[
+				"tile",
+				"www\\javascript\\directive\\tile-sound.js"
+			],
+			[
+				"mainctr",
+				"www\\javascript\\controller\\mainCtrl.js"
+			],
+			[
+				"main.scss",
+				"www\\scss\\main.scss"
+			],
+			[
+				"index",
+				"www\\html\\index.html"
+			],
+			[
+				"index.html",
+				"www\\html\\index.html"
+			],
+			[
+				"off-s",
+				"www\\view\\partials\\off-sidebar.html"
+			],
+			[
+				"tile-",
+				"www\\javascript\\directive\\tile-sound.js"
+			],
+			[
+				"main",
+				"www\\scss\\main.scss"
+			],
+			[
+				"main.css",
+				"www\\css\\main.css"
+			],
+			[
+				"index.",
+				"www\\html\\index.html"
+			],
+			[
+				"ripple",
+				"www\\javascript\\directive\\ripple.js"
+			],
+			[
+				"index.ht",
+				"www\\html\\index.html"
+			],
+			[
+				"previewc",
+				"www\\javascript\\controller\\previewCtrl.js"
+			],
+			[
+				"pre",
+				"www\\view\\preview.html"
+			],
+			[
+				"date.",
+				"www\\javascript\\service\\date.js"
+			],
+			[
+				"dash",
+				"www\\javascript\\controller\\dashboardCtrl.js"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 1,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 189.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

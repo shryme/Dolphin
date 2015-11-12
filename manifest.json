@@ -1,0 +1,12 @@
+{
+  "manifest_version": 2,
+  "name": "Dolphin",
+  "version": "1",
+  "app": {
+    "background": {
+      "scripts": ["main.js"]
+    }
+  },
+  "permissions": ["storage", "notifications", "http://localhost:8080/", "http://192.168.111.117:8080/"],
+  "icons": { "16": "image/pikachu.png", "128": "image/pikachu.png" }
+}
