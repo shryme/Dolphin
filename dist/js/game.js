@@ -102,6 +102,8 @@ function Dolphin(game, group, x, y) {
 	this.sprite.body.allowRotation = false;
 	this.sprite.anchor.setTo(.5, .5);
 
+	this.sprite.body.setSize(75, 50, 0, 0);
+
 
 	var list = new Array();
 	var listXY = new Array();
