@@ -8,9 +8,7 @@ function Play() {}
 Play.prototype = {
 	create: function() {
 
-		this.game.physics.startSystem(Phaser.Physics.P2JS);
-
-    	// this.game.physics.p2.updateBoundsCollisionGroup();
+		this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
 		// background
 		this.bg = this.game.add.sprite(0, 0, 'background');
@@ -29,27 +27,15 @@ Play.prototype = {
 		//Set background size with the size if the tileset
 		this.bg.height = this.map.widthInPixels;
 		this.bg.width = this.map.heightInPixels;
-
-
-
-
-
-		this.game.physics.p2.convertTilemap(this.map, this.blockLayer);
-
-
-		this.game.physics.p2.setImpactEvents(true);
+		this.game.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
 
 
 
 		this.list = new Array();
 
-		//Group of friends, this contains only sprite
-		this.groupFriends = this.game.add.group();
-
+		//Group of dolphins
 		this.groupDolphins = this.game.add.group();
 
-		this.groupDolphins.enableBody = true;
-		this.groupDolphins.physicsBodyType = Phaser.Physics.P2JS;
 
 		//Us
 		this.player = new Player(this.game, this.groupDolphins);
@@ -66,7 +52,6 @@ Play.prototype = {
 		//Add camera to follow our player
 		this.game.camera.follow(this.player.entity.sprite);
 
-		this.game.physics.p2.setBoundsToWorld(true, true, true, true, false);
 
 
 	},
@@ -84,14 +69,27 @@ Play.prototype = {
 		var blocks = this.blockLayer;
 		this.list.forEach(function(f) {
 			f.update();
+			game.physics.arcade.collide(f.entity.sprite, blocks);
 		});
+
+		//Collide with friends
+		this.game.physics.arcade.collide(this.groupDolphins);
+
+		//Collide with blocks
+		this.game.physics.arcade.collide(this.player.entity.sprite, this.blockLayer);
 
 	},
 
 	render: function() {
-		this.game.debug.cameraInfo(this.game.camera, 32, 32);
 
-		// this.game.debug.body(this.player.entity.sprite);
+		this.game.debug.bodyInfo(this.player.entity.sprite, 32, 32);
+		this.game.debug.body(this.player.entity.sprite);
+
+
+		var game = this.game;
+		this.list.forEach(function(f) {
+			game.debug.body(f.entity.sprite);
+		});
 
 	}
 

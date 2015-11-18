@@ -14,12 +14,11 @@ function Dolphin(game, group, x, y) {
 		this.sprite = this.game.add.sprite(x, y, 'dolphin', 'r1.png');
 	}
 
-
-	this.game.physics.p2.enable(this.sprite, true);
-	this.sprite.body.fixedRotation = true;
+	this.game.physics.arcade.enableBody(this.sprite);
+	this.sprite.body.gravity.y = 0;
 	this.sprite.body.collideWorldBounds = true;
 
-
+	this.sprite.body.allowRotation = false;
 	this.sprite.anchor.setTo(.5, .5);
 
 
@@ -138,12 +137,10 @@ Dolphin.prototype = {
 			speed = 300;
 
 		if (x === undefined && y === undefined) {
-			this.sprite.body.rotation = this.game.physics.arcade.moveToPointer(this.sprite, speed, this.game.input.activePointer, 500);
-			this.sprite.rotation = this.sprite.body.rotation;
+			this.sprite.rotation = this.game.physics.arcade.moveToPointer(this.sprite, speed, this.game.input.activePointer, 500);
 		}
 		else {
 			this.sprite.rotation = this.game.physics.arcade.moveToXY(this.sprite, x, y, speed);
-			this.sprite.body.rotation = this.sprite.rotation;
 		}
 
 
@@ -155,7 +152,7 @@ Dolphin.prototype = {
 		else
 			this.sprite.scale.y = 1;
 
-		this.sprite.body.data.updateAABB();
+		// this.sprite.body.data.updateAABB();
 
 	}
 }
