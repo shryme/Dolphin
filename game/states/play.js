@@ -8,6 +8,8 @@ function Play() {}
 Play.prototype = {
 	create: function() {
 
+		this.showDebug = true;
+
 		this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
 		// background
@@ -52,7 +54,8 @@ Play.prototype = {
 		//Add camera to follow our player
 		this.game.camera.follow(this.player.entity.sprite);
 
-
+		this.debugKey = this.game.input.keyboard.addKey(Phaser.Keyboard.Q);
+		this.debugKey.onDown.add(this.toggleDebug, this);
 
 	},
 
@@ -82,15 +85,30 @@ Play.prototype = {
 
 	render: function() {
 
-		this.game.debug.bodyInfo(this.player.entity.sprite, 32, 32);
-		this.game.debug.body(this.player.entity.sprite);
+		if (this.showDebug) {
+
+			this.game.debug.bodyInfo(this.player.entity.sprite, 32, 32);
+			this.game.debug.body(this.player.entity.sprite);
 
 
-		var game = this.game;
-		this.list.forEach(function(f) {
-			game.debug.body(f.entity.sprite);
-		});
+			var game = this.game;
+			this.list.forEach(function(f) {
+				game.debug.body(f.entity.sprite);
+			});
 
+		}
+
+	},
+
+
+
+	toggleDebug: function() {
+		this.showDebug = !this.showDebug;
+
+		if (!this.showDebug)
+	    {
+			this.game.debug.reset();
+		}
 	}
 
 };
