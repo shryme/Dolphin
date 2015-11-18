@@ -96,7 +96,7 @@ function Dolphin(game, group, x, y) {
 	}
 
 
-	this.game.physics.p2.enable(this.sprite);
+	this.game.physics.p2.enable(this.sprite, true);
 	this.sprite.body.fixedRotation = true;
 	this.sprite.body.collideWorldBounds = true;
 
@@ -177,9 +177,6 @@ Dolphin.prototype = {
 			this.sprite.animations.play('attack');
 
 			if (x === undefined && y === undefined) {
-				// x = this.game.input.activePointer.clientX;
-				// y = this.game.input.activePointer.clientY;
-
 				x = this.game.input.worldX;
 				y = this.game.input.worldY;
 			}
@@ -222,16 +219,13 @@ Dolphin.prototype = {
 			speed = 300;
 
 		if (x === undefined && y === undefined) {
-			// this.sprite.rotation = this.game.physics.arcade.moveToPointer(this.sprite, speed, this.game.input.activePointer, 500);
 			this.sprite.body.rotation = this.game.physics.arcade.moveToPointer(this.sprite, speed, this.game.input.activePointer, 500);
 			this.sprite.rotation = this.sprite.body.rotation;
-			// this.sprite.rotation = this.game.physics.arcade.moveToPointer(this.sprite, speed, this.game.input.activePointer, 500) - Math.PI/2
 		}
 		else {
 			this.sprite.rotation = this.game.physics.arcade.moveToXY(this.sprite, x, y, speed);
 			this.sprite.body.rotation = this.sprite.rotation;
 		}
-
 
 
 		this.sprite.animations.play('moveX');
@@ -434,7 +428,7 @@ Play.prototype = {
 	render: function() {
 		this.game.debug.cameraInfo(this.game.camera, 32, 32);
 
-		this.game.debug.body(this.player.entity.sprite);
+		// this.game.debug.body(this.player.entity.sprite);
 
 	}
 

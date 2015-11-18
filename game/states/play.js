@@ -91,7 +91,7 @@ Play.prototype = {
 	render: function() {
 		this.game.debug.cameraInfo(this.game.camera, 32, 32);
 
-		this.game.debug.body(this.player.entity.sprite);
+		// this.game.debug.body(this.player.entity.sprite);
 
 	}
 
