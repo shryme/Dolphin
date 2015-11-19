@@ -61,22 +61,27 @@ module.exports = function (grunt) {
           { expand: true, flatten: true, src: ['game/plugins/*.js'], dest: 'dist/js/plugins/' },
           { expand: true, flatten: true, src: ['bower_components/**/build/*.js'], dest: 'dist/js/' },
           { expand: true, src: ['css/**'], dest: 'dist/' },
-          { expand: true, src: ['index.html'], dest: 'dist/' }
+          { expand: true, src: ['index.html'], dest: 'dist/' },
+
+          { expand: true, src: ['index.html'], dest: '../DolphinCrx/' },
+          { expand: true, src: ['dist/**'], dest: '../DolphinCrx/' },
+          { expand: true, src: ['image/**'], dest: '../DolphinCrx/' },
+          { expand: true, src: ['assets/**'], dest: '../DolphinCrx/' },
+          { expand: true, src: ['css/**'], dest: '../DolphinCrx/' },
+          { expand: true, src: ['main.js'], dest: '../DolphinCrx/' },
+          { expand: true, src: ['manifest.json'], dest: '../DolphinCrx/' },
         ]
       }
     },
-    browserify: {
-      build: {
-        src: ['game/main.js'],
-        dest: 'dist/js/game.js'
-      }
-    }
+    clean: ['../DolphinCrx']
+
   });
 
-  grunt.registerTask('build', ['buildBootstrapper', 'browserify','copy']);
+  grunt.registerTask('build', ['buildBootstrapper', 'browserify', 'clean', 'copy']);
   grunt.registerTask('serve', ['build', 'connect:livereload', 'open', 'watch']);
   grunt.registerTask('default', ['serve']);
   grunt.registerTask('prod', ['build', 'copy']);
+  grunt.registerTask('gen', ['clean', 'copy']);
 
   grunt.registerTask('buildBootstrapper', 'builds the bootstrapper file correctly', function() {
     var stateFiles = grunt.file.expand('game/states/*.js');
@@ -94,4 +99,6 @@ module.exports = function (grunt) {
     bootstrapper = grunt.template.process(bootstrapper,{data: config});
     grunt.file.write('game/main.js', bootstrapper);
   });
+
+
 };
