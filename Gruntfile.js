@@ -73,7 +73,13 @@ module.exports = function (grunt) {
         ]
       }
     },
-    clean: ['../DolphinCrx']
+    clean: ['../DolphinCrx'],
+    browserify: {
+      build: {
+        src: ['game/main.js'],
+        dest: 'dist/js/game.js'
+      }
+    }
 
   });
 
