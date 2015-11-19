@@ -106,7 +106,7 @@ Play.prototype = {
 		this.showDebug = !this.showDebug;
 
 		if (!this.showDebug)
-	    {
+		{
 			this.game.debug.reset();
 		}
 	}
