@@ -16,6 +16,9 @@ Friend.prototype = {
 	},
 	update: function() {
 
+		if (!this.entity.update())
+			return;
+
 		if (this.game.input.activePointer.isDown)
 			this.entity.attack();
 		else if (this.game.physics.arcade.distanceToXY(this.entity.sprite, 300, 300) > 100)

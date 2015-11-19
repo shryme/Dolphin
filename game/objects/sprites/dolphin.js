@@ -34,14 +34,6 @@ function Dolphin(game, group, x, y) {
 		listAttack.push('attack' + i + '.png');
 	}
 
-
-	listAttack.push('attack6.png');
-	listAttack.push('attack6.png');
-	listAttack.push('attack6.png');
-	listAttack.push('attack6.png');
-	listAttack.push('attack6.png');
-
-
 	this.sprite.animations.add('moveX', list, 10, true, false);
 	this.sprite.animations.add('moveXY', listXY, 10, true, false);
 	this.sprite.animations.add('idle', ['r2.png', 'r3.png'], 2, true, false);
@@ -51,23 +43,50 @@ function Dolphin(game, group, x, y) {
 	this.isAttacking = false;
 	this.isDangerous = false;
 
-	this.attackAnimation.enableUpdate = true;
 
-	var fctMoveForAttack = this.moveForAttack.bind(this);
-	this.attackAnimation.onUpdate .add(function(current) {
-		if (current.currentFrame.index === 5)
-			fctMoveForAttack();
-
-	});
+	var fctStartAttacking = this.startAttack.bind(this);
+	this.attackAnimation.onComplete.add(fctStartAttacking);
 
 
-	var fctStopAttacking = this.stopAttack.bind(this);
-	this.attackAnimation.onComplete.add(fctStopAttacking);
+
+	this.attackDuration = 750;
+	this.attackEnding;
 
 }
 
 Dolphin.prototype = {
 	create: function() {
+
+	},
+	update: function() {
+
+		if (this.isAttacking) {
+
+			if (this.isDangerous) {
+
+				if (this.game.time.time > this.attackEnding) {
+					//After X time moving, we stop the attack and allow user to move like normal
+					this.stopAttack();
+					this.attackEnding = undefined;
+				}
+				else {
+					//Moving after the animation
+					this.moveForAttack();
+				}
+
+			}
+			else {
+				//Stop moving when the animation for attacking is playing
+				this.sprite.body.velocity.x = 0;
+				this.sprite.body.velocity.y = 0;
+			}
+
+
+			return false;
+
+		}
+
+		return true;
 
 	},
 	idle: function() {
@@ -82,8 +101,12 @@ Dolphin.prototype = {
 		this.sprite.body.velocity.x = this.vx * -1;
 		this.sprite.body.velocity.y = this.vy * -1;
 
-		this.isDangerous = true;
 
+
+	},
+	startAttack: function() {
+		this.attackEnding = this.game.time.time + this.attackDuration;
+		this.isDangerous = true;
 
 	},
 	stopAttack: function() {
@@ -96,6 +119,8 @@ Dolphin.prototype = {
 			this.isAttacking = true;
 			this.sprite.animations.play('attack');
 
+
+
 			if (x === undefined && y === undefined) {
 				x = this.game.input.worldX;
 				y = this.game.input.worldY;
@@ -105,7 +130,8 @@ Dolphin.prototype = {
 			var dx = this.sprite.position.x - x;
 			var dy = this.sprite.position.y - y;
 
-			var factor = 450 / Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
+			var attackDistance = 700;
+			var factor = attackDistance / Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
 
 			this.vx = dx * factor;
 			this.vy = dy * factor;
@@ -123,17 +149,6 @@ Dolphin.prototype = {
 	},
 	move: function(x, y, speed) {
 
-		//If attacking, we stop moving update
-		if (this.isAttacking) {
-
-			//This is the build up before the attack
-			if (!this.isDangerous) {
-				this.sprite.body.velocity.x = 0;
-				this.sprite.body.velocity.y = 0;
-			}
-
-			return
-		}
 
 		if (speed === undefined)
 			speed = 300;
