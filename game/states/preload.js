@@ -28,6 +28,7 @@ Preload.prototype = {
 		//this.load.spritesheet('dolphin', 'assets/sprites.png', 164, 72);
 
 		this.load.atlasJSONHash('dolphin', 'assets/sprites/dolphin.png', 'assets/sprites/dolphin.json');
+		this.load.atlasJSONHash('shark', 'assets/sprites/shark.png', 'assets/sprites/shark.json');
 
 
 	},
