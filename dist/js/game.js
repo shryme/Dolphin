@@ -3,7 +3,7 @@
 
 //global variables
 window.onload = function () {
-  var game = new Phaser.Game(900, 480, Phaser.AUTO, 'netmag-phaser');
+  var game = new Phaser.Game(900, 600, Phaser.AUTO, 'netmag-phaser');
 
   // Game States
   game.state.add('boot', require('./states/boot'));
@@ -15,7 +15,38 @@ window.onload = function () {
 
   game.state.start('boot');
 };
-},{"./states/boot":5,"./states/gameover":6,"./states/menu":7,"./states/play":8,"./states/preload":9}],2:[function(require,module,exports){
+},{"./states/boot":7,"./states/gameover":8,"./states/menu":9,"./states/play":10,"./states/preload":11}],2:[function(require,module,exports){
+
+var Shark = require('../sprites/shark');
+
+
+function BasicEnemy(game, group, x, y) {
+	this.game = game;
+
+	this.entity = new Shark(game, group, x, y);
+	this.entity.create();
+
+}
+
+BasicEnemy.prototype = {
+	create: function() {
+
+	},
+	update: function(target) {
+
+		if (!this.entity.update())
+			return;
+
+		this.entity.move(target, 400);
+
+		// this.entity.idle();
+
+	}
+}
+
+module.exports = BasicEnemy;
+
+},{"../sprites/shark":6}],3:[function(require,module,exports){
 
 var Dolphin = require('../sprites/dolphin');
 
@@ -49,15 +80,15 @@ Friend.prototype = {
 
 module.exports = Friend;
 
-},{"../sprites/dolphin":4}],3:[function(require,module,exports){
+},{"../sprites/dolphin":5}],4:[function(require,module,exports){
 
 var Dolphin = require('../sprites/dolphin');
 
 
-function Player(game, group) {
+function Player(game, group, x, y) {
 	this.game = game;
 
-	this.entity = new Dolphin(game, group);
+	this.entity = new Dolphin(game, group, x, y);
 	this.entity.create();
 
 }
@@ -85,7 +116,7 @@ Player.prototype = {
 
 module.exports = Player;
 
-},{"../sprites/dolphin":4}],4:[function(require,module,exports){
+},{"../sprites/dolphin":5}],5:[function(require,module,exports){
 
 function Dolphin(game, group, x, y) {
 	this.game = game;
@@ -273,7 +304,97 @@ module.exports = Dolphin;
 
 
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
+
+function Shark(game, group, x, y) {
+	this.game = game;
+
+
+	if (x === undefined && y === undefined) {
+		x = 0;
+		y = 0;
+	}
+
+	if (group !== undefined) {
+		this.sprite = group.create(x, y, 'shark', 'm1.png');
+	} else {
+		this.sprite = this.game.add.sprite(x, y, 'shark', 'm1.png');
+	}
+
+	this.game.physics.arcade.enableBody(this.sprite);
+	this.sprite.body.gravity.y = 0;
+	this.sprite.body.collideWorldBounds = true;
+
+	this.sprite.body.allowRotation = false;
+	this.sprite.anchor.setTo(.5, .5);
+
+	this.sprite.body.setSize(75, 50, 0, 0);
+
+
+	var listMove = new Array();
+	var listAttack = new Array();
+
+	for (var i = 1; i <= 5; i++) {
+		listMove.push('m' + i + '.png');
+	}
+
+	listAttack.push('a1.png');
+	listAttack.push('a2.png');
+
+	this.sprite.animations.add('move', listMove, 10, true, false);
+	this.sprite.animations.add('idle', ['m1.png', 'm2.png'], 2, true, false);
+	// this.attackAnimation = this.sprite.animations.add('attack', listAttack, 10);
+	this.sprite.animations.play('move');
+
+
+
+}
+
+Shark.prototype = {
+	create: function() {
+
+	},
+	update: function() {
+
+		return true;
+
+	},
+	idle: function() {
+
+		this.sprite.animations.play('idle');
+		this.sprite.body.velocity.x = 0;
+		this.sprite.body.velocity.y = 0;
+	},
+	attack: function(x, y) {
+
+	},
+	move: function(target, speed) {
+
+		this.sprite.rotation = this.game.physics.arcade.moveToObject(this.sprite, target, speed);
+
+		this.sprite.animations.play('move');
+
+		//Flip dolphin when moving to the left
+		if (this.sprite.rotation < -1.5 || this.sprite.rotation > 1.5)
+			this.sprite.scale.y = -1;
+		else
+			this.sprite.scale.y = 1;
+
+	}
+}
+
+module.exports = Shark;
+
+
+
+
+
+
+
+
+
+
+},{}],7:[function(require,module,exports){
 
 'use strict';
 
@@ -292,7 +413,7 @@ Boot.prototype = {
 
 module.exports = Boot;
 
-},{}],6:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 
 'use strict';
 function GameOver() {}
@@ -314,7 +435,7 @@ GameOver.prototype = {
 };
 module.exports = GameOver;
 
-},{}],7:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 
 'use strict';
 function Menu() {}
@@ -329,38 +450,26 @@ Menu.prototype = {
 		this.background.height = this.game.height;
 		this.background.width = this.game.width;
 
-		var button = this.game.add.button(this.game.world.centerX - 95, 200, 'creature_1', play, this, 2, 1, 0);
-		var button = this.game.add.button(this.game.world.centerX - 95, 300, 'creature_2', showMaze, this, 2, 1, 0);
-		var button = this.game.add.button(this.game.world.centerX - 95, 400, 'creature_3', generateMaze, this, 2, 1, 0);
-
+		var button = this.game.add.button(this.game.world.centerX - 95, 200, 'dolphin', play, this, 2, 1, 0);
     function play() {
     	this.game.state.start('play');
     }
 
-    function showMaze() {
-    	this.game.state.start('maze', true, false, true);
-    }
-
-    function generateMaze() {
-    	this.game.state.start('maze', true, false, false);
-    }
-
 	},
 	update: function() {
-		if(this.game.input.activePointer.justPressed()) {
-			// this.game.state.start('maze');
-		}
+
 	}
 };
 
 module.exports = Menu;
 
-},{}],8:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 
 'use strict';
 
 var Player = require('../objects/entity/player');
 var Friend = require('../objects/entity/friend');
+var Shark = require('../objects/entity/basicEnemy');
 
 function Play() {}
 Play.prototype = {
@@ -392,13 +501,18 @@ Play.prototype = {
 
 
 		this.list = new Array();
+		this.listEnemy = new Array();
 
 		//Group of dolphins
 		this.groupDolphins = this.game.add.group();
 
+		//Group of dolphins
+		this.groupSharks = this.game.add.group();
+
 
 		//Us
-		this.player = new Player(this.game, this.groupDolphins);
+		var spawn = this.map.objects.spawn[0];
+		this.player = new Player(this.game, this.groupDolphins, spawn.x, spawn.y);
 
 		var listObjectsDolphins = this.map.objects.dolphins;
 
@@ -408,6 +522,16 @@ Play.prototype = {
 
 			this.list.push(dolphin);
 		}
+
+		var listObjectsSharks = this.map.objects.sharks;
+
+		for (var i = 0; i < listObjectsSharks.length;  i++) {
+			var cur = listObjectsSharks[i];
+			var shark = new Shark(this.game, this.groupDolphins, cur.x, cur.y);
+
+			this.listEnemy.push(shark);
+		}
+
 
 		//Add camera to follow our player
 		this.game.camera.follow(this.player.entity.sprite);
@@ -433,8 +557,20 @@ Play.prototype = {
 			game.physics.arcade.collide(f.entity.sprite, blocks);
 		});
 
+		var player = this.player.entity.sprite;
+		this.listEnemy.forEach(function(f) {
+			f.update(player);
+			game.physics.arcade.collide(f.entity.sprite, blocks);
+		});
+
 		//Collide with friends
 		this.game.physics.arcade.collide(this.groupDolphins);
+
+		//Colision of sharks
+		this.game.physics.arcade.collide(this.groupSharks);
+
+		//Collision between sharks and dolphins
+		this.game.physics.arcade.collide(this.groupDolphins, this.groupSharks);
 
 		//Collide with blocks
 		this.game.physics.arcade.collide(this.player.entity.sprite, this.blockLayer);
@@ -451,6 +587,9 @@ Play.prototype = {
 
 			var game = this.game;
 			this.list.forEach(function(f) {
+				game.debug.body(f.entity.sprite);
+			});
+			this.listEnemy.forEach(function(f) {
 				game.debug.body(f.entity.sprite);
 			});
 
@@ -480,7 +619,7 @@ module.exports = Play;
 
 
 
-},{"../objects/entity/friend":2,"../objects/entity/player":3}],9:[function(require,module,exports){
+},{"../objects/entity/basicEnemy":2,"../objects/entity/friend":3,"../objects/entity/player":4}],11:[function(require,module,exports){
 
 'use strict';
 function Preload() {
@@ -511,6 +650,7 @@ Preload.prototype = {
 		//this.load.spritesheet('dolphin', 'assets/sprites.png', 164, 72);
 
 		this.load.atlasJSONHash('dolphin', 'assets/sprites/dolphin.png', 'assets/sprites/dolphin.json');
+		this.load.atlasJSONHash('shark', 'assets/sprites/shark.png', 'assets/sprites/shark.json');
 
 
 	},

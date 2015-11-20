@@ -3,6 +3,7 @@
 
 var Player = require('../objects/entity/player');
 var Friend = require('../objects/entity/friend');
+var Shark = require('../objects/entity/basicEnemy');
 
 function Play() {}
 Play.prototype = {
@@ -34,13 +35,18 @@ Play.prototype = {
 
 
 		this.list = new Array();
+		this.listEnemy = new Array();
 
 		//Group of dolphins
 		this.groupDolphins = this.game.add.group();
 
+		//Group of dolphins
+		this.groupSharks = this.game.add.group();
+
 
 		//Us
-		this.player = new Player(this.game, this.groupDolphins);
+		var spawn = this.map.objects.spawn[0];
+		this.player = new Player(this.game, this.groupDolphins, spawn.x, spawn.y);
 
 		var listObjectsDolphins = this.map.objects.dolphins;
 
@@ -50,6 +56,16 @@ Play.prototype = {
 
 			this.list.push(dolphin);
 		}
+
+		var listObjectsSharks = this.map.objects.sharks;
+
+		for (var i = 0; i < listObjectsSharks.length;  i++) {
+			var cur = listObjectsSharks[i];
+			var shark = new Shark(this.game, this.groupDolphins, cur.x, cur.y);
+
+			this.listEnemy.push(shark);
+		}
+
 
 		//Add camera to follow our player
 		this.game.camera.follow(this.player.entity.sprite);
@@ -75,8 +91,20 @@ Play.prototype = {
 			game.physics.arcade.collide(f.entity.sprite, blocks);
 		});
 
+		var player = this.player.entity.sprite;
+		this.listEnemy.forEach(function(f) {
+			f.update(player);
+			game.physics.arcade.collide(f.entity.sprite, blocks);
+		});
+
 		//Collide with friends
 		this.game.physics.arcade.collide(this.groupDolphins);
+
+		//Colision of sharks
+		this.game.physics.arcade.collide(this.groupSharks);
+
+		//Collision between sharks and dolphins
+		this.game.physics.arcade.collide(this.groupDolphins, this.groupSharks);
 
 		//Collide with blocks
 		this.game.physics.arcade.collide(this.player.entity.sprite, this.blockLayer);
@@ -93,6 +121,9 @@ Play.prototype = {
 
 			var game = this.game;
 			this.list.forEach(function(f) {
+				game.debug.body(f.entity.sprite);
+			});
+			this.listEnemy.forEach(function(f) {
 				game.debug.body(f.entity.sprite);
 			});
 
