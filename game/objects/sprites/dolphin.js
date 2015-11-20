@@ -52,6 +52,8 @@ function Dolphin(game, group, x, y) {
 	this.attackDuration = 750;
 	this.attackEnding;
 
+	this.hp = 777;
+
 }
 
 Dolphin.prototype = {
@@ -115,7 +117,7 @@ Dolphin.prototype = {
 	},
 	attack: function(x, y) {
 		if (!this.isAttacking) {
-			console.log('Attack');
+
 			this.isAttacking = true;
 			this.sprite.animations.play('attack');
 
@@ -171,6 +173,9 @@ Dolphin.prototype = {
 
 		// this.sprite.body.data.updateAABB();
 
+	},
+	hurt: function(dmg) {
+		this.hp -= dmg;
 	}
 }
 
