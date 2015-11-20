@@ -2,10 +2,10 @@
 var Dolphin = require('../sprites/dolphin');
 
 
-function Player(game, group) {
+function Player(game, group, x, y) {
 	this.game = game;
 
-	this.entity = new Dolphin(game, group);
+	this.entity = new Dolphin(game, group, x, y);
 	this.entity.create();
 
 }
