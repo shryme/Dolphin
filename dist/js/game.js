@@ -295,7 +295,6 @@ Dolphin.prototype = {
 		else
 			this.sprite.scale.y = 1;
 
-		// this.sprite.body.data.updateAABB();
 
 	},
 	hurt: function(dmg) {
