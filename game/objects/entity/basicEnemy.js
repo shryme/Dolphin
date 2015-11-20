@@ -19,10 +19,14 @@ BasicEnemy.prototype = {
 		if (!this.entity.update())
 			return;
 
-		if (this.game.physics.arcade.distanceBetween(this.entity.sprite, target) < 300)
+
+		if (this.game.physics.arcade.distanceBetween(this.entity.sprite, target.sprite) < 300)
 			this.entity.move(target, 400);
 		else
 			this.entity.idle();
+
+		if (this.game.physics.arcade.distanceBetween(this.entity.sprite, target.sprite) < 90)
+			this.entity.attack(target);
 
 	}
 }

@@ -36,10 +36,17 @@ function Shark(game, group, x, y) {
 
 	this.sprite.animations.add('move', listMove, 10, true, false);
 	this.sprite.animations.add('idle', ['m1.png', 'm2.png'], 2, true, false);
-	// this.attackAnimation = this.sprite.animations.add('attack', listAttack, 10);
+	this.attackAnimation = this.sprite.animations.add('attack', listAttack, 5);
 	this.sprite.animations.play('move');
 
 
+	var fctAttackComplete = this.attackComplete.bind(this);
+	this.attackAnimation.onComplete.add(fctAttackComplete);
+
+	this.currentTarget;
+	this.isAttacking = false;
+
+	this.dmg = 1;
 
 }
 
@@ -58,14 +65,21 @@ Shark.prototype = {
 		this.sprite.body.velocity.x = 0;
 		this.sprite.body.velocity.y = 0;
 	},
-	attack: function(x, y) {
-
+	attackComplete: function() {
+		this.isAttacking = false;
+		this.currentTarget.hurt(this.dmg);
+	},
+	attack: function(target) {
+		this.currentTarget = target;
+		this.isAttacking = true;
+		this.sprite.animations.play('attack');
 	},
 	move: function(target, speed) {
 
-		this.sprite.rotation = this.game.physics.arcade.moveToObject(this.sprite, target, speed);
+		this.sprite.rotation = this.game.physics.arcade.moveToObject(this.sprite, target.sprite, speed);
 
-		this.sprite.animations.play('move');
+		if (!this.isAttacking)
+			this.sprite.animations.play('move');
 
 		//Flip dolphin when moving to the left
 		if (this.sprite.rotation < -1.5 || this.sprite.rotation > 1.5)
