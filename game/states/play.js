@@ -73,6 +73,13 @@ Play.prototype = {
 		this.debugKey = this.game.input.keyboard.addKey(Phaser.Keyboard.Q);
 		this.debugKey.onDown.add(this.toggleDebug, this);
 
+
+
+		this.txtHp = this.game.add.text(10, 10, "Hp: 100", { font: "65px Arial", fill: "#bb00ff", align: "center"});
+		this.txtHp.fixedToCamera = true;
+		this.txtHp.cameraOffset.setTo(10, 10);
+
+
 	},
 
 	update: function() {
@@ -91,7 +98,7 @@ Play.prototype = {
 			game.physics.arcade.collide(f.entity.sprite, blocks);
 		});
 
-		var player = this.player.entity.sprite;
+		var player = this.player.entity;
 		this.listEnemy.forEach(function(f) {
 			f.update(player);
 			game.physics.arcade.collide(f.entity.sprite, blocks);
@@ -108,6 +115,9 @@ Play.prototype = {
 
 		//Collide with blocks
 		this.game.physics.arcade.collide(this.player.entity.sprite, this.blockLayer);
+
+
+		this.txtHp.text = "Hp: " + this.player.entity.hp;
 
 	},
 
