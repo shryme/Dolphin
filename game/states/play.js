@@ -5,8 +5,6 @@ var Player = require('../objects/entity/player');
 var Friend = require('../objects/entity/friend');
 var Shark = require('../objects/entity/basicEnemy');
 
-var Path = require('../plugins/phaser_pathfinding-0.2.0');
-
 function Play() {}
 Play.prototype = {
 	create: function() {
@@ -82,41 +80,9 @@ Play.prototype = {
 		this.txtHp.cameraOffset.setTo(10, 10);
 
 
-
-		this.pathfinder = this.game.plugins.add(Phaser.Plugin.PathFinderPlugin);
-		this.pathfinder.setGrid(this.blockLayer.layer.data, [-1]);
-
-
-		this.graphics = this.game.add.graphics(0, 0);
-		var graph = this.graphics;
-
-		this.pathfinder.setCallbackFunction(function(path) {
-			graph.lineStyle(2, 0x0000FF, 1);
-			path = path || [];
-			// console.log(path);
-			// for (var i = 0; i < path.length; i++) {
-			// 	graph.drawRect(path[i].x * 32, path[i].y * 32, 32, 32);
-			// }
-		});
-
-
-
-
-
-
-
-
-
-
-
 	},
 
 	update: function() {
-
-		// var x = Math.floor(this.player.entity.sprite.x / 32);
-		// var y = Math.floor(this.player.entity.sprite.y / 32);
-		// this.pathfinder.preparePathCalculation([0,0], [x, y]);
-		// this.pathfinder.calculatePath();
 
 		//Get cursor
 		var cursors = this.game.input.keyboard.createCursorKeys();
@@ -184,8 +150,6 @@ Play.prototype = {
 		{
 			this.game.debug.reset();
 		}
-
-		this.graphics.clear();
 	}
 
 };
