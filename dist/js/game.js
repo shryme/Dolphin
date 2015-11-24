@@ -26,6 +26,8 @@ function BasicEnemy(game, group, x, y) {
 	this.entity = new Shark(game, group, x, y);
 	this.entity.create();
 
+	this.listTargetPos = new Array();
+
 }
 
 BasicEnemy.prototype = {
@@ -37,13 +39,39 @@ BasicEnemy.prototype = {
 		if (!this.entity.update())
 			return;
 
+		var dist = this.game.physics.arcade.distanceBetween(this.entity.sprite, target.sprite);
 
-		if (this.game.physics.arcade.distanceBetween(this.entity.sprite, target.sprite) < 300)
+		if (dist < 300) {
+			//If close enough, chase the target
 			this.entity.move(target, 400);
+
+			//Reset the list
+			this.listTargetPos = new Array();
+
+		}
+		else if (dist < 600 || this.listTargetPos.length !== 0) {
+
+			//If still close but not enough to chase, add the current target position
+			//to a list that the enemy will follow to try to find the target again
+			this.listTargetPos.push({
+				x: target.sprite.x,
+				y: target.sprite.y
+			});
+
+			this.entity.move(this.listTargetPos[0], 400);
+
+			//If the enemy is close enough to the history position of the target,
+			//remove it from the list so the enemy chase the next point
+			if (this.game.physics.arcade.distanceBetween(this.entity.sprite, this.listTargetPos[0]) < 100)
+				this.listTargetPos.shift();
+
+
+		}
 		else
 			this.entity.idle();
 
-		if (this.game.physics.arcade.distanceBetween(this.entity.sprite, target.sprite) < 90)
+
+		if (dist < 90)
 			this.entity.attack(target);
 
 	}
@@ -392,7 +420,10 @@ Shark.prototype = {
 	},
 	move: function(target, speed) {
 
-		this.sprite.rotation = this.game.physics.arcade.moveToObject(this.sprite, target.sprite, speed);
+		if (target.sprite !== undefined)
+			target = target.sprite;
+
+		this.sprite.rotation = this.game.physics.arcade.moveToObject(this.sprite, target, speed);
 
 		if (!this.isAttacking)
 			this.sprite.animations.play('move');
