@@ -76,7 +76,10 @@ Shark.prototype = {
 	},
 	move: function(target, speed) {
 
-		this.sprite.rotation = this.game.physics.arcade.moveToObject(this.sprite, target.sprite, speed);
+		if (target.sprite !== undefined)
+			target = target.sprite;
+
+		this.sprite.rotation = this.game.physics.arcade.moveToObject(this.sprite, target, speed);
 
 		if (!this.isAttacking)
 			this.sprite.animations.play('move');
