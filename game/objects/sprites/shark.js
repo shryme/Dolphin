@@ -84,7 +84,7 @@ Shark.prototype = {
 		if (!this.isAttacking)
 			this.sprite.animations.play('move');
 
-		//Flip dolphin when moving to the left
+		//Flip shark when moving to the left
 		if (this.sprite.rotation < -1.5 || this.sprite.rotation > 1.5)
 			this.sprite.scale.y = -1;
 		else
