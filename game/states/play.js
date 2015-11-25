@@ -4,6 +4,7 @@
 var Player = require('../objects/entity/player');
 var Friend = require('../objects/entity/friend');
 var Shark = require('../objects/entity/basicEnemy');
+var Orca = require('../objects/entity/friendOrca');
 
 function Play() {}
 Play.prototype = {
@@ -40,8 +41,11 @@ Play.prototype = {
 		//Group of dolphins
 		this.groupDolphins = this.game.add.group();
 
-		//Group of dolphins
+		//Group of sharks
 		this.groupSharks = this.game.add.group();
+
+		//Group of orcas
+		this.groupOrcas = this.game.add.group();
 
 
 		//Us
@@ -61,9 +65,19 @@ Play.prototype = {
 
 		for (var i = 0; i < listObjectsSharks.length;  i++) {
 			var cur = listObjectsSharks[i];
-			var shark = new Shark(this.game, this.groupDolphins, cur.x, cur.y);
+			var shark = new Shark(this.game, this.groupSharks, cur.x, cur.y);
 
 			this.listEnemy.push(shark);
+		}
+
+
+		var listObjectsOrcas = this.map.objects.orcas;
+
+		for (var i = 0; i < listObjectsOrcas.length;  i++) {
+			var cur = listObjectsOrcas[i];
+			var orca = new Orca(this.game, this.groupOrcas, cur.x, cur.y);
+
+			this.list.push(orca);
 		}
 
 

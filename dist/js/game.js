@@ -15,7 +15,7 @@ window.onload = function () {
 
   game.state.start('boot');
 };
-},{"./states/boot":7,"./states/gameover":8,"./states/menu":9,"./states/play":10,"./states/preload":11}],2:[function(require,module,exports){
+},{"./states/boot":9,"./states/gameover":10,"./states/menu":11,"./states/play":12,"./states/preload":13}],2:[function(require,module,exports){
 
 var Shark = require('../sprites/shark');
 
@@ -79,7 +79,7 @@ BasicEnemy.prototype = {
 
 module.exports = BasicEnemy;
 
-},{"../sprites/shark":6}],3:[function(require,module,exports){
+},{"../sprites/shark":8}],3:[function(require,module,exports){
 
 var Dolphin = require('../sprites/dolphin');
 
@@ -113,7 +113,41 @@ Friend.prototype = {
 
 module.exports = Friend;
 
-},{"../sprites/dolphin":5}],4:[function(require,module,exports){
+},{"../sprites/dolphin":6}],4:[function(require,module,exports){
+
+var Orca = require('../sprites/orca');
+
+
+function FriendOrca(game, group, x, y) {
+	this.game = game;
+
+	this.entity = new Orca(game, group, x, y);
+	this.entity.create();
+
+}
+
+FriendOrca.prototype = {
+	create: function() {
+
+	},
+	update: function() {
+
+		if (!this.entity.update())
+			return;
+
+		var target = {x: 700, y: 700};
+
+		if (this.game.physics.arcade.distanceBetween(this.entity.sprite, target) > 100)
+			this.entity.move(target, 400);
+		else
+			this.entity.idle();
+
+	}
+}
+
+module.exports = FriendOrca;
+
+},{"../sprites/orca":7}],5:[function(require,module,exports){
 
 var Dolphin = require('../sprites/dolphin');
 
@@ -149,7 +183,7 @@ Player.prototype = {
 
 module.exports = Player;
 
-},{"../sprites/dolphin":5}],5:[function(require,module,exports){
+},{"../sprites/dolphin":6}],6:[function(require,module,exports){
 
 function Dolphin(game, group, x, y) {
 	this.game = game;
@@ -341,7 +375,91 @@ module.exports = Dolphin;
 
 
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
+
+function Orca(game, group, x, y) {
+	this.game = game;
+
+
+	if (x === undefined && y === undefined) {
+		x = 0;
+		y = 0;
+	}
+
+	if (group !== undefined) {
+		this.sprite = group.create(x, y, 'orca', 'm1.png');
+	} else {
+		this.sprite = this.game.add.sprite(x, y, 'orca', 'm1.png');
+	}
+
+	this.game.physics.arcade.enableBody(this.sprite);
+	this.sprite.body.gravity.y = 0;
+	this.sprite.body.collideWorldBounds = true;
+
+	this.sprite.body.allowRotation = false;
+	this.sprite.anchor.setTo(.5, .5);
+
+	this.sprite.body.setSize(75, 50, 0, 0);
+
+
+	var listMove = new Array();
+
+	for (var i = 1; i <= 8; i++) {
+		listMove.push('m' + i + '.png');
+	}
+
+
+	this.sprite.animations.add('move', listMove, 10, true, false);
+	this.sprite.animations.add('idle', ['m1.png', 'm2.png'], 2, true, false);
+	this.sprite.animations.play('move');
+
+}
+
+Orca.prototype = {
+	create: function() {
+
+	},
+	update: function() {
+
+		return true;
+
+	},
+	idle: function() {
+
+		this.sprite.animations.play('idle');
+		this.sprite.body.velocity.x = 0;
+		this.sprite.body.velocity.y = 0;
+	},
+	move: function(target, speed) {
+
+		if (target.sprite !== undefined)
+			target = target.sprite;
+
+		this.sprite.rotation = this.game.physics.arcade.moveToObject(this.sprite, target, speed);
+
+		this.sprite.animations.play('move');
+
+		//Flip orca when moving to the left
+		if (this.sprite.rotation < -1.5 || this.sprite.rotation > 1.5)
+			this.sprite.scale.y = -1;
+		else
+			this.sprite.scale.y = 1;
+
+	}
+}
+
+module.exports = Orca;
+
+
+
+
+
+
+
+
+
+
+},{}],8:[function(require,module,exports){
 
 function Shark(game, group, x, y) {
 	this.game = game;
@@ -448,7 +566,7 @@ module.exports = Shark;
 
 
 
-},{}],7:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 
 'use strict';
 
@@ -467,7 +585,7 @@ Boot.prototype = {
 
 module.exports = Boot;
 
-},{}],8:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 
 'use strict';
 function GameOver() {}
@@ -489,7 +607,7 @@ GameOver.prototype = {
 };
 module.exports = GameOver;
 
-},{}],9:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 
 'use strict';
 function Menu() {}
@@ -517,13 +635,14 @@ Menu.prototype = {
 
 module.exports = Menu;
 
-},{}],10:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 
 'use strict';
 
 var Player = require('../objects/entity/player');
 var Friend = require('../objects/entity/friend');
 var Shark = require('../objects/entity/basicEnemy');
+var Orca = require('../objects/entity/friendOrca');
 
 function Play() {}
 Play.prototype = {
@@ -560,8 +679,11 @@ Play.prototype = {
 		//Group of dolphins
 		this.groupDolphins = this.game.add.group();
 
-		//Group of dolphins
+		//Group of sharks
 		this.groupSharks = this.game.add.group();
+
+		//Group of orcas
+		this.groupOrcas = this.game.add.group();
 
 
 		//Us
@@ -581,9 +703,19 @@ Play.prototype = {
 
 		for (var i = 0; i < listObjectsSharks.length;  i++) {
 			var cur = listObjectsSharks[i];
-			var shark = new Shark(this.game, this.groupDolphins, cur.x, cur.y);
+			var shark = new Shark(this.game, this.groupSharks, cur.x, cur.y);
 
 			this.listEnemy.push(shark);
+		}
+
+
+		var listObjectsOrcas = this.map.objects.orcas;
+
+		for (var i = 0; i < listObjectsOrcas.length;  i++) {
+			var cur = listObjectsOrcas[i];
+			var orca = new Orca(this.game, this.groupOrcas, cur.x, cur.y);
+
+			this.list.push(orca);
 		}
 
 
@@ -683,7 +815,7 @@ module.exports = Play;
 
 
 
-},{"../objects/entity/basicEnemy":2,"../objects/entity/friend":3,"../objects/entity/player":4}],11:[function(require,module,exports){
+},{"../objects/entity/basicEnemy":2,"../objects/entity/friend":3,"../objects/entity/friendOrca":4,"../objects/entity/player":5}],13:[function(require,module,exports){
 
 'use strict';
 function Preload() {
