@@ -284,7 +284,7 @@ Dolphin.prototype = {
 			var dx = this.sprite.position.x - x;
 			var dy = this.sprite.position.y - y;
 
-			var attackDistance = 700;
+			var attackDistance = 750;
 			var factor = attackDistance / Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
 
 			this.vx = dx * factor;
