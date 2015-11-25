@@ -43,7 +43,7 @@ BasicEnemy.prototype = {
 
 		if (dist < 300) {
 			//If close enough, chase the target
-			this.entity.move(target, 400);
+			this.entity.move(target, 500);
 
 			//Reset the list
 			this.listTargetPos = new Array();
@@ -715,6 +715,7 @@ Preload.prototype = {
 
 		this.load.atlasJSONHash('dolphin', 'assets/sprites/dolphin.png', 'assets/sprites/dolphin.json');
 		this.load.atlasJSONHash('shark', 'assets/sprites/shark.png', 'assets/sprites/shark.json');
+		this.load.atlasJSONHash('orca', 'assets/sprites/tara.png', 'assets/sprites/tara.json');
 
 
 	},
