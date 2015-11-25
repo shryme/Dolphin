@@ -25,7 +25,7 @@ BasicEnemy.prototype = {
 
 		if (dist < 300) {
 			//If close enough, chase the target
-			this.entity.move(target, 400);
+			this.entity.move(target, 500);
 
 			//Reset the list
 			this.listTargetPos = new Array();
