@@ -118,11 +118,20 @@ module.exports = Friend;
 var Orca = require('../sprites/orca');
 
 
-function FriendOrca(game, group, x, y) {
+function FriendOrca(game, group, x, y, wp) {
+
 	this.game = game;
 
 	this.entity = new Orca(game, group, x, y);
 	this.entity.create();
+
+	this.target = {x: 700, y: 700};
+
+	this.waypoints = wp;
+	this.currentWp = 0;
+
+	if (wp !== undefined)
+		this.target = wp[0];
 
 }
 
@@ -135,12 +144,19 @@ FriendOrca.prototype = {
 		if (!this.entity.update())
 			return;
 
-		var target = {x: 700, y: 700};
-
-		if (this.game.physics.arcade.distanceBetween(this.entity.sprite, target) > 100)
-			this.entity.move(target, 400);
-		else
-			this.entity.idle();
+		if (this.game.physics.arcade.distanceBetween(this.entity.sprite, this.target) > 100) {
+			this.entity.move(this.target, 400);
+		}
+		else {
+			if (this.waypoints !== undefined) {
+				this.currentWp++;
+				if (this.currentWp === this.waypoints.length)
+					this.currentWp = 0;
+				this.target = this.waypoints[this.currentWp];
+			}
+			else
+				this.entity.idle();
+		}
 
 	}
 }
@@ -675,6 +691,7 @@ Play.prototype = {
 
 		this.list = new Array();
 		this.listEnemy = new Array();
+		this.listWaypoints = {};
 
 		//Group of dolphins
 		this.groupDolphins = this.game.add.group();
@@ -689,6 +706,30 @@ Play.prototype = {
 		//Us
 		var spawn = this.map.objects.spawn[0];
 		this.player = new Player(this.game, this.groupDolphins, spawn.x, spawn.y);
+
+
+
+
+		var listObjectsWaypoints = this.map.objects.waypoints;
+
+		for (var i = 0; i < listObjectsWaypoints.length;  i++) {
+			var cur = listObjectsWaypoints[i];
+			var listWpUpdated = new Array();
+
+			for (var j = 0; j < cur.polyline.length; j++) {
+
+				var posWp = {
+					x: cur.polyline[j][0] + cur.x,
+					y: cur.polyline[j][1] + cur.y,
+				}
+
+				listWpUpdated.push(posWp);
+			}
+
+			this.listWaypoints[cur.name] = listWpUpdated;
+		}
+
+
 
 		var listObjectsDolphins = this.map.objects.dolphins;
 
@@ -713,7 +754,7 @@ Play.prototype = {
 
 		for (var i = 0; i < listObjectsOrcas.length;  i++) {
 			var cur = listObjectsOrcas[i];
-			var orca = new Orca(this.game, this.groupOrcas, cur.x, cur.y);
+			var orca = new Orca(this.game, this.groupOrcas, cur.x, cur.y, this.listWaypoints[cur.properties.wp]);
 
 			this.list.push(orca);
 		}

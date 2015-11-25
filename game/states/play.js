@@ -37,6 +37,7 @@ Play.prototype = {
 
 		this.list = new Array();
 		this.listEnemy = new Array();
+		this.listWaypoints = {};
 
 		//Group of dolphins
 		this.groupDolphins = this.game.add.group();
@@ -51,6 +52,30 @@ Play.prototype = {
 		//Us
 		var spawn = this.map.objects.spawn[0];
 		this.player = new Player(this.game, this.groupDolphins, spawn.x, spawn.y);
+
+
+
+
+		var listObjectsWaypoints = this.map.objects.waypoints;
+
+		for (var i = 0; i < listObjectsWaypoints.length;  i++) {
+			var cur = listObjectsWaypoints[i];
+			var listWpUpdated = new Array();
+
+			for (var j = 0; j < cur.polyline.length; j++) {
+
+				var posWp = {
+					x: cur.polyline[j][0] + cur.x,
+					y: cur.polyline[j][1] + cur.y,
+				}
+
+				listWpUpdated.push(posWp);
+			}
+
+			this.listWaypoints[cur.name] = listWpUpdated;
+		}
+
+
 
 		var listObjectsDolphins = this.map.objects.dolphins;
 
@@ -75,7 +100,7 @@ Play.prototype = {
 
 		for (var i = 0; i < listObjectsOrcas.length;  i++) {
 			var cur = listObjectsOrcas[i];
-			var orca = new Orca(this.game, this.groupOrcas, cur.x, cur.y);
+			var orca = new Orca(this.game, this.groupOrcas, cur.x, cur.y, this.listWaypoints[cur.properties.wp]);
 
 			this.list.push(orca);
 		}
