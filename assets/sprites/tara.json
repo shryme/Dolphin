@@ -1,0 +1,76 @@
+{"frames": [
+
+{
+	"filename": "m1.png",
+	"frame": {"x":2,"y":70,"w":72,"h":30},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":72,"h":30},
+	"sourceSize": {"w":72,"h":30}
+},
+{
+	"filename": "m2.png",
+	"frame": {"x":74,"y":36,"w":70,"h":31},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":70,"h":31},
+	"sourceSize": {"w":70,"h":31}
+},
+{
+	"filename": "m3.png",
+	"frame": {"x":146,"y":36,"w":70,"h":31},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":70,"h":31},
+	"sourceSize": {"w":70,"h":33}
+},
+{
+	"filename": "m4.png",
+	"frame": {"x":2,"y":2,"w":70,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":70,"h":32},
+	"sourceSize": {"w":70,"h":32}
+},
+{
+	"filename": "m5.png",
+	"frame": {"x":2,"y":36,"w":70,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":70,"h":32},
+	"sourceSize": {"w":70,"h":32}
+},
+{
+	"filename": "m6.png",
+	"frame": {"x":74,"y":2,"w":70,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":70,"h":32},
+	"sourceSize": {"w":70,"h":32}
+},
+{
+	"filename": "m7.png",
+	"frame": {"x":146,"y":2,"w":70,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":70,"h":32},
+	"sourceSize": {"w":70,"h":32}
+},
+{
+	"filename": "m8.png",
+	"frame": {"x":76,"y":69,"w":70,"h":31},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":70,"h":31},
+	"sourceSize": {"w":70,"h":31}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "tara.png",
+	"format": "RGBA8888",
+	"size": {"w":218,"h":102},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:03b41a8374992e6c077d10a7b97376b8:0252c5e3beab5e929b7ff1ae585c0738:96e04c57856ac0ed539efc190d3b67aa$"
+}
+}
