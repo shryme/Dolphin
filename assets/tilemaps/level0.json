@@ -163,7 +163,7 @@
                  "name":"orca",
                  "properties":
                     {
-
+                     "wp":"orca_2"
                     },
                  "rotation":0,
                  "type":"",
@@ -178,7 +178,7 @@
                  "name":"orca",
                  "properties":
                     {
-
+                     "wp":"orca_1"
                     },
                  "rotation":0,
                  "type":"",
@@ -196,29 +196,45 @@
         }, 
         {
          "draworder":"topdown",
-         "height":100,
-         "name":"wp_orca1",
+         "height":0,
+         "name":"waypoints",
          "objects":[
                 {
                  "height":0,
-                 "id":33,
-                 "name":"",
+                 "id":35,
+                 "name":"orca_1",
                  "polyline":[
                         {
                          "x":0,
                          "y":0
                         }, 
                         {
-                         "x":644,
-                         "y":0
+                         "x":382,
+                         "y":-78
                         }, 
                         {
-                         "x":648,
-                         "y":454
+                         "x":720,
+                         "y":200
                         }, 
                         {
-                         "x":-32,
-                         "y":442
+                         "x":300,
+                         "y":398
+                        }, 
+                        {
+                         "x":-264,
+                         "y":338
+                        }, 
+                        {
+                         "x":-272,
+                         "y":162
+                        }, 
+                        {
+                         "x":322,
+                         "y":198
+                        }, 
+                        {
+                         "x":-16,
+                         "y":20
                         }],
                  "properties":
                     {
@@ -228,17 +244,81 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":1178,
-                 "y":588
+                 "x":1156,
+                 "y":586
+                }, 
+                {
+                 "height":0,
+                 "id":37,
+                 "name":"orca_2",
+                 "polyline":[
+                        {
+                         "x":0,
+                         "y":0
+                        }, 
+                        {
+                         "x":-660,
+                         "y":114
+                        }, 
+                        {
+                         "x":-604,
+                         "y":930
+                        }, 
+                        {
+                         "x":-250,
+                         "y":1580
+                        }, 
+                        {
+                         "x":298,
+                         "y":1594
+                        }, 
+                        {
+                         "x":316,
+                         "y":1778
+                        }, 
+                        {
+                         "x":740,
+                         "y":1780
+                        }, 
+                        {
+                         "x":306,
+                         "y":1450
+                        }, 
+                        {
+                         "x":-276,
+                         "y":1344
+                        }, 
+                        {
+                         "x":-490,
+                         "y":776
+                        }, 
+                        {
+                         "x":-558,
+                         "y":198
+                        }, 
+                        {
+                         "x":-586,
+                         "y":-596
+                        }],
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":764,
+                 "y":1362
                 }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
-         "width":100,
+         "width":0,
          "x":0,
          "y":0
         }],
- "nextobjectid":35,
+ "nextobjectid":38,
  "orientation":"orthogonal",
  "properties":
     {

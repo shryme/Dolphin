@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" nextobjectid="37">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" nextobjectid="38">
  <tileset firstgid="1" name="basic" tilewidth="32" tileheight="32" tilecount="3">
   <image source="../../../../Chrome_app/dolphin/assets/tilemaps/tileset.png" width="96" height="32"/>
  </tileset>
@@ -121,7 +121,11 @@
   <object id="28" name="spawn" x="742" y="62" width="188" height="110"/>
  </objectgroup>
  <objectgroup name="orcas">
-  <object id="30" name="orca" x="764" y="1240" width="170" height="68"/>
+  <object id="30" name="orca" x="764" y="1240" width="170" height="68">
+   <properties>
+    <property name="wp" value="orca_2"/>
+   </properties>
+  </object>
   <object id="32" name="orca" x="1137" y="1056" width="170" height="68">
    <properties>
     <property name="wp" value="orca_1"/>
@@ -131,6 +135,9 @@
  <objectgroup name="waypoints">
   <object id="35" name="orca_1" x="1156" y="586">
    <polyline points="0,0 382,-78 720,200 300,398 -264,338 -272,162 322,198 -16,20"/>
+  </object>
+  <object id="37" name="orca_2" x="764" y="1362">
+   <polyline points="0,0 -660,114 -604,930 -250,1580 298,1594 316,1778 740,1780 306,1450 -276,1344 -490,776 -558,198 -586,-596"/>
   </object>
  </objectgroup>
 </map>
