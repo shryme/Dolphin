@@ -85,7 +85,7 @@
         }, 
         {
          "draworder":"topdown",
-         "height":100,
+         "height":0,
          "name":"sharks",
          "objects":[
                 {
@@ -121,13 +121,13 @@
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
-         "width":100,
+         "width":0,
          "x":0,
          "y":0
         }, 
         {
          "draworder":"topdown",
-         "height":100,
+         "height":0,
          "name":"spawn",
          "objects":[
                 {
@@ -148,11 +148,53 @@
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
+         "width":0,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "height":100,
+         "name":"orcas",
+         "objects":[
+                {
+                 "height":68,
+                 "id":30,
+                 "name":"orca",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":170,
+                 "x":764,
+                 "y":1240
+                }, 
+                {
+                 "height":68,
+                 "id":32,
+                 "name":"orca",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":170,
+                 "x":1137,
+                 "y":1056
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
          "width":100,
          "x":0,
          "y":0
         }],
- "nextobjectid":30,
+ "nextobjectid":33,
  "orientation":"orthogonal",
  "properties":
     {
