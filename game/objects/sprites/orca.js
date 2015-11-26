@@ -1,27 +1,21 @@
 
-function Orca(game, group, x, y) {
-	this.game = game;
-
+function Orca(game, x, y) {
 
 	if (x === undefined && y === undefined) {
 		x = 0;
 		y = 0;
 	}
 
-	if (group !== undefined) {
-		this.sprite = group.create(x, y, 'orca', 'm1.png');
-	} else {
-		this.sprite = this.game.add.sprite(x, y, 'orca', 'm1.png');
-	}
+	Phaser.Sprite.call(this, game, x, y, 'orca', 'm1.png');
 
-	this.game.physics.arcade.enableBody(this.sprite);
-	this.sprite.body.gravity.y = 0;
-	this.sprite.body.collideWorldBounds = true;
+	this.game.physics.arcade.enableBody(this);
+	this.body.gravity.y = 0;
+	this.body.collideWorldBounds = true;
 
-	this.sprite.body.allowRotation = false;
-	this.sprite.anchor.setTo(.5, .5);
+	this.body.allowRotation = false;
+	this.anchor.setTo(.5, .5);
 
-	this.sprite.body.setSize(75, 50, 0, 0);
+	this.body.setSize(75, 50, 0, 0);
 
 
 	var listMove = new Array();
@@ -31,43 +25,47 @@ function Orca(game, group, x, y) {
 	}
 
 
-	this.sprite.animations.add('move', listMove, 10, true, false);
-	this.sprite.animations.add('idle', ['m1.png', 'm2.png'], 2, true, false);
-	this.sprite.animations.play('move');
+	this.animations.add('move', listMove, 10, true, false);
+	this.animations.add('idle', ['m1.png', 'm2.png'], 2, true, false);
+	this.animations.play('move');
+
+	game.add.existing(this);
 
 }
 
-Orca.prototype = {
-	create: function() {
+Orca.prototype = Object.create(Phaser.Sprite.prototype);
+Orca.prototype.constructor = Orca;
 
-	},
-	update: function() {
+Orca.prototype.create = function() {
 
-		return true;
+}
 
-	},
-	idle: function() {
+Orca.prototype.update = function() {
 
-		this.sprite.animations.play('idle');
-		this.sprite.body.velocity.x = 0;
-		this.sprite.body.velocity.y = 0;
-	},
-	move: function(target, speed) {
+	return true;
+}
 
-		if (target.sprite !== undefined)
-			target = target.sprite;
+Orca.prototype.idle = function() {
 
-		this.sprite.rotation = this.game.physics.arcade.moveToObject(this.sprite, target, speed);
+	this.animations.play('idle');
+	this.body.velocity.x = 0;
+	this.body.velocity.y = 0;
+}
 
-		this.sprite.animations.play('move');
+Orca.prototype.move = function(target, speed) {
+	// if (target.sprite !== undefined)
+	// 	target = target.sprite;
 
-		//Flip orca when moving to the left
-		if (this.sprite.rotation < -1.5 || this.sprite.rotation > 1.5)
-			this.sprite.scale.y = -1;
-		else
-			this.sprite.scale.y = 1;
+	this.rotation = this.game.physics.arcade.moveToObject(this, target, speed);
 
-	}
+	this.animations.play('move');
+
+	//Flip orca when moving to the left
+	if (this.rotation < -1.5 || this.rotation > 1.5)
+		this.scale.y = -1;
+	else
+		this.scale.y = 1;
+
 }
 
 module.exports = Orca;

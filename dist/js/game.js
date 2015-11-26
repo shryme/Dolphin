@@ -20,10 +20,10 @@ window.onload = function () {
 var Shark = require('../sprites/shark');
 
 
-function BasicEnemy(game, group, x, y) {
+function BasicEnemy(game, x, y) {
 	this.game = game;
 
-	this.entity = new Shark(game, group, x, y);
+	this.entity = new Shark(game, x, y);
 	this.entity.create();
 
 	this.listTargetPos = new Array();
@@ -39,7 +39,7 @@ BasicEnemy.prototype = {
 		if (!this.entity.update())
 			return;
 
-		var dist = this.game.physics.arcade.distanceBetween(this.entity.sprite, target.sprite);
+		var dist = this.game.physics.arcade.distanceBetween(this.entity, target);
 
 		if (dist < 300) {
 			//If close enough, chase the target
@@ -54,15 +54,15 @@ BasicEnemy.prototype = {
 			//If still close but not enough to chase, add the current target position
 			//to a list that the enemy will follow to try to find the target again
 			this.listTargetPos.push({
-				x: target.sprite.x,
-				y: target.sprite.y
+				x: target.x,
+				y: target.y
 			});
 
 			this.entity.move(this.listTargetPos[0], 400);
 
 			//If the enemy is close enough to the history position of the target,
 			//remove it from the list so the enemy chase the next point
-			if (this.game.physics.arcade.distanceBetween(this.entity.sprite, this.listTargetPos[0]) < 100)
+			if (this.game.physics.arcade.distanceBetween(this.entity, this.listTargetPos[0]) < 100)
 				this.listTargetPos.shift();
 
 
@@ -84,10 +84,10 @@ module.exports = BasicEnemy;
 var Dolphin = require('../sprites/dolphin');
 
 
-function Friend(game, group, x, y) {
+function Friend(game, x, y) {
 	this.game = game;
 
-	this.entity = new Dolphin(game, group, x, y);
+	this.entity = new Dolphin(game, x, y);
 	this.entity.create();
 
 }
@@ -103,7 +103,7 @@ Friend.prototype = {
 
 		if (this.game.input.activePointer.isDown)
 			this.entity.attack();
-		else if (this.game.physics.arcade.distanceToXY(this.entity.sprite, 300, 300) > 100)
+		else if (this.game.physics.arcade.distanceToXY(this.entity, 300, 300) > 100)
 			this.entity.move(300, 300, 400);
 		else
 			this.entity.idle();
@@ -118,11 +118,12 @@ module.exports = Friend;
 var Orca = require('../sprites/orca');
 
 
-function FriendOrca(game, group, x, y, wp) {
+function FriendOrca(game, x, y, wp) {
 
 	this.game = game;
 
-	this.entity = new Orca(game, group, x, y);
+	this.entity = new Orca(game, x, y);
+	// this.entity = new Orca(game, group, x, y);
 	this.entity.create();
 
 	this.target = {x: 700, y: 700};
@@ -144,7 +145,7 @@ FriendOrca.prototype = {
 		if (!this.entity.update())
 			return;
 
-		if (this.game.physics.arcade.distanceBetween(this.entity.sprite, this.target) > 100) {
+		if (this.game.physics.arcade.distanceBetween(this.entity, this.target) > 100) {
 			this.entity.move(this.target, 400);
 		}
 		else {
@@ -168,10 +169,10 @@ module.exports = FriendOrca;
 var Dolphin = require('../sprites/dolphin');
 
 
-function Player(game, group, x, y) {
+function Player(game, x, y) {
 	this.game = game;
 
-	this.entity = new Dolphin(game, group, x, y);
+	this.entity = new Dolphin(game, x, y);
 	this.entity.create();
 
 }
@@ -188,7 +189,7 @@ Player.prototype = {
 
 		if (this.game.input.activePointer.isDown)
 			this.entity.attack();
-		else if (this.game.physics.arcade.distanceToPointer(this.entity.sprite, this.game.input.activePointer) > 20)
+		else if (this.game.physics.arcade.distanceToPointer(this.entity, this.game.input.activePointer) > 20)
 			this.entity.move();
 		else
 			this.entity.idle();
@@ -201,29 +202,23 @@ module.exports = Player;
 
 },{"../sprites/dolphin":6}],6:[function(require,module,exports){
 
-function Dolphin(game, group, x, y) {
-	this.game = game;
-
+function Dolphin(game, x, y) {
 
 	if (x === undefined && y === undefined) {
 		x = 0;
 		y = 0;
 	}
 
-	if (group !== undefined) {
-		this.sprite = group.create(x, y, 'dolphin', 'r1.png');
-	} else {
-		this.sprite = this.game.add.sprite(x, y, 'dolphin', 'r1.png');
-	}
+	Phaser.Sprite.call(this, game, x, y, 'dolphin', 'r1.png');
 
-	this.game.physics.arcade.enableBody(this.sprite);
-	this.sprite.body.gravity.y = 0;
-	this.sprite.body.collideWorldBounds = true;
+	this.game.physics.arcade.enableBody(this);
+	this.body.gravity.y = 0;
+	this.body.collideWorldBounds = true;
 
-	this.sprite.body.allowRotation = false;
-	this.sprite.anchor.setTo(.5, .5);
+	this.body.allowRotation = false;
+	this.anchor.setTo(.5, .5);
 
-	this.sprite.body.setSize(75, 50, 0, 0);
+	this.body.setSize(75, 50, 0, 0);
 
 
 	var list = new Array();
@@ -236,11 +231,11 @@ function Dolphin(game, group, x, y) {
 		listAttack.push('attack' + i + '.png');
 	}
 
-	this.sprite.animations.add('moveX', list, 10, true, false);
-	this.sprite.animations.add('moveXY', listXY, 10, true, false);
-	this.sprite.animations.add('idle', ['r2.png', 'r3.png'], 2, true, false);
-	this.attackAnimation = this.sprite.animations.add('attack', listAttack, 10);
-	this.sprite.animations.play('moveX');
+	this.animations.add('moveX', list, 10, true, false);
+	this.animations.add('moveXY', listXY, 10, true, false);
+	this.animations.add('idle', ['r2.png', 'r3.png'], 2, true, false);
+	this.attackAnimation = this.animations.add('attack', listAttack, 10);
+	this.animations.play('moveX');
 
 	this.isAttacking = false;
 	this.isDangerous = false;
@@ -256,129 +251,135 @@ function Dolphin(game, group, x, y) {
 
 	this.hp = 777;
 
+	game.add.existing(this);
+
 }
 
-Dolphin.prototype = {
-	create: function() {
+Dolphin.prototype = Object.create(Phaser.Sprite.prototype);
+Dolphin.prototype.constructor = Dolphin;
 
-	},
-	update: function() {
 
-		if (this.isAttacking) {
+Dolphin.prototype.create = function() {
 
-			if (this.isDangerous) {
+}
 
-				if (this.game.time.time > this.attackEnding) {
-					//After X time moving, we stop the attack and allow user to move like normal
-					this.stopAttack();
-					this.attackEnding = undefined;
-				}
-				else {
-					//Moving after the animation
-					this.moveForAttack();
-				}
+Dolphin.prototype.update = function() {
 
+	if (this.isAttacking) {
+
+		if (this.isDangerous) {
+
+			if (this.game.time.time > this.attackEnding) {
+				//After X time moving, we stop the attack and allow user to move like normal
+				this.stopAttack();
+				this.attackEnding = undefined;
 			}
 			else {
-				//Stop moving when the animation for attacking is playing
-				this.sprite.body.velocity.x = 0;
-				this.sprite.body.velocity.y = 0;
+				//Moving after the animation
+				this.moveForAttack();
 			}
 
-
-			return false;
-
-		}
-
-		return true;
-
-	},
-	idle: function() {
-		if (this.isAttacking)
-			return
-
-		this.sprite.animations.play('idle');
-		this.sprite.body.velocity.x = 0;
-		this.sprite.body.velocity.y = 0;
-	},
-	moveForAttack: function() {
-		this.sprite.body.velocity.x = this.vx * -1;
-		this.sprite.body.velocity.y = this.vy * -1;
-
-
-
-	},
-	startAttack: function() {
-		this.attackEnding = this.game.time.time + this.attackDuration;
-		this.isDangerous = true;
-
-	},
-	stopAttack: function() {
-		this.isAttacking = false;
-		this.isDangerous = false;
-	},
-	attack: function(x, y) {
-		if (!this.isAttacking) {
-
-			this.isAttacking = true;
-			this.sprite.animations.play('attack');
-
-
-
-			if (x === undefined && y === undefined) {
-				x = this.game.input.worldX;
-				y = this.game.input.worldY;
-			}
-
-
-			var dx = this.sprite.position.x - x;
-			var dy = this.sprite.position.y - y;
-
-			var attackDistance = 750;
-			var factor = attackDistance / Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
-
-			this.vx = dx * factor;
-			this.vy = dy * factor;
-
-			this.sprite.rotation = this.game.physics.arcade.angleToXY(this.sprite, x, y);
-
-			//Flip dolphin when moving to the left
-			if (this.sprite.rotation < -1.5 || this.sprite.rotation > 1.5)
-				this.sprite.scale.y = -1;
-			else
-				this.sprite.scale.y = 1;
-
-
-		}
-	},
-	move: function(x, y, speed) {
-
-
-		if (speed === undefined)
-			speed = 300;
-
-		if (x === undefined && y === undefined) {
-			this.sprite.rotation = this.game.physics.arcade.moveToPointer(this.sprite, speed, this.game.input.activePointer, 500);
 		}
 		else {
-			this.sprite.rotation = this.game.physics.arcade.moveToXY(this.sprite, x, y, speed);
+			//Stop moving when the animation for attacking is playing
+			this.body.velocity.x = 0;
+			this.body.velocity.y = 0;
 		}
 
 
-		this.sprite.animations.play('moveX');
+		return false;
+
+	}
+
+	return true;
+
+}
+
+Dolphin.prototype.idle = function() {
+	if (this.isAttacking)
+		return
+
+	this.animations.play('idle');
+	this.body.velocity.x = 0;
+	this.body.velocity.y = 0;
+}
+
+Dolphin.prototype.moveForAttack = function() {
+	this.body.velocity.x = this.vx * -1;
+	this.body.velocity.y = this.vy * -1;
+}
+
+Dolphin.prototype.startAttack = function() {
+	this.attackEnding = this.game.time.time + this.attackDuration;
+	this.isDangerous = true;
+}
+
+Dolphin.prototype.stopAttack = function() {
+	this.isAttacking = false;
+	this.isDangerous = false;
+}
+
+Dolphin.prototype.attack = function(x, y) {
+	if (!this.isAttacking) {
+
+		this.isAttacking = true;
+		this.animations.play('attack');
+
+		if (x === undefined && y === undefined) {
+			x = this.game.input.worldX;
+			y = this.game.input.worldY;
+		}
+
+
+		var dx = this.position.x - x;
+		var dy = this.position.y - y;
+
+		var attackDistance = 750;
+		var factor = attackDistance / Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
+
+		this.vx = dx * factor;
+		this.vy = dy * factor;
+
+		this.rotation = this.game.physics.arcade.angleToXY(this, x, y);
 
 		//Flip dolphin when moving to the left
-		if (this.sprite.rotation < -1.5 || this.sprite.rotation > 1.5)
-			this.sprite.scale.y = -1;
+		if (this.rotation < -1.5 || this.rotation > 1.5)
+			this.scale.y = -1;
 		else
-			this.sprite.scale.y = 1;
+			this.scale.y = 1;
 
 
-	},
-	hurt: function(dmg) {
-		this.hp -= dmg;
 	}
 }
+
+Dolphin.prototype.move = function(x, y, speed) {
+
+	if (speed === undefined)
+		speed = 300;
+
+	if (x === undefined && y === undefined) {
+		this.rotation = this.game.physics.arcade.moveToPointer(this, speed, this.game.input.activePointer, 500);
+	}
+	else {
+		this.rotation = this.game.physics.arcade.moveToXY(this, x, y, speed);
+	}
+
+
+	this.animations.play('moveX');
+
+	//Flip dolphin when moving to the left
+	if (this.rotation < -1.5 || this.rotation > 1.5)
+		this.scale.y = -1;
+	else
+		this.scale.y = 1;
+
+
+}
+
+Dolphin.prototype.hurt = function(dmg) {
+	this.hp -= dmg;
+}
+
 
 module.exports = Dolphin;
 
@@ -393,29 +394,23 @@ module.exports = Dolphin;
 
 },{}],7:[function(require,module,exports){
 
-function Orca(game, group, x, y) {
-	this.game = game;
-
+function Orca(game, x, y) {
 
 	if (x === undefined && y === undefined) {
 		x = 0;
 		y = 0;
 	}
 
-	if (group !== undefined) {
-		this.sprite = group.create(x, y, 'orca', 'm1.png');
-	} else {
-		this.sprite = this.game.add.sprite(x, y, 'orca', 'm1.png');
-	}
+	Phaser.Sprite.call(this, game, x, y, 'orca', 'm1.png');
 
-	this.game.physics.arcade.enableBody(this.sprite);
-	this.sprite.body.gravity.y = 0;
-	this.sprite.body.collideWorldBounds = true;
+	this.game.physics.arcade.enableBody(this);
+	this.body.gravity.y = 0;
+	this.body.collideWorldBounds = true;
 
-	this.sprite.body.allowRotation = false;
-	this.sprite.anchor.setTo(.5, .5);
+	this.body.allowRotation = false;
+	this.anchor.setTo(.5, .5);
 
-	this.sprite.body.setSize(75, 50, 0, 0);
+	this.body.setSize(75, 50, 0, 0);
 
 
 	var listMove = new Array();
@@ -425,43 +420,47 @@ function Orca(game, group, x, y) {
 	}
 
 
-	this.sprite.animations.add('move', listMove, 10, true, false);
-	this.sprite.animations.add('idle', ['m1.png', 'm2.png'], 2, true, false);
-	this.sprite.animations.play('move');
+	this.animations.add('move', listMove, 10, true, false);
+	this.animations.add('idle', ['m1.png', 'm2.png'], 2, true, false);
+	this.animations.play('move');
+
+	game.add.existing(this);
 
 }
 
-Orca.prototype = {
-	create: function() {
+Orca.prototype = Object.create(Phaser.Sprite.prototype);
+Orca.prototype.constructor = Orca;
 
-	},
-	update: function() {
+Orca.prototype.create = function() {
 
-		return true;
+}
 
-	},
-	idle: function() {
+Orca.prototype.update = function() {
 
-		this.sprite.animations.play('idle');
-		this.sprite.body.velocity.x = 0;
-		this.sprite.body.velocity.y = 0;
-	},
-	move: function(target, speed) {
+	return true;
+}
 
-		if (target.sprite !== undefined)
-			target = target.sprite;
+Orca.prototype.idle = function() {
 
-		this.sprite.rotation = this.game.physics.arcade.moveToObject(this.sprite, target, speed);
+	this.animations.play('idle');
+	this.body.velocity.x = 0;
+	this.body.velocity.y = 0;
+}
 
-		this.sprite.animations.play('move');
+Orca.prototype.move = function(target, speed) {
+	// if (target.sprite !== undefined)
+	// 	target = target.sprite;
 
-		//Flip orca when moving to the left
-		if (this.sprite.rotation < -1.5 || this.sprite.rotation > 1.5)
-			this.sprite.scale.y = -1;
-		else
-			this.sprite.scale.y = 1;
+	this.rotation = this.game.physics.arcade.moveToObject(this, target, speed);
 
-	}
+	this.animations.play('move');
+
+	//Flip orca when moving to the left
+	if (this.rotation < -1.5 || this.rotation > 1.5)
+		this.scale.y = -1;
+	else
+		this.scale.y = 1;
+
 }
 
 module.exports = Orca;
@@ -477,29 +476,23 @@ module.exports = Orca;
 
 },{}],8:[function(require,module,exports){
 
-function Shark(game, group, x, y) {
-	this.game = game;
-
+function Shark(game, x, y) {
 
 	if (x === undefined && y === undefined) {
 		x = 0;
 		y = 0;
 	}
 
-	if (group !== undefined) {
-		this.sprite = group.create(x, y, 'shark', 'm1.png');
-	} else {
-		this.sprite = this.game.add.sprite(x, y, 'shark', 'm1.png');
-	}
+	Phaser.Sprite.call(this, game, x, y, 'shark', 'm1.png');
 
-	this.game.physics.arcade.enableBody(this.sprite);
-	this.sprite.body.gravity.y = 0;
-	this.sprite.body.collideWorldBounds = true;
+	this.game.physics.arcade.enableBody(this);
+	this.body.gravity.y = 0;
+	this.body.collideWorldBounds = true;
 
-	this.sprite.body.allowRotation = false;
-	this.sprite.anchor.setTo(.5, .5);
+	this.body.allowRotation = false;
+	this.anchor.setTo(.5, .5);
 
-	this.sprite.body.setSize(75, 50, 0, 0);
+	this.body.setSize(75, 50, 0, 0);
 
 
 	var listMove = new Array();
@@ -512,10 +505,10 @@ function Shark(game, group, x, y) {
 	listAttack.push('a1.png');
 	listAttack.push('a2.png');
 
-	this.sprite.animations.add('move', listMove, 10, true, false);
-	this.sprite.animations.add('idle', ['m1.png', 'm2.png'], 2, true, false);
-	this.attackAnimation = this.sprite.animations.add('attack', listAttack, 5);
-	this.sprite.animations.play('move');
+	this.animations.add('move', listMove, 10, true, false);
+	this.animations.add('idle', ['m1.png', 'm2.png'], 2, true, false);
+	this.attackAnimation = this.animations.add('attack', listAttack, 5);
+	this.animations.play('move');
 
 
 	var fctAttackComplete = this.attackComplete.bind(this);
@@ -526,50 +519,57 @@ function Shark(game, group, x, y) {
 
 	this.dmg = 1;
 
+	game.add.existing(this);
+
 }
 
-Shark.prototype = {
-	create: function() {
+Shark.prototype = Object.create(Phaser.Sprite.prototype);
+Shark.prototype.constructor = Shark;
 
-	},
-	update: function() {
 
-		return true;
+Shark.prototype.create = function() {
 
-	},
-	idle: function() {
-
-		this.sprite.animations.play('idle');
-		this.sprite.body.velocity.x = 0;
-		this.sprite.body.velocity.y = 0;
-	},
-	attackComplete: function() {
-		this.isAttacking = false;
-		this.currentTarget.hurt(this.dmg);
-	},
-	attack: function(target) {
-		this.currentTarget = target;
-		this.isAttacking = true;
-		this.sprite.animations.play('attack');
-	},
-	move: function(target, speed) {
-
-		if (target.sprite !== undefined)
-			target = target.sprite;
-
-		this.sprite.rotation = this.game.physics.arcade.moveToObject(this.sprite, target, speed);
-
-		if (!this.isAttacking)
-			this.sprite.animations.play('move');
-
-		//Flip shark when moving to the left
-		if (this.sprite.rotation < -1.5 || this.sprite.rotation > 1.5)
-			this.sprite.scale.y = -1;
-		else
-			this.sprite.scale.y = 1;
-
-	}
 }
+
+Shark.prototype.update = function() {
+	return true;
+}
+
+Shark.prototype.idle = function() {
+	this.animations.play('idle');
+	this.body.velocity.x = 0;
+	this.body.velocity.y = 0;
+}
+
+Shark.prototype.attackComplete = function() {
+	this.isAttacking = false;
+	this.currentTarget.hurt(this.dmg);
+}
+
+Shark.prototype.attack = function(target) {
+	this.currentTarget = target;
+	this.isAttacking = true;
+	this.animations.play('attack');
+}
+
+Shark.prototype.move = function(target, speed) {
+
+	// if (target.sprite !== undefined)
+	// 	target = target.sprite;
+
+	this.rotation = this.game.physics.arcade.moveToObject(this, target, speed);
+
+	if (!this.isAttacking)
+		this.animations.play('move');
+
+	//Flip shark when moving to the left
+	if (this.rotation < -1.5 || this.rotation > 1.5)
+		this.scale.y = -1;
+	else
+		this.scale.y = 1;
+
+}
+
 
 module.exports = Shark;
 
@@ -705,8 +705,8 @@ Play.prototype = {
 
 		//Us
 		var spawn = this.map.objects.spawn[0];
-		this.player = new Player(this.game, this.groupDolphins, spawn.x, spawn.y);
-
+		this.player = new Player(this.game, spawn.x, spawn.y);
+		this.groupDolphins.add(this.player.entity);
 
 
 
@@ -735,7 +735,8 @@ Play.prototype = {
 
 		for (var i = 0; i < listObjectsDolphins.length;  i++) {
 			var cur = listObjectsDolphins[i];
-			var dolphin = new Friend(this.game, this.groupDolphins, cur.x, cur.y);
+			var dolphin = new Friend(this.game, cur.x, cur.y);
+			this.groupDolphins.add(dolphin.entity);
 
 			this.list.push(dolphin);
 		}
@@ -744,7 +745,8 @@ Play.prototype = {
 
 		for (var i = 0; i < listObjectsSharks.length;  i++) {
 			var cur = listObjectsSharks[i];
-			var shark = new Shark(this.game, this.groupSharks, cur.x, cur.y);
+			var shark = new Shark(this.game, cur.x, cur.y);
+			this.groupSharks.add(shark.entity);
 
 			this.listEnemy.push(shark);
 		}
@@ -754,14 +756,15 @@ Play.prototype = {
 
 		for (var i = 0; i < listObjectsOrcas.length;  i++) {
 			var cur = listObjectsOrcas[i];
-			var orca = new Orca(this.game, this.groupOrcas, cur.x, cur.y, this.listWaypoints[cur.properties.wp]);
+			var orca = new Orca(this.game, cur.x, cur.y, this.listWaypoints[cur.properties.wp]);
+			this.groupOrcas.add(orca.entity);
 
 			this.list.push(orca);
 		}
 
 
 		//Add camera to follow our player
-		this.game.camera.follow(this.player.entity.sprite);
+		this.game.camera.follow(this.player.entity);
 
 		this.debugKey = this.game.input.keyboard.addKey(Phaser.Keyboard.Q);
 		this.debugKey.onDown.add(this.toggleDebug, this);
@@ -788,13 +791,13 @@ Play.prototype = {
 		var blocks = this.blockLayer;
 		this.list.forEach(function(f) {
 			f.update();
-			game.physics.arcade.collide(f.entity.sprite, blocks);
+			// game.physics.arcade.collide(f.entity.sprite, blocks);
 		});
 
 		var player = this.player.entity;
 		this.listEnemy.forEach(function(f) {
 			f.update(player);
-			game.physics.arcade.collide(f.entity.sprite, blocks);
+			// game.physics.arcade.collide(f.entity.sprite, blocks);
 		});
 
 		//Collide with friends
@@ -807,7 +810,9 @@ Play.prototype = {
 		this.game.physics.arcade.collide(this.groupDolphins, this.groupSharks);
 
 		//Collide with blocks
-		this.game.physics.arcade.collide(this.player.entity.sprite, this.blockLayer);
+		// this.game.physics.arcade.collide(this.player.entity.sprite, this.blockLayer);
+		this.game.physics.arcade.collide(this.groupSharks, this.blockLayer);
+		this.game.physics.arcade.collide(this.groupDolphins, this.blockLayer);
 
 
 		this.txtHp.text = "Hp: " + this.player.entity.hp;
@@ -818,16 +823,16 @@ Play.prototype = {
 
 		if (this.showDebug) {
 
-			this.game.debug.bodyInfo(this.player.entity.sprite, 32, 32);
-			this.game.debug.body(this.player.entity.sprite);
+			this.game.debug.bodyInfo(this.player.entity, 32, 32);
+			this.game.debug.body(this.player.entity);
 
 
 			var game = this.game;
 			this.list.forEach(function(f) {
-				game.debug.body(f.entity.sprite);
+				game.debug.body(f.entity);
 			});
 			this.listEnemy.forEach(function(f) {
-				game.debug.body(f.entity.sprite);
+				game.debug.body(f.entity);
 			});
 
 		}

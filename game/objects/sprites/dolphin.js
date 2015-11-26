@@ -1,27 +1,21 @@
 
-function Dolphin(game, group, x, y) {
-	this.game = game;
-
+function Dolphin(game, x, y) {
 
 	if (x === undefined && y === undefined) {
 		x = 0;
 		y = 0;
 	}
 
-	if (group !== undefined) {
-		this.sprite = group.create(x, y, 'dolphin', 'r1.png');
-	} else {
-		this.sprite = this.game.add.sprite(x, y, 'dolphin', 'r1.png');
-	}
+	Phaser.Sprite.call(this, game, x, y, 'dolphin', 'r1.png');
 
-	this.game.physics.arcade.enableBody(this.sprite);
-	this.sprite.body.gravity.y = 0;
-	this.sprite.body.collideWorldBounds = true;
+	this.game.physics.arcade.enableBody(this);
+	this.body.gravity.y = 0;
+	this.body.collideWorldBounds = true;
 
-	this.sprite.body.allowRotation = false;
-	this.sprite.anchor.setTo(.5, .5);
+	this.body.allowRotation = false;
+	this.anchor.setTo(.5, .5);
 
-	this.sprite.body.setSize(75, 50, 0, 0);
+	this.body.setSize(75, 50, 0, 0);
 
 
 	var list = new Array();
@@ -34,11 +28,11 @@ function Dolphin(game, group, x, y) {
 		listAttack.push('attack' + i + '.png');
 	}
 
-	this.sprite.animations.add('moveX', list, 10, true, false);
-	this.sprite.animations.add('moveXY', listXY, 10, true, false);
-	this.sprite.animations.add('idle', ['r2.png', 'r3.png'], 2, true, false);
-	this.attackAnimation = this.sprite.animations.add('attack', listAttack, 10);
-	this.sprite.animations.play('moveX');
+	this.animations.add('moveX', list, 10, true, false);
+	this.animations.add('moveXY', listXY, 10, true, false);
+	this.animations.add('idle', ['r2.png', 'r3.png'], 2, true, false);
+	this.attackAnimation = this.animations.add('attack', listAttack, 10);
+	this.animations.play('moveX');
 
 	this.isAttacking = false;
 	this.isDangerous = false;
@@ -54,129 +48,135 @@ function Dolphin(game, group, x, y) {
 
 	this.hp = 777;
 
+	game.add.existing(this);
+
 }
 
-Dolphin.prototype = {
-	create: function() {
+Dolphin.prototype = Object.create(Phaser.Sprite.prototype);
+Dolphin.prototype.constructor = Dolphin;
 
-	},
-	update: function() {
 
-		if (this.isAttacking) {
+Dolphin.prototype.create = function() {
 
-			if (this.isDangerous) {
+}
 
-				if (this.game.time.time > this.attackEnding) {
-					//After X time moving, we stop the attack and allow user to move like normal
-					this.stopAttack();
-					this.attackEnding = undefined;
-				}
-				else {
-					//Moving after the animation
-					this.moveForAttack();
-				}
+Dolphin.prototype.update = function() {
 
+	if (this.isAttacking) {
+
+		if (this.isDangerous) {
+
+			if (this.game.time.time > this.attackEnding) {
+				//After X time moving, we stop the attack and allow user to move like normal
+				this.stopAttack();
+				this.attackEnding = undefined;
 			}
 			else {
-				//Stop moving when the animation for attacking is playing
-				this.sprite.body.velocity.x = 0;
-				this.sprite.body.velocity.y = 0;
+				//Moving after the animation
+				this.moveForAttack();
 			}
 
-
-			return false;
-
-		}
-
-		return true;
-
-	},
-	idle: function() {
-		if (this.isAttacking)
-			return
-
-		this.sprite.animations.play('idle');
-		this.sprite.body.velocity.x = 0;
-		this.sprite.body.velocity.y = 0;
-	},
-	moveForAttack: function() {
-		this.sprite.body.velocity.x = this.vx * -1;
-		this.sprite.body.velocity.y = this.vy * -1;
-
-
-
-	},
-	startAttack: function() {
-		this.attackEnding = this.game.time.time + this.attackDuration;
-		this.isDangerous = true;
-
-	},
-	stopAttack: function() {
-		this.isAttacking = false;
-		this.isDangerous = false;
-	},
-	attack: function(x, y) {
-		if (!this.isAttacking) {
-
-			this.isAttacking = true;
-			this.sprite.animations.play('attack');
-
-
-
-			if (x === undefined && y === undefined) {
-				x = this.game.input.worldX;
-				y = this.game.input.worldY;
-			}
-
-
-			var dx = this.sprite.position.x - x;
-			var dy = this.sprite.position.y - y;
-
-			var attackDistance = 750;
-			var factor = attackDistance / Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
-
-			this.vx = dx * factor;
-			this.vy = dy * factor;
-
-			this.sprite.rotation = this.game.physics.arcade.angleToXY(this.sprite, x, y);
-
-			//Flip dolphin when moving to the left
-			if (this.sprite.rotation < -1.5 || this.sprite.rotation > 1.5)
-				this.sprite.scale.y = -1;
-			else
-				this.sprite.scale.y = 1;
-
-
-		}
-	},
-	move: function(x, y, speed) {
-
-
-		if (speed === undefined)
-			speed = 300;
-
-		if (x === undefined && y === undefined) {
-			this.sprite.rotation = this.game.physics.arcade.moveToPointer(this.sprite, speed, this.game.input.activePointer, 500);
 		}
 		else {
-			this.sprite.rotation = this.game.physics.arcade.moveToXY(this.sprite, x, y, speed);
+			//Stop moving when the animation for attacking is playing
+			this.body.velocity.x = 0;
+			this.body.velocity.y = 0;
 		}
 
 
-		this.sprite.animations.play('moveX');
+		return false;
+
+	}
+
+	return true;
+
+}
+
+Dolphin.prototype.idle = function() {
+	if (this.isAttacking)
+		return
+
+	this.animations.play('idle');
+	this.body.velocity.x = 0;
+	this.body.velocity.y = 0;
+}
+
+Dolphin.prototype.moveForAttack = function() {
+	this.body.velocity.x = this.vx * -1;
+	this.body.velocity.y = this.vy * -1;
+}
+
+Dolphin.prototype.startAttack = function() {
+	this.attackEnding = this.game.time.time + this.attackDuration;
+	this.isDangerous = true;
+}
+
+Dolphin.prototype.stopAttack = function() {
+	this.isAttacking = false;
+	this.isDangerous = false;
+}
+
+Dolphin.prototype.attack = function(x, y) {
+	if (!this.isAttacking) {
+
+		this.isAttacking = true;
+		this.animations.play('attack');
+
+		if (x === undefined && y === undefined) {
+			x = this.game.input.worldX;
+			y = this.game.input.worldY;
+		}
+
+
+		var dx = this.position.x - x;
+		var dy = this.position.y - y;
+
+		var attackDistance = 750;
+		var factor = attackDistance / Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
+
+		this.vx = dx * factor;
+		this.vy = dy * factor;
+
+		this.rotation = this.game.physics.arcade.angleToXY(this, x, y);
 
 		//Flip dolphin when moving to the left
-		if (this.sprite.rotation < -1.5 || this.sprite.rotation > 1.5)
-			this.sprite.scale.y = -1;
+		if (this.rotation < -1.5 || this.rotation > 1.5)
+			this.scale.y = -1;
 		else
-			this.sprite.scale.y = 1;
+			this.scale.y = 1;
 
 
-	},
-	hurt: function(dmg) {
-		this.hp -= dmg;
 	}
 }
+
+Dolphin.prototype.move = function(x, y, speed) {
+
+	if (speed === undefined)
+		speed = 300;
+
+	if (x === undefined && y === undefined) {
+		this.rotation = this.game.physics.arcade.moveToPointer(this, speed, this.game.input.activePointer, 500);
+	}
+	else {
+		this.rotation = this.game.physics.arcade.moveToXY(this, x, y, speed);
+	}
+
+
+	this.animations.play('moveX');
+
+	//Flip dolphin when moving to the left
+	if (this.rotation < -1.5 || this.rotation > 1.5)
+		this.scale.y = -1;
+	else
+		this.scale.y = 1;
+
+
+}
+
+Dolphin.prototype.hurt = function(dmg) {
+	this.hp -= dmg;
+}
+
 
 module.exports = Dolphin;
 

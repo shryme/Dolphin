@@ -2,11 +2,12 @@
 var Orca = require('../sprites/orca');
 
 
-function FriendOrca(game, group, x, y, wp) {
+function FriendOrca(game, x, y, wp) {
 
 	this.game = game;
 
-	this.entity = new Orca(game, group, x, y);
+	this.entity = new Orca(game, x, y);
+	// this.entity = new Orca(game, group, x, y);
 	this.entity.create();
 
 	this.target = {x: 700, y: 700};
@@ -28,7 +29,7 @@ FriendOrca.prototype = {
 		if (!this.entity.update())
 			return;
 
-		if (this.game.physics.arcade.distanceBetween(this.entity.sprite, this.target) > 100) {
+		if (this.game.physics.arcade.distanceBetween(this.entity, this.target) > 100) {
 			this.entity.move(this.target, 400);
 		}
 		else {

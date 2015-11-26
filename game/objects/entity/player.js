@@ -2,10 +2,10 @@
 var Dolphin = require('../sprites/dolphin');
 
 
-function Player(game, group, x, y) {
+function Player(game, x, y) {
 	this.game = game;
 
-	this.entity = new Dolphin(game, group, x, y);
+	this.entity = new Dolphin(game, x, y);
 	this.entity.create();
 
 }
@@ -22,7 +22,7 @@ Player.prototype = {
 
 		if (this.game.input.activePointer.isDown)
 			this.entity.attack();
-		else if (this.game.physics.arcade.distanceToPointer(this.entity.sprite, this.game.input.activePointer) > 20)
+		else if (this.game.physics.arcade.distanceToPointer(this.entity, this.game.input.activePointer) > 20)
 			this.entity.move();
 		else
 			this.entity.idle();

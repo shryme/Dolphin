@@ -51,8 +51,8 @@ Play.prototype = {
 
 		//Us
 		var spawn = this.map.objects.spawn[0];
-		this.player = new Player(this.game, this.groupDolphins, spawn.x, spawn.y);
-
+		this.player = new Player(this.game, spawn.x, spawn.y);
+		this.groupDolphins.add(this.player.entity);
 
 
 
@@ -81,7 +81,8 @@ Play.prototype = {
 
 		for (var i = 0; i < listObjectsDolphins.length;  i++) {
 			var cur = listObjectsDolphins[i];
-			var dolphin = new Friend(this.game, this.groupDolphins, cur.x, cur.y);
+			var dolphin = new Friend(this.game, cur.x, cur.y);
+			this.groupDolphins.add(dolphin.entity);
 
 			this.list.push(dolphin);
 		}
@@ -90,7 +91,8 @@ Play.prototype = {
 
 		for (var i = 0; i < listObjectsSharks.length;  i++) {
 			var cur = listObjectsSharks[i];
-			var shark = new Shark(this.game, this.groupSharks, cur.x, cur.y);
+			var shark = new Shark(this.game, cur.x, cur.y);
+			this.groupSharks.add(shark.entity);
 
 			this.listEnemy.push(shark);
 		}
@@ -100,14 +102,15 @@ Play.prototype = {
 
 		for (var i = 0; i < listObjectsOrcas.length;  i++) {
 			var cur = listObjectsOrcas[i];
-			var orca = new Orca(this.game, this.groupOrcas, cur.x, cur.y, this.listWaypoints[cur.properties.wp]);
+			var orca = new Orca(this.game, cur.x, cur.y, this.listWaypoints[cur.properties.wp]);
+			this.groupOrcas.add(orca.entity);
 
 			this.list.push(orca);
 		}
 
 
 		//Add camera to follow our player
-		this.game.camera.follow(this.player.entity.sprite);
+		this.game.camera.follow(this.player.entity);
 
 		this.debugKey = this.game.input.keyboard.addKey(Phaser.Keyboard.Q);
 		this.debugKey.onDown.add(this.toggleDebug, this);
@@ -134,13 +137,13 @@ Play.prototype = {
 		var blocks = this.blockLayer;
 		this.list.forEach(function(f) {
 			f.update();
-			game.physics.arcade.collide(f.entity.sprite, blocks);
+			// game.physics.arcade.collide(f.entity.sprite, blocks);
 		});
 
 		var player = this.player.entity;
 		this.listEnemy.forEach(function(f) {
 			f.update(player);
-			game.physics.arcade.collide(f.entity.sprite, blocks);
+			// game.physics.arcade.collide(f.entity.sprite, blocks);
 		});
 
 		//Collide with friends
@@ -153,7 +156,9 @@ Play.prototype = {
 		this.game.physics.arcade.collide(this.groupDolphins, this.groupSharks);
 
 		//Collide with blocks
-		this.game.physics.arcade.collide(this.player.entity.sprite, this.blockLayer);
+		// this.game.physics.arcade.collide(this.player.entity.sprite, this.blockLayer);
+		this.game.physics.arcade.collide(this.groupSharks, this.blockLayer);
+		this.game.physics.arcade.collide(this.groupDolphins, this.blockLayer);
 
 
 		this.txtHp.text = "Hp: " + this.player.entity.hp;
@@ -164,16 +169,16 @@ Play.prototype = {
 
 		if (this.showDebug) {
 
-			this.game.debug.bodyInfo(this.player.entity.sprite, 32, 32);
-			this.game.debug.body(this.player.entity.sprite);
+			this.game.debug.bodyInfo(this.player.entity, 32, 32);
+			this.game.debug.body(this.player.entity);
 
 
 			var game = this.game;
 			this.list.forEach(function(f) {
-				game.debug.body(f.entity.sprite);
+				game.debug.body(f.entity);
 			});
 			this.listEnemy.forEach(function(f) {
-				game.debug.body(f.entity.sprite);
+				game.debug.body(f.entity);
 			});
 
 		}

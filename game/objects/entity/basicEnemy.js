@@ -2,10 +2,10 @@
 var Shark = require('../sprites/shark');
 
 
-function BasicEnemy(game, group, x, y) {
+function BasicEnemy(game, x, y) {
 	this.game = game;
 
-	this.entity = new Shark(game, group, x, y);
+	this.entity = new Shark(game, x, y);
 	this.entity.create();
 
 	this.listTargetPos = new Array();
@@ -21,7 +21,7 @@ BasicEnemy.prototype = {
 		if (!this.entity.update())
 			return;
 
-		var dist = this.game.physics.arcade.distanceBetween(this.entity.sprite, target.sprite);
+		var dist = this.game.physics.arcade.distanceBetween(this.entity, target);
 
 		if (dist < 300) {
 			//If close enough, chase the target
@@ -36,15 +36,15 @@ BasicEnemy.prototype = {
 			//If still close but not enough to chase, add the current target position
 			//to a list that the enemy will follow to try to find the target again
 			this.listTargetPos.push({
-				x: target.sprite.x,
-				y: target.sprite.y
+				x: target.x,
+				y: target.y
 			});
 
 			this.entity.move(this.listTargetPos[0], 400);
 
 			//If the enemy is close enough to the history position of the target,
 			//remove it from the list so the enemy chase the next point
-			if (this.game.physics.arcade.distanceBetween(this.entity.sprite, this.listTargetPos[0]) < 100)
+			if (this.game.physics.arcade.distanceBetween(this.entity, this.listTargetPos[0]) < 100)
 				this.listTargetPos.shift();
 
 
