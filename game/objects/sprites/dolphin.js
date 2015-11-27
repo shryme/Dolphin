@@ -31,7 +31,7 @@ function Dolphin(game, x, y) {
 	this.animations.add('moveX', list, 10, true, false);
 	this.animations.add('moveXY', listXY, 10, true, false);
 	this.animations.add('idle', ['r2.png', 'r3.png'], 2, true, false);
-	this.attackAnimation = this.animations.add('attack', listAttack, 10);
+	this.attackAnimation = this.animations.add('attack', listAttack, 15);
 	this.animations.play('moveX');
 
 	this.isAttacking = false;
