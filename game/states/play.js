@@ -137,13 +137,11 @@ Play.prototype = {
 		var blocks = this.blockLayer;
 		this.list.forEach(function(f) {
 			f.update();
-			// game.physics.arcade.collide(f.entity.sprite, blocks);
 		});
 
 		var player = this.player.entity;
 		this.listEnemy.forEach(function(f) {
 			f.update(player);
-			// game.physics.arcade.collide(f.entity.sprite, blocks);
 		});
 
 		//Collide with friends
@@ -156,7 +154,6 @@ Play.prototype = {
 		this.game.physics.arcade.collide(this.groupDolphins, this.groupSharks);
 
 		//Collide with blocks
-		// this.game.physics.arcade.collide(this.player.entity.sprite, this.blockLayer);
 		this.game.physics.arcade.collide(this.groupSharks, this.blockLayer);
 		this.game.physics.arcade.collide(this.groupDolphins, this.blockLayer);
 
