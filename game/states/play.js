@@ -139,10 +139,12 @@ Play.prototype = {
 			f.update();
 		});
 
-		var player = this.player.entity;
-		this.listEnemy.forEach(function(f) {
-			f.update(player);
-		});
+		for (var i = this.listEnemy.length-1; i >= 0; i--) {
+			if (this.listEnemy[i].entity.alive === false)
+				this.listEnemy.splice(i, 1);
+			else
+				this.listEnemy[i].update(this.player.entity);
+		}
 
 		//Collide with friends
 		this.game.physics.arcade.collide(this.groupDolphins);

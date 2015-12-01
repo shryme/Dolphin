@@ -40,7 +40,9 @@ function Shark(game, x, y) {
 	this.currentTarget;
 	this.isAttacking = false;
 
+	this.hp = 1;
 	this.dmg = 1;
+
 
 	game.add.existing(this);
 
@@ -93,14 +95,13 @@ Shark.prototype.move = function(target, speed) {
 
 }
 
+Shark.prototype.hurt = function(dmg) {
+	this.hp -= dmg;
+	if (this.hp <= 0) {
+		this.destroy();
+	}
+}
+
 
 module.exports = Shark;
-
-
-
-
-
-
-
-
 

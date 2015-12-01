@@ -47,6 +47,7 @@ function Dolphin(game, x, y) {
 	this.attackEnding;
 
 	this.hp = 777;
+	this.dmg = 1;
 
 	game.add.existing(this);
 
@@ -182,6 +183,7 @@ Dolphin.prototype.processCallback = function(enemy) {
 
 	if (enemy.key === "shark") {
 		if (this.isDangerous) {
+			enemy.hurt(this.dmg);
 			return false;
 		}
 	}

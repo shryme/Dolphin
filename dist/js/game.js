@@ -250,6 +250,7 @@ function Dolphin(game, x, y) {
 	this.attackEnding;
 
 	this.hp = 777;
+	this.dmg = 1;
 
 	game.add.existing(this);
 
@@ -385,6 +386,7 @@ Dolphin.prototype.processCallback = function(enemy) {
 
 	if (enemy.key === "shark") {
 		if (this.isDangerous) {
+			enemy.hurt(this.dmg);
 			return false;
 		}
 	}
@@ -530,7 +532,9 @@ function Shark(game, x, y) {
 	this.currentTarget;
 	this.isAttacking = false;
 
+	this.hp = 1;
 	this.dmg = 1;
+
 
 	game.add.existing(this);
 
@@ -583,16 +587,15 @@ Shark.prototype.move = function(target, speed) {
 
 }
 
+Shark.prototype.hurt = function(dmg) {
+	this.hp -= dmg;
+	if (this.hp <= 0) {
+		this.destroy();
+	}
+}
+
 
 module.exports = Shark;
-
-
-
-
-
-
-
-
 
 
 },{}],9:[function(require,module,exports){
@@ -806,10 +809,12 @@ Play.prototype = {
 			f.update();
 		});
 
-		var player = this.player.entity;
-		this.listEnemy.forEach(function(f) {
-			f.update(player);
-		});
+		for (var i = this.listEnemy.length-1; i >= 0; i--) {
+			if (this.listEnemy[i].entity.alive === false)
+				this.listEnemy.splice(i, 1);
+			else
+				this.listEnemy[i].update(this.player.entity);
+		}
 
 		//Collide with friends
 		this.game.physics.arcade.collide(this.groupDolphins);
