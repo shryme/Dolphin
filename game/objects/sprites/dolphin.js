@@ -178,6 +178,19 @@ Dolphin.prototype.hurt = function(dmg) {
 }
 
 
+Dolphin.prototype.processCallback = function(enemy) {
+
+	if (enemy.key === "shark") {
+		if (this.isDangerous) {
+			return false;
+		}
+	}
+
+	return true;
+
+}
+
+
 module.exports = Dolphin;
 
 

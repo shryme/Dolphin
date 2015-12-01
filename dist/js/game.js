@@ -381,6 +381,19 @@ Dolphin.prototype.hurt = function(dmg) {
 }
 
 
+Dolphin.prototype.processCallback = function(enemy) {
+
+	if (enemy.key === "shark") {
+		if (this.isDangerous) {
+			return false;
+		}
+	}
+
+	return true;
+
+}
+
+
 module.exports = Dolphin;
 
 
@@ -805,7 +818,7 @@ Play.prototype = {
 		this.game.physics.arcade.collide(this.groupSharks);
 
 		//Collision between sharks and dolphins
-		this.game.physics.arcade.collide(this.groupDolphins, this.groupSharks);
+		this.game.physics.arcade.collide(this.groupDolphins, this.groupSharks, undefined, this.dolphinProcessCallback, this);
 
 		//Collide with blocks
 		this.game.physics.arcade.collide(this.groupSharks, this.blockLayer);
@@ -836,7 +849,9 @@ Play.prototype = {
 
 	},
 
-
+	dolphinProcessCallback: function(dolphin, enemy) {
+		return dolphin.processCallback(enemy);
+	},
 
 	toggleDebug: function() {
 		this.showDebug = !this.showDebug;
