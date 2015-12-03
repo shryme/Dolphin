@@ -25,13 +25,18 @@ Play.prototype = {
 		//Create block layer, and add collision
 		this.blockLayer = this.map.createLayer('block');
 		this.blockLayer.resizeWorld();
-		this.map.setCollisionBetween(0, 5);
+		this.overlapLayer = this.map.createLayer('overlap');
+
+
+		this.map.setCollisionBetween(0, 10, true, this.blockLayer);
+		this.map.setCollisionBetween(0, 10, true, this.overlapLayer);
 
 
 		//Set background size with the size if the tileset
 		this.bg.height = this.map.widthInPixels;
 		this.bg.width = this.map.heightInPixels;
 		this.game.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
+
 
 
 
@@ -159,6 +164,8 @@ Play.prototype = {
 		this.game.physics.arcade.collide(this.groupSharks, this.blockLayer);
 		this.game.physics.arcade.collide(this.groupDolphins, this.blockLayer);
 
+		this.game.physics.arcade.overlap(this.player.entity, this.overlapLayer, undefined, this.addGravity, this);
+
 
 		this.txtHp.text = "Hp: " + this.player.entity.hp;
 
@@ -195,7 +202,16 @@ Play.prototype = {
 		{
 			this.game.debug.reset();
 		}
+	},
+
+	addGravity: function(sprite, tile) {
+		if (tile.index !== -1)
+			sprite.body.gravity.y = 3000;
+		else
+			sprite.body.gravity.y = 0;
+		return false;
 	}
+
 
 };
 
