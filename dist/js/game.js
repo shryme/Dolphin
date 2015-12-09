@@ -876,7 +876,7 @@ Play.prototype = {
 
 	addGravity: function(sprite, tile) {
 		if (tile.index !== -1)
-			sprite.body.gravity.y = 3000;
+			sprite.body.gravity.y = 15000;
 		else
 			sprite.body.gravity.y = 0;
 		return false;
@@ -886,9 +886,6 @@ Play.prototype = {
 };
 
 module.exports = Play;
-
-
-
 
 
 
