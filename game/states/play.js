@@ -164,8 +164,9 @@ Play.prototype = {
 		this.game.physics.arcade.collide(this.groupSharks, this.blockLayer);
 		this.game.physics.arcade.collide(this.groupDolphins, this.blockLayer);
 
-		this.game.physics.arcade.overlap(this.player.entity, this.overlapLayer, undefined, this.addGravity, this);
-
+		//Overlap for gravity
+		this.game.physics.arcade.overlap(this.groupDolphins, this.overlapLayer, undefined, this.addGravity, this);
+		this.game.physics.arcade.overlap(this.groupSharks, this.overlapLayer, undefined, this.addGravity, this);
 
 		this.txtHp.text = "Hp: " + this.player.entity.hp;
 
