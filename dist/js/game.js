@@ -676,6 +676,11 @@ var Friend = require('../objects/entity/friend');
 var Shark = require('../objects/entity/basicEnemy');
 var Orca = require('../objects/entity/friendOrca');
 
+var tileIndex = {
+	empty: -1,
+	invisibleGravity: 8
+}
+
 function Play() {}
 Play.prototype = {
 	create: function() {
@@ -796,6 +801,11 @@ Play.prototype = {
 		this.txtHp.fixedToCamera = true;
 		this.txtHp.cameraOffset.setTo(10, 10);
 
+		for (var i = 0; i < this.overlapLayer.layer.data.length; i++)
+			for (var j = 0; j < this.overlapLayer.layer.data[i].length; j++)
+				if (this.overlapLayer.layer.data[i][j].index === tileIndex.invisibleGravity)
+					this.overlapLayer.layer.data[i][j].alpha = 0;
+
 
 	},
 
@@ -884,7 +894,7 @@ Play.prototype = {
 	},
 
 	addGravity: function(sprite, tile) {
-		if (tile.index !== -1)
+		if (tile.index !== tileIndex.empty)
 			sprite.body.gravity.y = 15000;
 		else
 			sprite.body.gravity.y = 0;
