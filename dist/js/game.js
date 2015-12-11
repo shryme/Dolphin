@@ -827,16 +827,24 @@ Play.prototype = {
 		//Colision of sharks
 		this.game.physics.arcade.collide(this.groupSharks);
 
+		//Colision of orcas
+		this.game.physics.arcade.collide(this.groupOrcas);
+
 		//Collision between sharks and dolphins
 		this.game.physics.arcade.collide(this.groupDolphins, this.groupSharks, undefined, this.dolphinProcessCallback, this);
+
+		this.game.physics.arcade.collide(this.groupDolphins, this.groupOrcas);
+		this.game.physics.arcade.collide(this.groupSharks, this.groupOrcas);
 
 		//Collide with blocks
 		this.game.physics.arcade.collide(this.groupSharks, this.blockLayer);
 		this.game.physics.arcade.collide(this.groupDolphins, this.blockLayer);
+		this.game.physics.arcade.collide(this.groupOrcas, this.blockLayer);
 
 		//Overlap for gravity
 		this.game.physics.arcade.overlap(this.groupDolphins, this.overlapLayer, undefined, this.addGravity, this);
 		this.game.physics.arcade.overlap(this.groupSharks, this.overlapLayer, undefined, this.addGravity, this);
+		this.game.physics.arcade.overlap(this.groupOrcas, this.overlapLayer, undefined, this.addGravity, this);
 
 		this.txtHp.text = "Hp: " + this.player.entity.hp;
 
