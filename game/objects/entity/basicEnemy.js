@@ -2,13 +2,21 @@
 var Shark = require('../sprites/shark');
 
 
-function BasicEnemy(game, x, y) {
+function BasicEnemy(game, x, y, wp) {
 	this.game = game;
 
 	this.entity = new Shark(game, x, y);
 	this.entity.create();
 
 	this.listTargetPos = new Array();
+
+	this.target = {x: 300, y: 300};
+
+	this.waypoints = wp;
+	this.currentWp = 0;
+
+	if (wp !== undefined)
+		this.target = wp[0];
 
 }
 
@@ -49,8 +57,16 @@ BasicEnemy.prototype = {
 
 
 		}
-		else
-			this.entity.idle();
+		else {
+			if (this.waypoints !== undefined) {
+				this.currentWp++;
+				if (this.currentWp === this.waypoints.length)
+					this.currentWp = 0;
+				this.target = this.waypoints[this.currentWp];
+			}
+			else
+				this.entity.idle();
+		}
 
 
 		if (dist < 90)

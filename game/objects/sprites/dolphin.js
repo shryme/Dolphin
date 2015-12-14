@@ -150,16 +150,16 @@ Dolphin.prototype.attack = function(x, y) {
 	}
 }
 
-Dolphin.prototype.move = function(x, y, speed) {
+Dolphin.prototype.move = function(target, speed) {
 
 	if (speed === undefined)
 		speed = 300;
 
-	if (x === undefined && y === undefined) {
+	if (target === undefined) {
 		this.rotation = this.game.physics.arcade.moveToPointer(this, speed, this.game.input.activePointer, 500);
 	}
 	else {
-		this.rotation = this.game.physics.arcade.moveToXY(this, x, y, speed);
+		this.rotation = this.game.physics.arcade.moveToObject(this, target, speed);
 	}
 
 
