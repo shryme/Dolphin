@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" nextobjectid="39">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" nextobjectid="40">
  <tileset firstgid="1" name="basic" tilewidth="32" tileheight="32" tilecount="9">
   <image source="tileset.png" width="96" height="96"/>
  </tileset>
@@ -213,7 +213,11 @@
  </layer>
  <objectgroup name="dolphins">
   <object id="15" name="dolphin" x="544.5" y="1630" width="224.5" height="96.5"/>
-  <object id="17" name="dolphin" x="239.25" y="1106.25" width="146.25" height="42.75"/>
+  <object id="17" name="dolphin" x="239.25" y="1106.25" width="146.25" height="42.75">
+   <properties>
+    <property name="wp" value="dolphin_1"/>
+   </properties>
+  </object>
   <object id="19" name="dolphin" x="991.75" y="805.75" width="224.5" height="96.5"/>
   <object id="20" name="dolphin" x="93.75" y="2987.75" width="100.25" height="38.25"/>
  </objectgroup>
@@ -242,6 +246,9 @@
   </object>
   <object id="38" name="orca_1" x="2298" y="542">
    <polyline points="0,0 -276,676 18,724 86,484 -142,382 -486,536 -548,680 -724,344 -682,260 -168,198 74,398 -130,660 -428,576 -522,396 -422,228 -258,44 -530,130 -626,120 -518,454 -58,542 262,424 218,172 -40,32 -272,6 -410,88 -524,192 -224,256 98,268 -44,474 -434,482 -536,346 -252,218 206,154 192,26 -154,0 -264,14 -450,26 -54,164 -30,312 -310,362 -248,192 98,242 162,64 -152,-2 -266,204 -232,412 -664,416 -506,248 -144,242 36,236 18,60 -324,160 -238,372 -210,494 -474,514 -466,306 -38,266 270,304 326,14 84,20 -122,4 -368,18 -308,152 14,280 304,464 240,656 -232,814 -488,812 -570,748 -612,672 -714,542 -632,424 -312,598 -256,724 -62,692 -26,474 -34,260 -382,178 -578,332 -506,606 -120,588 232,344 368,170 236,30 54,24 -200,22 -514,174 -644,170 -786,250 -636,-68 -482,364 -418,148 -46,10"/>
+  </object>
+  <object id="39" name="dolphin_1" x="412" y="582">
+   <polyline points="0,0 44,-102 392,-116 424,300 -34,270 -4,22"/>
   </object>
  </objectgroup>
 </map>

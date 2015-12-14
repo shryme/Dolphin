@@ -48,7 +48,7 @@
                  "name":"dolphin",
                  "properties":
                     {
-
+                     "wp":"dolphin_1"
                     },
                  "rotation":0,
                  "type":"",
@@ -661,6 +661,46 @@
                  "width":0,
                  "x":2298,
                  "y":542
+                }, 
+                {
+                 "height":0,
+                 "id":39,
+                 "name":"dolphin_1",
+                 "polyline":[
+                        {
+                         "x":0,
+                         "y":0
+                        }, 
+                        {
+                         "x":44,
+                         "y":-102
+                        }, 
+                        {
+                         "x":392,
+                         "y":-116
+                        }, 
+                        {
+                         "x":424,
+                         "y":300
+                        }, 
+                        {
+                         "x":-34,
+                         "y":270
+                        }, 
+                        {
+                         "x":-4,
+                         "y":22
+                        }],
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":412,
+                 "y":582
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -669,7 +709,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":39,
+ "nextobjectid":40,
  "orientation":"orthogonal",
  "properties":
     {
