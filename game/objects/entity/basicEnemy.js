@@ -31,6 +31,8 @@ BasicEnemy.prototype = {
 
 		var dist = this.game.physics.arcade.distanceBetween(this.entity, target);
 
+
+
 		if (dist < 300) {
 			//If close enough, chase the target
 			this.entity.move(target, 500);
@@ -39,7 +41,7 @@ BasicEnemy.prototype = {
 			this.listTargetPos = new Array();
 
 		}
-		else if (dist < 600 || this.listTargetPos.length !== 0) {
+		else if (dist < 600 && this.listTargetPos.length <= 100) {
 
 			//If still close but not enough to chase, add the current target position
 			//to a list that the enemy will follow to try to find the target again
@@ -59,13 +61,23 @@ BasicEnemy.prototype = {
 		}
 		else {
 			if (this.waypoints !== undefined) {
-				this.currentWp++;
-				if (this.currentWp === this.waypoints.length)
-					this.currentWp = 0;
-				this.target = this.waypoints[this.currentWp];
+
+				if (this.game.physics.arcade.distanceBetween(this.entity, this.target) > 100) {
+					this.entity.move(this.target, 300);
+				}
+				else {
+					this.currentWp++;
+					if (this.currentWp === this.waypoints.length)
+						this.currentWp = 0;
+					this.target = this.waypoints[this.currentWp];
+				}
+
 			}
 			else
 				this.entity.idle();
+
+			//Reset the list
+			this.listTargetPos = new Array();
 		}
 
 

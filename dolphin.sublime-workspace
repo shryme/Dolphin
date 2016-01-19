@@ -4,6 +4,50 @@
 		"selected_items":
 		[
 			[
+				"grou",
+				"groupOrcas"
+			],
+			[
+				"pro",
+				"proto	Prototype"
+			],
+			[
+				"listW",
+				"listWpUpdated"
+			],
+			[
+				"lis",
+				"listWaypoints"
+			],
+			[
+				"for",
+				"for	for (…) {…} (Improved Native For-Loop)"
+			],
+			[
+				"li",
+				"listWaypoints"
+			],
+			[
+				"tar",
+				"targetPos"
+			],
+			[
+				"grp",
+				"graphics"
+			],
+			[
+				"fn",
+				"function"
+			],
+			[
+				"att",
+				"attackDuration"
+			],
+			[
+				"is",
+				"isDangerous"
+			],
+			[
 				"block",
 				"blockLayer"
 			],
@@ -112,14 +156,6 @@
 				"numberToPlace"
 			],
 			[
-				"pro",
-				"propertyName"
-			],
-			[
-				"li",
-				"listContact"
-			],
-			[
 				"cmb",
 				"cmbOrderDir"
 			],
@@ -150,10 +186,6 @@
 			[
 				"back",
 				"background-color"
-			],
-			[
-				"for",
-				"forEach"
 			],
 			[
 				"st",
@@ -315,7 +347,23 @@
 			"file": "game/states/play.js",
 			"settings":
 			{
-				"buffer_size": 9092,
+				"buffer_size": 6050,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "game/states/boot.js",
+			"settings":
+			{
+				"buffer_size": 272,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "game/states/menu.js",
+			"settings":
+			{
+				"buffer_size": 476,
 				"line_ending": "Unix"
 			}
 		},
@@ -323,7 +371,79 @@
 			"file": "game/objects/entity/friend.js",
 			"settings":
 			{
-				"buffer_size": 503,
+				"buffer_size": 868,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Gruntfile.js",
+			"settings":
+			{
+				"buffer_size": 3539,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "game/objects/sprites/dolphin.js",
+			"settings":
+			{
+				"buffer_size": 3830,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "game/objects/entity/friendOrca.js",
+			"settings":
+			{
+				"buffer_size": 850,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "game/objects/entity/basicEnemy.js",
+			"settings":
+			{
+				"buffer_size": 1602,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "game/objects/sprites/orca.js",
+			"settings":
+			{
+				"buffer_size": 1358,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "game/objects/sprites/shark.js",
+			"settings":
+			{
+				"buffer_size": 2089,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "index.html",
+			"settings":
+			{
+				"buffer_size": 509,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "game/main.js",
+			"settings":
+			{
+				"buffer_size": 460,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "game/states/preload.js",
+			"settings":
+			{
+				"buffer_size": 1128,
 				"line_ending": "Windows"
 			}
 		},
@@ -331,15 +451,7 @@
 			"file": "game/objects/entity/player.js",
 			"settings":
 			{
-				"buffer_size": 511,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "game/objects/sprites/dolphin.js",
-			"settings":
-			{
-				"buffer_size": 14712,
+				"buffer_size": 544,
 				"line_ending": "Windows"
 			}
 		}
@@ -381,14 +493,39 @@
 	"expanded_folders":
 	[
 		"/C/Users/spaquet/Documents/GitHub/Dolphin",
+		"/C/Users/spaquet/Documents/GitHub/Dolphin/dist",
+		"/C/Users/spaquet/Documents/GitHub/Dolphin/dist/js",
+		"/C/Users/spaquet/Documents/GitHub/Dolphin/dist/js/plugins",
 		"/C/Users/spaquet/Documents/GitHub/Dolphin/game",
 		"/C/Users/spaquet/Documents/GitHub/Dolphin/game/objects",
 		"/C/Users/spaquet/Documents/GitHub/Dolphin/game/objects/entity",
 		"/C/Users/spaquet/Documents/GitHub/Dolphin/game/objects/sprites",
-		"/C/Users/spaquet/Documents/GitHub/Dolphin/game/states"
+		"/C/Users/spaquet/Documents/GitHub/Dolphin/game/plugins",
+		"/C/Users/spaquet/Documents/GitHub/Dolphin/game/states",
+		"/C/Users/spaquet/Documents/GitHub/Dolphin/templates"
 	],
 	"file_history":
 	[
+		"/N/Michaël R/Troll Message.xml",
+		"/C/Users/spaquet/Downloads/2016-01-07/base.ged",
+		"/C/workspace/GAM/Servers2/localhost at localhost-config/server.xml",
+		"/C/workspace/GAM/Servers/Tomcat v7.0 Server at localhost.server",
+		"/C/workspace/GAM/Servers2/.settings/org.eclipse.wst.server.core.prefs",
+		"/N/Bahji/Session/sgad/WebRoot/infras/layout/template/top_menu.jsp",
+		"/N/Bahji/Session/sgad/WebRoot/infras/layout/template/content_accueil.jsp",
+		"/N/Bahji/Session/sso/WebRoot/identification.jsp",
+		"/N/Bahji/Session/sso/WebRoot/cookie.jsp",
+		"/N/Bahji/Session/WEB/ca/ledor/struts/actions/ApplicationDispatchAction.java",
+		"/N/Bahji/Session/WEB/ca/ledor/struts/actions/ApplicationDispatchAction.class",
+		"/C/Users/spaquet/Documents/GitHub/Dolphin/assets/tilemaps/level0.tmx",
+		"/C/Users/spaquet/Documents/GitHub/Dolphin/game/plugins/phaser_pathfinding-0.2.0.js",
+		"/C/Users/spaquet/Documents/GitHub/Dolphin/plugin/phaser_pathfinding-0.2.0.js",
+		"/C/Users/spaquet/Documents/GitHub/Dolphin/game/objects/entity/astar.js",
+		"/C/Users/spaquet/Documents/GitHub/Dolphin/config.json",
+		"/C/Users/spaquet/Documents/GitHub/Dolphin/main.js",
+		"/C/Users/spaquet/Documents/GitHub/Dolphin/Gruntfile.js",
+		"/C/Users/spaquet/Documents/GitHub/Dolphin/README.md",
+		"/C/Users/spaquet/Documents/GitHub/Dolphin/dist/js/phaser.js",
 		"/C/Users/spaquet/Documents/GitHub/Dolphin/game/objects/entity/friend.js",
 		"/C/Users/spaquet/Documents/GitHub/Dolphin/game/objects/entity/player.js",
 		"/C/Users/spaquet/Documents/GitHub/Dolphin/game/objects/sprites/dolphin.js",
@@ -460,13 +597,14 @@
 	],
 	"find":
 	{
-		"height": 30.0
+		"height": 38.0
 	},
 	"find_in_files":
 	{
 		"height": 90.0,
 		"where_history":
 		[
+			"C:\\Users\\spaquet\\Documents\\GitHub\\Dolphin\\game\\objects",
 			"C:\\Users\\spaquet\\Documents\\Chrome_app\\nodejs\\tcpServer\\client\\javascript",
 			"C:\\Users\\spaquet\\Documents\\Chrome_app\\nodejs\\tcpServer\\client",
 			"C:\\Users\\spaquet\\Documents\\Chrome_app\\nodejs\\tcpServer\\client\\javascript",
@@ -482,6 +620,29 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"olivier",
+			"olivier ca",
+			"addGravity",
+			"cooki",
+			".Sprite",
+			".sprite",
+			"this.sprite",
+			"this.spr",
+			"export",
+			"astar",
+			"distanceBetween",
+			"update",
+			"browserify",
+			"loadNpmTasks",
+			"groupFriends",
+			"fixedRotation",
+			"rotation",
+			"fixedRotation",
+			"if (!this.fixedRotation)",
+			"fixedRotation",
+			"p2js",
+			"playerCollisionGroup",
+			"dolphinsCollisionGroup",
 			"setB",
 			"groupFriends",
 			"enable",
@@ -586,25 +747,7 @@
 			"execu",
 			"block",
 			"isValidOperator",
-			"Line",
-			"innerT",
-			"clear",
-			"console",
-			"lineTemplate",
-			"todo",
-			"getId",
-			"getLine",
-			"getIndexOfLine",
-			"getId",
-			"getLine",
-			"setTodos",
-			"function",
-			"notifyListeners",
-			"reset",
-			"addTodo",
-			"clearTodos",
-			"addListener",
-			"archiveDone"
+			"Line"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -630,7 +773,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -639,15 +782,100 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 9092,
+						"buffer_size": 6050,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								232,
-								232
+								2255,
+								2255
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 100.0,
+						"translation.y": 1782.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "game/states/boot.js",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 272,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								272,
+								272
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "game/states/menu.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 476,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								399,
+								399
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 11,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "game/objects/entity/friend.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 868,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								602,
+								602
 							]
 						],
 						"settings":
@@ -656,10 +884,40 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 132.0,
+						"translation.y": 198.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "Gruntfile.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3539,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1402,
+								1402
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1122.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 12,
 					"type": "text"
 				}
 			]
@@ -669,20 +927,20 @@
 			"sheets":
 			[
 				{
-					"buffer": 1,
-					"file": "game/objects/entity/friend.js",
+					"buffer": 5,
+					"file": "game/objects/sprites/dolphin.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 503,
+						"buffer_size": 3830,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								3294,
+								3294
 							]
 						],
 						"settings":
@@ -691,27 +949,56 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 2970.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "game/objects/entity/friendOrca.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 850,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								484,
+								499
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 198.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 3,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "game/objects/entity/player.js",
+					"buffer": 7,
+					"file": "game/objects/entity/basicEnemy.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 511,
+						"buffer_size": 1602,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								1515,
+								1515
 							]
 						],
 						"settings":
@@ -720,27 +1007,141 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1000.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "game/objects/sprites/orca.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1358,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1154,
+								1079
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 768.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "game/objects/sprites/dolphin.js",
-					"semi_transient": true,
+					"buffer": 9,
+					"file": "game/objects/sprites/shark.js",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 14712,
+						"buffer_size": 2089,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								551,
+								551
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1496.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 509,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								370,
+								370
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "game/main.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 460,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								75,
+								75
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 13,
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "game/states/preload.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1128,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								894,
+								894
 							]
 						],
 						"settings":
@@ -752,7 +1153,36 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "game/objects/entity/player.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 544,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								419,
+								419
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
 					"type": "text"
 				}
 			]
@@ -786,7 +1216,7 @@
 		"cols":
 		[
 			0.0,
-			0.5,
+			0.795138888888,
 			1.0
 		],
 		"rows":
