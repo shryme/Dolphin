@@ -79,19 +79,12 @@ Shark.prototype.attack = function(target) {
 
 Shark.prototype.move = function(target, speed) {
 
-	// if (target.sprite !== undefined)
-	// 	target = target.sprite;
-
 	this.rotation = this.game.physics.arcade.moveToObject(this, target, speed);
 
 	if (!this.isAttacking)
 		this.animations.play('move');
 
-	//Flip shark when moving to the left
-	if (this.rotation < -1.5 || this.rotation > 1.5)
-		this.scale.y = -1;
-	else
-		this.scale.y = 1;
+	this.flipSprite();
 
 }
 

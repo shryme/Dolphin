@@ -165,12 +165,7 @@ Dolphin.prototype.move = function(target, speed) {
 
 	this.animations.play('moveX');
 
-	//Flip dolphin when moving to the left
-	if (this.rotation < -1.5 || this.rotation > 1.5)
-		this.scale.y = -1;
-	else
-		this.scale.y = 1;
-
+	this.flipSprite();
 
 }
 

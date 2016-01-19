@@ -413,12 +413,7 @@ Dolphin.prototype.move = function(target, speed) {
 
 	this.animations.play('moveX');
 
-	//Flip dolphin when moving to the left
-	if (this.rotation < -1.5 || this.rotation > 1.5)
-		this.scale.y = -1;
-	else
-		this.scale.y = 1;
-
+	this.flipSprite();
 
 }
 
@@ -515,11 +510,7 @@ Orca.prototype.move = function(target, speed) {
 
 	this.animations.play('move');
 
-	//Flip orca when moving to the left
-	if (this.rotation < -1.5 || this.rotation > 1.5)
-		this.scale.y = -1;
-	else
-		this.scale.y = 1;
+	this.flipSprite();
 
 }
 
@@ -616,19 +607,12 @@ Shark.prototype.attack = function(target) {
 
 Shark.prototype.move = function(target, speed) {
 
-	// if (target.sprite !== undefined)
-	// 	target = target.sprite;
-
 	this.rotation = this.game.physics.arcade.moveToObject(this, target, speed);
 
 	if (!this.isAttacking)
 		this.animations.play('move');
 
-	//Flip shark when moving to the left
-	if (this.rotation < -1.5 || this.rotation > 1.5)
-		this.scale.y = -1;
-	else
-		this.scale.y = 1;
+	this.flipSprite();
 
 }
 
@@ -724,6 +708,14 @@ var Orca = require('../objects/entity/friendOrca');
 var tileIndex = {
 	empty: -1,
 	invisibleGravity: 8
+}
+
+//Add function to flip sprite when looking to the left
+Phaser.Sprite.prototype.flipSprite = function() {
+	if (this.rotation < -1.5 || this.rotation > 1.5)
+		this.scale.y = -1;
+	else
+		this.scale.y = 1;
 }
 
 function Play() {}

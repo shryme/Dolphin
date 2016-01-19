@@ -11,6 +11,14 @@ var tileIndex = {
 	invisibleGravity: 8
 }
 
+//Add function to flip sprite when looking to the left
+Phaser.Sprite.prototype.flipSprite = function() {
+	if (this.rotation < -1.5 || this.rotation > 1.5)
+		this.scale.y = -1;
+	else
+		this.scale.y = 1;
+}
+
 function Play() {}
 Play.prototype = {
 	create: function() {

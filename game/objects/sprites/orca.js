@@ -60,11 +60,7 @@ Orca.prototype.move = function(target, speed) {
 
 	this.animations.play('move');
 
-	//Flip orca when moving to the left
-	if (this.rotation < -1.5 || this.rotation > 1.5)
-		this.scale.y = -1;
-	else
-		this.scale.y = 1;
+	this.flipSprite();
 
 }
 
