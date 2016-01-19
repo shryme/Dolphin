@@ -105,7 +105,7 @@
                  "name":"shark",
                  "properties":
                     {
-
+                     "wp":"shark_1"
                     },
                  "rotation":0,
                  "type":"",
@@ -701,6 +701,62 @@
                  "width":0,
                  "x":412,
                  "y":582
+                }, 
+                {
+                 "height":0,
+                 "id":40,
+                 "name":"shark_1",
+                 "polyline":[
+                        {
+                         "x":0,
+                         "y":0
+                        }, 
+                        {
+                         "x":-124,
+                         "y":398
+                        }, 
+                        {
+                         "x":690,
+                         "y":744
+                        }, 
+                        {
+                         "x":1008,
+                         "y":504
+                        }, 
+                        {
+                         "x":676,
+                         "y":466
+                        }, 
+                        {
+                         "x":650,
+                         "y":240
+                        }, 
+                        {
+                         "x":306,
+                         "y":226
+                        }, 
+                        {
+                         "x":294,
+                         "y":26
+                        }, 
+                        {
+                         "x":184,
+                         "y":-138
+                        }, 
+                        {
+                         "x":12,
+                         "y":-36
+                        }],
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":260,
+                 "y":940
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -709,7 +765,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":40,
+ "nextobjectid":41,
  "orientation":"orthogonal",
  "properties":
     {
