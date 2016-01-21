@@ -757,6 +757,30 @@
                  "width":0,
                  "x":260,
                  "y":940
+                }, 
+                {
+                 "height":0,
+                 "id":42,
+                 "name":"turtle_1",
+                 "polyline":[
+                        {
+                         "x":0,
+                         "y":0
+                        }, 
+                        {
+                         "x":1512,
+                         "y":-12
+                        }],
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1222,
+                 "y":658
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -764,8 +788,35 @@
          "width":0,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "height":100,
+         "name":"turtles",
+         "objects":[
+                {
+                 "height":96.5,
+                 "id":41,
+                 "name":"turle",
+                 "properties":
+                    {
+                     "wp":"turtle_1"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":224.5,
+                 "x":921.75,
+                 "y":589.75
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "width":100,
+         "x":0,
+         "y":0
         }],
- "nextobjectid":41,
+ "nextobjectid":44,
  "orientation":"orthogonal",
  "properties":
     {
