@@ -5,6 +5,7 @@ var Player = require('../objects/entity/player');
 var Friend = require('../objects/entity/friend');
 var Shark = require('../objects/entity/basicEnemy');
 var Orca = require('../objects/entity/friendOrca');
+var Turtle = require('../objects/entity/friendTurtle');
 
 var tileIndex = {
 	empty: -1,
@@ -66,6 +67,9 @@ Play.prototype = {
 		//Group of orcas
 		this.groupOrcas = this.game.add.group();
 
+		//Group of turtles
+		this.groupTurtles = this.game.add.group();
+
 
 		//Us
 		var spawn = this.map.objects.spawn[0];
@@ -126,6 +130,16 @@ Play.prototype = {
 			this.list.push(orca);
 		}
 
+		var listObjectsTurtles = this.map.objects.turtles;
+
+		for (var i = 0; i < listObjectsTurtles.length;  i++) {
+			var cur = listObjectsTurtles[i];
+			var turtle = new Turtle(this.game, cur.x, cur.y, this.listWaypoints[cur.properties.wp]);
+			this.groupTurtles.add(turtle.entity);
+
+			this.list.push(turtle);
+		}
+
 
 		//Add camera to follow our player
 		this.game.camera.follow(this.player.entity);
@@ -178,21 +192,30 @@ Play.prototype = {
 		//Colision of orcas
 		this.game.physics.arcade.collide(this.groupOrcas);
 
+		//Colision of turtles
+		this.game.physics.arcade.collide(this.groupTurtles);
+
 		//Collision between sharks and dolphins
 		this.game.physics.arcade.collide(this.groupDolphins, this.groupSharks, undefined, this.dolphinProcessCallback, this);
 
 		this.game.physics.arcade.collide(this.groupDolphins, this.groupOrcas);
 		this.game.physics.arcade.collide(this.groupSharks, this.groupOrcas);
+		this.game.physics.arcade.collide(this.groupTurtles, this.groupOrcas);
+
+		this.game.physics.arcade.collide(this.groupDolphins, this.groupTurtles);
+		this.game.physics.arcade.collide(this.groupSharks, this.groupTurtles);
 
 		//Collide with blocks
 		this.game.physics.arcade.collide(this.groupSharks, this.blockLayer);
 		this.game.physics.arcade.collide(this.groupDolphins, this.blockLayer);
 		this.game.physics.arcade.collide(this.groupOrcas, this.blockLayer);
+		this.game.physics.arcade.collide(this.groupTurtles, this.blockLayer);
 
 		//Overlap for gravity
 		this.game.physics.arcade.overlap(this.groupDolphins, this.overlapLayer, undefined, this.addGravity, this);
 		this.game.physics.arcade.overlap(this.groupSharks, this.overlapLayer, undefined, this.addGravity, this);
 		this.game.physics.arcade.overlap(this.groupOrcas, this.overlapLayer, undefined, this.addGravity, this);
+		this.game.physics.arcade.overlap(this.groupTurtles, this.overlapLayer, undefined, this.addGravity, this);
 
 		this.txtHp.text = "Hp: " + this.player.entity.hp;
 

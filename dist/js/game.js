@@ -15,7 +15,7 @@ window.onload = function () {
 
   game.state.start('boot');
 };
-},{"./states/boot":9,"./states/gameover":10,"./states/menu":11,"./states/play":12,"./states/preload":13}],2:[function(require,module,exports){
+},{"./states/boot":11,"./states/gameover":12,"./states/menu":13,"./states/play":14,"./states/preload":15}],2:[function(require,module,exports){
 
 var Shark = require('../sprites/shark');
 
@@ -107,7 +107,7 @@ BasicEnemy.prototype = {
 
 module.exports = BasicEnemy;
 
-},{"../sprites/shark":8}],3:[function(require,module,exports){
+},{"../sprites/shark":9}],3:[function(require,module,exports){
 
 var Dolphin = require('../sprites/dolphin');
 
@@ -158,7 +158,7 @@ Friend.prototype = {
 
 module.exports = Friend;
 
-},{"../sprites/dolphin":6}],4:[function(require,module,exports){
+},{"../sprites/dolphin":7}],4:[function(require,module,exports){
 
 var Orca = require('../sprites/orca');
 
@@ -209,7 +209,58 @@ FriendOrca.prototype = {
 
 module.exports = FriendOrca;
 
-},{"../sprites/orca":7}],5:[function(require,module,exports){
+},{"../sprites/orca":8}],5:[function(require,module,exports){
+
+var Turtle = require('../sprites/turtle');
+
+
+function FriendTurtle(game, x, y, wp) {
+
+	this.game = game;
+
+	this.entity = new Turtle(game, x, y);
+
+	this.entity.create();
+
+	this.target = {x: 700, y: 700};
+
+	this.waypoints = wp;
+	this.currentWp = 0;
+
+	if (wp !== undefined)
+		this.target = wp[0];
+
+}
+
+FriendTurtle.prototype = {
+	create: function() {
+
+	},
+	update: function() {
+
+		if (!this.entity.update())
+			return;
+
+		if (this.game.physics.arcade.distanceBetween(this.entity, this.target) > 100) {
+			this.entity.move(this.target, 400);
+		}
+		else {
+			if (this.waypoints !== undefined) {
+				this.currentWp++;
+				if (this.currentWp === this.waypoints.length)
+					this.currentWp = 0;
+				this.target = this.waypoints[this.currentWp];
+			}
+			else
+				this.entity.idle();
+		}
+
+	}
+}
+
+module.exports = FriendTurtle;
+
+},{"../sprites/turtle":10}],6:[function(require,module,exports){
 
 var Dolphin = require('../sprites/dolphin');
 
@@ -245,7 +296,7 @@ Player.prototype = {
 
 module.exports = Player;
 
-},{"../sprites/dolphin":6}],6:[function(require,module,exports){
+},{"../sprites/dolphin":7}],7:[function(require,module,exports){
 
 function Dolphin(game, x, y) {
 
@@ -447,7 +498,7 @@ module.exports = Dolphin;
 
 
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 
 function Orca(game, x, y) {
 
@@ -525,7 +576,7 @@ module.exports = Orca;
 
 
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 
 function Shark(game, x, y) {
 
@@ -627,7 +678,82 @@ Shark.prototype.hurt = function(dmg) {
 module.exports = Shark;
 
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
+
+function Turtle(game, x, y) {
+
+	if (x === undefined && y === undefined) {
+		x = 0;
+		y = 0;
+	}
+
+	Phaser.Sprite.call(this, game, x, y, 'turtle', 's1.png');
+
+	this.game.physics.arcade.enableBody(this);
+	this.body.gravity.y = 0;
+	this.body.collideWorldBounds = true;
+
+	this.body.allowRotation = false;
+	this.anchor.setTo(.5, .5);
+
+	this.body.setSize(75, 50, 0, 0);
+
+
+	var listMove = new Array();
+
+	for (var i = 1; i <= 10; i++) {
+		listMove.push('s' + i + '.png');
+	}
+
+	this.animations.add('move', listMove, 10, true, false);
+	this.animations.add('idle', ['s1.png', 's2.png'], 2, true, false);
+	this.animations.play('move');
+
+	game.add.existing(this);
+
+}
+
+Turtle.prototype = Object.create(Phaser.Sprite.prototype);
+Turtle.prototype.constructor = Turtle;
+
+Turtle.prototype.create = function() {
+
+}
+
+Turtle.prototype.update = function() {
+
+	return true;
+}
+
+Turtle.prototype.idle = function() {
+
+	this.animations.play('idle');
+	this.body.velocity.x = 0;
+	this.body.velocity.y = 0;
+}
+
+Turtle.prototype.move = function(target, speed) {
+
+	this.rotation = this.game.physics.arcade.moveToObject(this, target, speed);
+
+	this.animations.play('move');
+
+	this.flipSprite();
+
+}
+
+module.exports = Turtle;
+
+
+
+
+
+
+
+
+
+
+},{}],11:[function(require,module,exports){
 
 'use strict';
 
@@ -646,7 +772,7 @@ Boot.prototype = {
 
 module.exports = Boot;
 
-},{}],10:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 
 'use strict';
 function GameOver() {}
@@ -668,7 +794,7 @@ GameOver.prototype = {
 };
 module.exports = GameOver;
 
-},{}],11:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 
 'use strict';
 function Menu() {}
@@ -696,7 +822,7 @@ Menu.prototype = {
 
 module.exports = Menu;
 
-},{}],12:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 
 'use strict';
 
@@ -704,6 +830,7 @@ var Player = require('../objects/entity/player');
 var Friend = require('../objects/entity/friend');
 var Shark = require('../objects/entity/basicEnemy');
 var Orca = require('../objects/entity/friendOrca');
+var Turtle = require('../objects/entity/friendTurtle');
 
 var tileIndex = {
 	empty: -1,
@@ -765,6 +892,9 @@ Play.prototype = {
 		//Group of orcas
 		this.groupOrcas = this.game.add.group();
 
+		//Group of turtles
+		this.groupTurtles = this.game.add.group();
+
 
 		//Us
 		var spawn = this.map.objects.spawn[0];
@@ -825,6 +955,16 @@ Play.prototype = {
 			this.list.push(orca);
 		}
 
+		var listObjectsTurtles = this.map.objects.turtles;
+
+		for (var i = 0; i < listObjectsTurtles.length;  i++) {
+			var cur = listObjectsTurtles[i];
+			var turtle = new Turtle(this.game, cur.x, cur.y, this.listWaypoints[cur.properties.wp]);
+			this.groupTurtles.add(turtle.entity);
+
+			this.list.push(turtle);
+		}
+
 
 		//Add camera to follow our player
 		this.game.camera.follow(this.player.entity);
@@ -877,21 +1017,30 @@ Play.prototype = {
 		//Colision of orcas
 		this.game.physics.arcade.collide(this.groupOrcas);
 
+		//Colision of turtles
+		this.game.physics.arcade.collide(this.groupTurtles);
+
 		//Collision between sharks and dolphins
 		this.game.physics.arcade.collide(this.groupDolphins, this.groupSharks, undefined, this.dolphinProcessCallback, this);
 
 		this.game.physics.arcade.collide(this.groupDolphins, this.groupOrcas);
 		this.game.physics.arcade.collide(this.groupSharks, this.groupOrcas);
+		this.game.physics.arcade.collide(this.groupTurtles, this.groupOrcas);
+
+		this.game.physics.arcade.collide(this.groupDolphins, this.groupTurtles);
+		this.game.physics.arcade.collide(this.groupSharks, this.groupTurtles);
 
 		//Collide with blocks
 		this.game.physics.arcade.collide(this.groupSharks, this.blockLayer);
 		this.game.physics.arcade.collide(this.groupDolphins, this.blockLayer);
 		this.game.physics.arcade.collide(this.groupOrcas, this.blockLayer);
+		this.game.physics.arcade.collide(this.groupTurtles, this.blockLayer);
 
 		//Overlap for gravity
 		this.game.physics.arcade.overlap(this.groupDolphins, this.overlapLayer, undefined, this.addGravity, this);
 		this.game.physics.arcade.overlap(this.groupSharks, this.overlapLayer, undefined, this.addGravity, this);
 		this.game.physics.arcade.overlap(this.groupOrcas, this.overlapLayer, undefined, this.addGravity, this);
+		this.game.physics.arcade.overlap(this.groupTurtles, this.overlapLayer, undefined, this.addGravity, this);
 
 		this.txtHp.text = "Hp: " + this.player.entity.hp;
 
@@ -947,7 +1096,7 @@ module.exports = Play;
 
 
 
-},{"../objects/entity/basicEnemy":2,"../objects/entity/friend":3,"../objects/entity/friendOrca":4,"../objects/entity/player":5}],13:[function(require,module,exports){
+},{"../objects/entity/basicEnemy":2,"../objects/entity/friend":3,"../objects/entity/friendOrca":4,"../objects/entity/friendTurtle":5,"../objects/entity/player":6}],15:[function(require,module,exports){
 
 'use strict';
 function Preload() {
