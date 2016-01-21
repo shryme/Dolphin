@@ -83,7 +83,7 @@ module.exports = function (grunt) {
 
   });
 
-  grunt.registerTask('build', ['buildBootstrapper', 'browserify', 'clean', 'copy']);
+  grunt.registerTask('build', ['buildBootstrapper', 'browserify']);
   grunt.registerTask('serve', ['build', 'connect:livereload', 'open', 'watch']);
   grunt.registerTask('default', ['serve']);
   grunt.registerTask('prod', ['build', 'copy']);
