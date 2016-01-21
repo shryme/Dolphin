@@ -40,8 +40,8 @@ function Shark(game, x, y) {
 	this.currentTarget;
 	this.isAttacking = false;
 
-	this.hp = 1;
-	this.dmg = 1;
+	this.hp = 1000000;
+	this.dmg = 300;
 
 
 	game.add.existing(this);
