@@ -804,6 +804,15 @@ Shark.prototype.hurt = function(dmg) {
 }
 
 
+Shark.prototype.addGravity = function() {
+	this.body.gravity.y = 50000;
+}
+
+Shark.prototype.removeGravity = function() {
+	this.body.gravity.y = 0;
+}
+
+
 module.exports = Shark;
 
 
