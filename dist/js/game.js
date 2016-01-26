@@ -503,7 +503,10 @@ Dolphin.prototype.processCallback = function(enemy) {
 
 
 
-
+Dolphin.prototype.resetGravity = function() {
+	this.listGravityPos = new Array();
+	this.isInGravity = false;
+}
 
 
 Dolphin.prototype.updateGravity = function() {
@@ -511,8 +514,7 @@ Dolphin.prototype.updateGravity = function() {
 	if (this.isInGravity) {
 
 		if (this.game.time.time > this.jumpEnding) {
-			this.listGravityPos = new Array();
-			this.isInGravity = false;
+			this.resetGravity();
 			return true;
 		}
 
@@ -526,8 +528,7 @@ Dolphin.prototype.updateGravity = function() {
 
 			if (this.currentWpJump >= this.listGravityPos.length) {
 
-				this.listGravityPos = new Array();
-				this.isInGravity = false;
+				this.resetGravity();
 				return true;
 			}
 			this.targetJump = this.listGravityPos[this.currentWpJump];
