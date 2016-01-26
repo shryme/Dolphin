@@ -6,7 +6,7 @@ function FriendTurtle(game, x, y, wp) {
 
 	this.game = game;
 
-	this.sprite = new Turtle(game, x, y);
+	this.sprite = new Turtle(game, x, y, this);
 
 	this.sprite.create();
 

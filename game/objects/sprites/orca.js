@@ -1,5 +1,7 @@
 
-function Orca(game, x, y) {
+function Orca(game, x, y, entity) {
+
+	this.entity = entity;
 
 	if (x === undefined && y === undefined) {
 		x = 0;

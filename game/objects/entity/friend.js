@@ -5,7 +5,7 @@ var Dolphin = require('../sprites/dolphin');
 function Friend(game, x, y, wp) {
 	this.game = game;
 
-	this.sprite = new Dolphin(game, x, y);
+	this.sprite = new Dolphin(game, x, y, this);
 	this.sprite.create();
 
 

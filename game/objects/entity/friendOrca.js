@@ -6,7 +6,7 @@ function FriendOrca(game, x, y, wp) {
 
 	this.game = game;
 
-	this.sprite = new Orca(game, x, y);
+	this.sprite = new Orca(game, x, y, this);
 	// this.sprite = new Orca(game, group, x, y);
 	this.sprite.create();
 

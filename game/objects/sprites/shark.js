@@ -1,5 +1,7 @@
 
-function Shark(game, x, y) {
+function Shark(game, x, y, entity) {
+
+	this.entity = entity;
 
 	if (x === undefined && y === undefined) {
 		x = 0;

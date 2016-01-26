@@ -1,5 +1,7 @@
 
-function Turtle(game, x, y) {
+function Turtle(game, x, y, entity) {
+
+	this.entity = entity;
 
 	if (x === undefined && y === undefined) {
 		x = 0;

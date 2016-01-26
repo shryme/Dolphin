@@ -5,7 +5,7 @@ var Shark = require('../sprites/shark');
 function BasicEnemy(game, x, y, wp) {
 	this.game = game;
 
-	this.sprite = new Shark(game, x, y);
+	this.sprite = new Shark(game, x, y, this);
 	this.sprite.create();
 
 	this.listTargetPos = new Array();

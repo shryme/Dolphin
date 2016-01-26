@@ -23,7 +23,7 @@ var Shark = require('../sprites/shark');
 function BasicEnemy(game, x, y, wp) {
 	this.game = game;
 
-	this.sprite = new Shark(game, x, y);
+	this.sprite = new Shark(game, x, y, this);
 	this.sprite.create();
 
 	this.listTargetPos = new Array();
@@ -115,7 +115,7 @@ var Dolphin = require('../sprites/dolphin');
 function Friend(game, x, y, wp) {
 	this.game = game;
 
-	this.sprite = new Dolphin(game, x, y);
+	this.sprite = new Dolphin(game, x, y, this);
 	this.sprite.create();
 
 
@@ -167,7 +167,7 @@ function FriendOrca(game, x, y, wp) {
 
 	this.game = game;
 
-	this.sprite = new Orca(game, x, y);
+	this.sprite = new Orca(game, x, y, this);
 	// this.sprite = new Orca(game, group, x, y);
 	this.sprite.create();
 
@@ -218,7 +218,7 @@ function FriendTurtle(game, x, y, wp) {
 
 	this.game = game;
 
-	this.sprite = new Turtle(game, x, y);
+	this.sprite = new Turtle(game, x, y, this);
 
 	this.sprite.create();
 
@@ -268,7 +268,7 @@ var Dolphin = require('../sprites/dolphin');
 function Player(game, x, y) {
 	this.game = game;
 
-	this.sprite = new Dolphin(game, x, y);
+	this.sprite = new Dolphin(game, x, y, this);
 	this.sprite.create();
 
 }
@@ -298,7 +298,11 @@ module.exports = Player;
 
 },{"../sprites/dolphin":7}],7:[function(require,module,exports){
 
-function Dolphin(game, x, y) {
+function Dolphin(game, x, y, entity) {
+
+	this.entity = entity;
+
+	console.log(this);
 
 	if (x === undefined && y === undefined) {
 		x = 0;
@@ -535,7 +539,9 @@ module.exports = Dolphin;
 
 },{}],8:[function(require,module,exports){
 
-function Orca(game, x, y) {
+function Orca(game, x, y, entity) {
+
+	this.entity = entity;
 
 	if (x === undefined && y === undefined) {
 		x = 0;
@@ -615,7 +621,9 @@ module.exports = Orca;
 
 },{}],9:[function(require,module,exports){
 
-function Shark(game, x, y) {
+function Shark(game, x, y, entity) {
+
+	this.entity = entity;
 
 	if (x === undefined && y === undefined) {
 		x = 0;
@@ -719,7 +727,9 @@ module.exports = Shark;
 
 },{}],10:[function(require,module,exports){
 
-function Turtle(game, x, y) {
+function Turtle(game, x, y, entity) {
+
+	this.entity = entity;
 
 	if (x === undefined && y === undefined) {
 		x = 0;

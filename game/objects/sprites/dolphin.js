@@ -1,5 +1,9 @@
 
-function Dolphin(game, x, y) {
+function Dolphin(game, x, y, entity) {
+
+	this.entity = entity;
+
+	console.log(this);
 
 	if (x === undefined && y === undefined) {
 		x = 0;
