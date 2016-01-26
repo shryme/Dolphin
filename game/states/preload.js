@@ -16,7 +16,10 @@ Preload.prototype = {
 		this.load.image('menu', 'assets/background.png');
 		this.load.image('background', 'assets/background.png');
 
-		this.load.tilemap('tilemap', 'assets/tilemaps/level0.json', null, Phaser.Tilemap.TILED_JSON);
+		for (var i = 0; i <= 1; i++) {
+			this.load.tilemap('level' + i, 'assets/tilemaps/level' + i + '.json', null, Phaser.Tilemap.TILED_JSON);
+		}
+
 		this.load.image('tileset', "assets/tilemaps/tileset.png");
 
 		this.load.atlasJSONHash('dolphin', 'assets/sprites/dolphin.png', 'assets/sprites/dolphin.json');

@@ -13,9 +13,9 @@ Menu.prototype = {
 		this.background.width = this.game.width;
 
 		var button = this.game.add.button(this.game.world.centerX - 95, 200, 'dolphin', play, this, 2, 1, 0);
-    function play() {
-    	this.game.state.start('play');
-    }
+		function play() {
+			this.game.state.start('play', true, false, 'level0');
+		}
 
 	},
 	update: function() {

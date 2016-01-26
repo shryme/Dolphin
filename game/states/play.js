@@ -42,8 +42,13 @@ Sprite end!
 
 function Play() {}
 Play.prototype = {
-	create: function() {
+	init: function(level) {
+		console.log('init', level);
+		this.currentLevel = level;
+	},
 
+	create: function() {
+		console.log('create');
 		this.showDebug = true;
 
 		this.game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -53,7 +58,7 @@ Play.prototype = {
 
 
 		//Load tiles
-		this.map = this.game.add.tilemap('tilemap');
+		this.map = this.game.add.tilemap(this.currentLevel);
 		this.map.addTilesetImage('basic', 'tileset');
 
 		//Create block layer, and add collision
@@ -170,6 +175,14 @@ Play.prototype = {
 		this.resetKey = this.game.input.keyboard.addKey(Phaser.Keyboard.R);
 		this.resetKey.onDown.add(this.resetGame, this);
 
+		this.resetKey = this.game.input.keyboard.addKey(Phaser.Keyboard.R);
+		this.resetKey.onDown.add(this.resetGame, this);
+
+		this.resetKey = this.game.input.keyboard.addKey(Phaser.Keyboard.ONE);
+		this.resetKey.onDown.add(this.goToLevelZero, this);
+
+		this.resetKey = this.game.input.keyboard.addKey(Phaser.Keyboard.TWO);
+		this.resetKey.onDown.add(this.goToLevelOne, this);
 
 
 
@@ -278,7 +291,15 @@ Play.prototype = {
 	},
 
 	resetGame: function() {
-		this.game.state.start('play');
+		this.game.state.start('play', true, false, this.currentLevel);
+	},
+
+	goToLevelZero: function() {
+		this.game.state.start('play', true, false, 'level0');
+	},
+
+	goToLevelOne: function() {
+		this.game.state.start('play', true, false, 'level1');
 	},
 
 	addGravity: function(sprite, tile) {

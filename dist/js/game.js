@@ -940,9 +940,9 @@ Menu.prototype = {
 		this.background.width = this.game.width;
 
 		var button = this.game.add.button(this.game.world.centerX - 95, 200, 'dolphin', play, this, 2, 1, 0);
-    function play() {
-    	this.game.state.start('play');
-    }
+		function play() {
+			this.game.state.start('play', true, false, 'level0');
+		}
 
 	},
 	update: function() {
@@ -997,8 +997,13 @@ Sprite end!
 
 function Play() {}
 Play.prototype = {
-	create: function() {
+	init: function(level) {
+		console.log('init', level);
+		this.currentLevel = level;
+	},
 
+	create: function() {
+		console.log('create');
 		this.showDebug = true;
 
 		this.game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -1008,7 +1013,7 @@ Play.prototype = {
 
 
 		//Load tiles
-		this.map = this.game.add.tilemap('tilemap');
+		this.map = this.game.add.tilemap(this.currentLevel);
 		this.map.addTilesetImage('basic', 'tileset');
 
 		//Create block layer, and add collision
@@ -1125,6 +1130,14 @@ Play.prototype = {
 		this.resetKey = this.game.input.keyboard.addKey(Phaser.Keyboard.R);
 		this.resetKey.onDown.add(this.resetGame, this);
 
+		this.resetKey = this.game.input.keyboard.addKey(Phaser.Keyboard.R);
+		this.resetKey.onDown.add(this.resetGame, this);
+
+		this.resetKey = this.game.input.keyboard.addKey(Phaser.Keyboard.ONE);
+		this.resetKey.onDown.add(this.goToLevelZero, this);
+
+		this.resetKey = this.game.input.keyboard.addKey(Phaser.Keyboard.TWO);
+		this.resetKey.onDown.add(this.goToLevelOne, this);
 
 
 
@@ -1233,7 +1246,15 @@ Play.prototype = {
 	},
 
 	resetGame: function() {
-		this.game.state.start('play');
+		this.game.state.start('play', true, false, this.currentLevel);
+	},
+
+	goToLevelZero: function() {
+		this.game.state.start('play', true, false, 'level0');
+	},
+
+	goToLevelOne: function() {
+		this.game.state.start('play', true, false, 'level1');
 	},
 
 	addGravity: function(sprite, tile) {
@@ -1272,7 +1293,10 @@ Preload.prototype = {
 		this.load.image('menu', 'assets/background.png');
 		this.load.image('background', 'assets/background.png');
 
-		this.load.tilemap('tilemap', 'assets/tilemaps/level0.json', null, Phaser.Tilemap.TILED_JSON);
+		for (var i = 0; i <= 1; i++) {
+			this.load.tilemap('level' + i, 'assets/tilemaps/level' + i + '.json', null, Phaser.Tilemap.TILED_JSON);
+		}
+
 		this.load.image('tileset', "assets/tilemaps/tileset.png");
 
 		this.load.atlasJSONHash('dolphin', 'assets/sprites/dolphin.png', 'assets/sprites/dolphin.json');
