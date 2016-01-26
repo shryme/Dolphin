@@ -3,8 +3,6 @@ function Dolphin(game, x, y, entity) {
 
 	this.entity = entity;
 
-	console.log(this);
-
 	if (x === undefined && y === undefined) {
 		x = 0;
 		y = 0;
@@ -182,11 +180,7 @@ Dolphin.prototype.attack = function(x, y) {
 
 		this.rotation = this.game.physics.arcade.angleToXY(this, x, y);
 
-		//Flip dolphin when moving to the left
-		if (this.rotation < -1.5 || this.rotation > 1.5)
-			this.scale.y = -1;
-		else
-			this.scale.y = 1;
+		this.flipSprite();
 
 
 	}
@@ -255,12 +249,7 @@ Dolphin.prototype.addGravity = function() {
 			return angle * (Math.PI / 180);
 		}
 
-
-		var t = 1;
-
-		var vo = 75;
-
-		vo = Math.sqrt(Math.pow(this.body.velocity.x, 2) + Math.pow(this.body.velocity.y, 2));
+		var vo = Math.sqrt(Math.pow(this.body.velocity.x, 2) + Math.pow(this.body.velocity.y, 2));
 		vo = vo / 6;
 
 		var theta = this.angle * -1;
@@ -269,13 +258,10 @@ Dolphin.prototype.addGravity = function() {
 		var vox = vo * Math.cos(toRadians(theta));
 		var voy = vo * Math.sin(toRadians(theta));
 
-		var x = vox * t;
-		var y = voy * t + 0.5 * g * Math.pow(t, 2);
-
 
 		var totalTime = ((voy) / g) * 2;
 
-		totalTime += 2;
+		totalTime += 1;
 
 		var isRightToLeft = false;
 
