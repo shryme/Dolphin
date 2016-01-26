@@ -68,36 +68,6 @@ Dolphin.prototype.create = function() {
 
 }
 
-Dolphin.prototype.updateGravity = function() {
-	// if (this.isInGravity && this.x > 1000) {
-	if (this.isInGravity) {
-
-		this.targetJump = this.listGravityPos[this.currentWp];
-
-		if (this.targetJump === undefined)
-			debugger
-
-		if (this.game.physics.arcade.distanceBetween(this, this.targetJump) > 10) {
-			this.move(this.targetJump, 600, 50);
-		}
-		else {
-			this.currentWp++;
-
-			if (this.currentWp >= this.listGravityPos.length) {
-
-				this.listGravityPos = new Array();
-				this.isInGravity = false;
-				return false;
-			}
-			this.targetJump = this.listGravityPos[this.currentWp];
-		}
-
-
-		return false;
-	}
-	return true;
-}
-
 Dolphin.prototype.update = function() {
 
 	if (!this.updateGravity())
@@ -237,12 +207,37 @@ Dolphin.prototype.processCallback = function(enemy) {
 
 
 
+Dolphin.prototype.updateGravity = function() {
 
+	if (this.isInGravity) {
+
+		this.targetJump = this.listGravityPos[this.currentWpJump];
+
+		if (this.game.physics.arcade.distanceBetween(this, this.targetJump) > 10) {
+			this.move(this.targetJump, 600, 50);
+		}
+		else {
+			this.currentWpJump++;
+
+			if (this.currentWpJump >= this.listGravityPos.length) {
+
+				this.listGravityPos = new Array();
+				this.isInGravity = false;
+				return false;
+			}
+			this.targetJump = this.listGravityPos[this.currentWpJump];
+		}
+
+
+		return false;
+	}
+	return true;
+}
 
 Dolphin.prototype.addGravity = function() {
 	if (!this.isInGravity) {
 		this.isInGravity = true;
-		this.currentWp = 0;
+		this.currentWpJump = 0;
 
 
 		function toRadians (angle) {
