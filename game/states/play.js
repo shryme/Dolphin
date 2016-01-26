@@ -1,4 +1,3 @@
-
 'use strict';
 
 var Player = require('../objects/entity/player');
@@ -12,6 +11,11 @@ var tileIndex = {
 	invisibleGravity: 8
 }
 
+
+
+/*******************************************************
+Use to augment sprite, could be done better! */
+
 //Add function to flip sprite when looking to the left
 Phaser.Sprite.prototype.flipSprite = function() {
 	if (this.rotation < -1.5 || this.rotation > 1.5)
@@ -19,6 +23,128 @@ Phaser.Sprite.prototype.flipSprite = function() {
 	else
 		this.scale.y = 1;
 }
+
+//Add gravity
+Phaser.Sprite.prototype.addGravity = function() {
+
+	if (!this.isInGravity) {
+		this.isInGravity = true;
+		this.currentWp = 0;
+		// this.body.gravity.y = 15000;
+
+
+
+
+
+		function toRadians (angle) {
+			return angle * (Math.PI / 180);
+		}
+
+
+		var t = 1;
+
+		var vo = 75;
+
+		vo = Math.sqrt(Math.pow(this.body.velocity.x, 2) + Math.pow(this.body.velocity.y, 2));
+		vo = vo / 6;
+
+		var theta = this.angle * -1;
+		var g = 9.8;
+
+		var vox = vo * Math.cos(toRadians(theta));
+		var voy = vo * Math.sin(toRadians(theta));
+
+		var x = vox * t;
+		var y = voy * t + 0.5 * g * Math.pow(t, 2);
+
+
+		var totalTime = ((voy) / g) * 2;
+
+		totalTime += 2;
+
+		var isRightToLeft = false;
+
+		if (totalTime < 0) {
+			isRightToLeft = true;
+			totalTime = totalTime * -1;
+		}
+
+
+		this.listGravityPos = new Array();
+
+		if (this.key === 'dolphin') {
+
+			for (var i = 0.0; i < totalTime; i = i + 0.5) {
+				var x = vox * i;
+				var y = voy * i + 0.5 * -9.8 * Math.pow(i, 2);
+
+				if (isRightToLeft)
+					x = this.x - x;
+				else
+					x = this.x + x;
+
+				this.listGravityPos.push({x: x, y: this.y - y});
+			}
+
+
+		}
+
+
+
+
+
+
+		// console.log(x + " - " + y, this);
+
+
+	}
+
+
+
+}
+
+//Remove gravity
+Phaser.Sprite.prototype.removeGravity = function() {
+
+	// if (this.isInGravity && this.listGravityPos.length === 0) {
+	// 	this.isInGravity = false;
+	// 	this.listGravityPos = new Array();
+
+	// 	this.body.gravity.y = 0;
+	// }
+
+
+
+}
+
+//Execute gravity
+Phaser.Sprite.prototype.executeGravity = function() {
+	if (this.rotation < -1.5 || this.rotation > 1.5)
+		this.scale.y = -1;
+	else
+		this.scale.y = 1;
+}
+
+
+
+//Global initialize
+
+
+Phaser.Sprite.prototype.initialize = function() {
+	this.isInGravity = false;
+	this.listGravityPos = new Array();
+}
+
+/*
+Sprite end!
+*******************************************************/
+
+
+
+
+
+
+
 
 function Play() {}
 Play.prototype = {
@@ -256,9 +382,9 @@ Play.prototype = {
 
 	addGravity: function(sprite, tile) {
 		if (tile.index !== tileIndex.empty)
-			sprite.body.gravity.y = 15000;
+			sprite.addGravity();
 		else
-			sprite.body.gravity.y = 0;
+			sprite.removeGravity();
 		return false;
 	}
 

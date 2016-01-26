@@ -8,6 +8,8 @@ function Orca(game, x, y) {
 
 	Phaser.Sprite.call(this, game, x, y, 'orca', 'm1.png');
 
+	this.initialize();
+
 	this.game.physics.arcade.enableBody(this);
 	this.body.gravity.y = 0;
 	this.body.collideWorldBounds = true;

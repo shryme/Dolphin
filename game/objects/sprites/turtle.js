@@ -8,6 +8,8 @@ function Turtle(game, x, y) {
 
 	Phaser.Sprite.call(this, game, x, y, 'turtle', 's1.png');
 
+	this.initialize();
+
 	this.game.physics.arcade.enableBody(this);
 	this.body.gravity.y = 0;
 	this.body.collideWorldBounds = true;

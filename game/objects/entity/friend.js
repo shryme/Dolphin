@@ -9,7 +9,7 @@ function Friend(game, x, y, wp) {
 	this.entity.create();
 
 
-	this.target = {x: 300, y: 300};
+	this.target = {x: 372, y: 1142};
 
 	this.waypoints = wp;
 	this.currentWp = 0;

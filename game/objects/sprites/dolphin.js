@@ -8,6 +8,8 @@ function Dolphin(game, x, y) {
 
 	Phaser.Sprite.call(this, game, x, y, 'dolphin', 'r1.png');
 
+	this.initialize();
+
 	this.game.physics.arcade.enableBody(this);
 	this.body.gravity.y = 0;
 	this.body.collideWorldBounds = true;
@@ -61,7 +63,40 @@ Dolphin.prototype.create = function() {
 
 }
 
+Dolphin.prototype.updateGravity = function() {
+	// if (this.isInGravity && this.x > 1000) {
+	if (this.isInGravity) {
+
+		this.targetJump = this.listGravityPos[this.currentWp];
+
+		if (this.targetJump === undefined)
+			debugger
+
+		if (this.game.physics.arcade.distanceBetween(this, this.targetJump) > 10) {
+			this.move(this.targetJump, 600, 50);
+		}
+		else {
+			this.currentWp++;
+
+			if (this.currentWp >= this.listGravityPos.length) {
+
+				this.listGravityPos = new Array();
+				this.isInGravity = false;
+				return false;
+			}
+			this.targetJump = this.listGravityPos[this.currentWp];
+		}
+
+
+		return false;
+	}
+	return true;
+}
+
 Dolphin.prototype.update = function() {
+
+	if (!this.updateGravity())
+		return false;
 
 	if (this.isAttacking) {
 
@@ -150,7 +185,7 @@ Dolphin.prototype.attack = function(x, y) {
 	}
 }
 
-Dolphin.prototype.move = function(target, speed) {
+Dolphin.prototype.move = function(target, speed, maxTime) {
 
 	if (speed === undefined)
 		speed = 300;
@@ -159,7 +194,7 @@ Dolphin.prototype.move = function(target, speed) {
 		this.rotation = this.game.physics.arcade.moveToPointer(this, speed, this.game.input.activePointer, 500);
 	}
 	else {
-		this.rotation = this.game.physics.arcade.moveToObject(this, target, speed);
+		this.rotation = this.game.physics.arcade.moveToObject(this, target, speed, maxTime);
 	}
 
 
