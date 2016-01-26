@@ -1120,6 +1120,11 @@ Play.prototype = {
 		this.debugKey = this.game.input.keyboard.addKey(Phaser.Keyboard.Q);
 		this.debugKey.onDown.add(this.toggleDebug, this);
 
+		this.resetKey = this.game.input.keyboard.addKey(Phaser.Keyboard.R);
+		this.resetKey.onDown.add(this.resetGame, this);
+
+
+
 
 
 		this.txtHp = this.game.add.text(10, 10, "Hp: 100", { font: "65px Arial", fill: "#bb00ff", align: "center"});
@@ -1223,6 +1228,10 @@ Play.prototype = {
 
 		if (!this.showDebug)
 			this.game.debug.reset();
+	},
+
+	resetGame: function() {
+		this.game.state.start('play');
 	},
 
 	addGravity: function(sprite, tile) {
