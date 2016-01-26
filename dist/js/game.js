@@ -23,8 +23,8 @@ var Shark = require('../sprites/shark');
 function BasicEnemy(game, x, y, wp) {
 	this.game = game;
 
-	this.entity = new Shark(game, x, y);
-	this.entity.create();
+	this.sprite = new Shark(game, x, y);
+	this.sprite.create();
 
 	this.listTargetPos = new Array();
 
@@ -44,16 +44,16 @@ BasicEnemy.prototype = {
 	},
 	update: function(target) {
 
-		if (!this.entity.update())
+		if (!this.sprite.update())
 			return;
 
-		var dist = this.game.physics.arcade.distanceBetween(this.entity, target);
+		var dist = this.game.physics.arcade.distanceBetween(this.sprite, target);
 
 
 
 		if (dist < 300) {
 			//If close enough, chase the target
-			this.entity.move(target, 500);
+			this.sprite.move(target, 500);
 
 			//Reset the list
 			this.listTargetPos = new Array();
@@ -68,11 +68,11 @@ BasicEnemy.prototype = {
 				y: target.y
 			});
 
-			this.entity.move(this.listTargetPos[0], 400);
+			this.sprite.move(this.listTargetPos[0], 400);
 
 			//If the enemy is close enough to the history position of the target,
 			//remove it from the list so the enemy chase the next point
-			if (this.game.physics.arcade.distanceBetween(this.entity, this.listTargetPos[0]) < 100)
+			if (this.game.physics.arcade.distanceBetween(this.sprite, this.listTargetPos[0]) < 100)
 				this.listTargetPos.shift();
 
 
@@ -80,8 +80,8 @@ BasicEnemy.prototype = {
 		else {
 			if (this.waypoints !== undefined) {
 
-				if (this.game.physics.arcade.distanceBetween(this.entity, this.target) > 100) {
-					this.entity.move(this.target, 300);
+				if (this.game.physics.arcade.distanceBetween(this.sprite, this.target) > 100) {
+					this.sprite.move(this.target, 300);
 				}
 				else {
 					this.currentWp++;
@@ -92,7 +92,7 @@ BasicEnemy.prototype = {
 
 			}
 			else
-				this.entity.idle();
+				this.sprite.idle();
 
 			//Reset the list
 			this.listTargetPos = new Array();
@@ -100,7 +100,7 @@ BasicEnemy.prototype = {
 
 
 		if (dist < 90)
-			this.entity.attack(target);
+			this.sprite.attack(target);
 
 	}
 }
@@ -115,8 +115,8 @@ var Dolphin = require('../sprites/dolphin');
 function Friend(game, x, y, wp) {
 	this.game = game;
 
-	this.entity = new Dolphin(game, x, y);
-	this.entity.create();
+	this.sprite = new Dolphin(game, x, y);
+	this.sprite.create();
 
 
 	this.target = {x: 372, y: 1142};
@@ -135,13 +135,13 @@ Friend.prototype = {
 	},
 	update: function() {
 
-		if (!this.entity.update())
+		if (!this.sprite.update())
 			return;
 
 		if (this.game.input.activePointer.isDown)
-			this.entity.attack();
-		else if (this.game.physics.arcade.distanceBetween(this.entity, this.target) > 100)
-			this.entity.move(this.target, 400);
+			this.sprite.attack();
+		else if (this.game.physics.arcade.distanceBetween(this.sprite, this.target) > 100)
+			this.sprite.move(this.target, 400);
 		else {
 			if (this.waypoints !== undefined) {
 				this.currentWp++;
@@ -150,7 +150,7 @@ Friend.prototype = {
 				this.target = this.waypoints[this.currentWp];
 			}
 			else
-				this.entity.idle();
+				this.sprite.idle();
 		}
 
 	}
@@ -167,9 +167,9 @@ function FriendOrca(game, x, y, wp) {
 
 	this.game = game;
 
-	this.entity = new Orca(game, x, y);
-	// this.entity = new Orca(game, group, x, y);
-	this.entity.create();
+	this.sprite = new Orca(game, x, y);
+	// this.sprite = new Orca(game, group, x, y);
+	this.sprite.create();
 
 	this.target = {x: 700, y: 700};
 
@@ -187,11 +187,11 @@ FriendOrca.prototype = {
 	},
 	update: function() {
 
-		if (!this.entity.update())
+		if (!this.sprite.update())
 			return;
 
-		if (this.game.physics.arcade.distanceBetween(this.entity, this.target) > 100) {
-			this.entity.move(this.target, 400);
+		if (this.game.physics.arcade.distanceBetween(this.sprite, this.target) > 100) {
+			this.sprite.move(this.target, 400);
 		}
 		else {
 			if (this.waypoints !== undefined) {
@@ -201,7 +201,7 @@ FriendOrca.prototype = {
 				this.target = this.waypoints[this.currentWp];
 			}
 			else
-				this.entity.idle();
+				this.sprite.idle();
 		}
 
 	}
@@ -218,9 +218,9 @@ function FriendTurtle(game, x, y, wp) {
 
 	this.game = game;
 
-	this.entity = new Turtle(game, x, y);
+	this.sprite = new Turtle(game, x, y);
 
-	this.entity.create();
+	this.sprite.create();
 
 	this.target = {x: 700, y: 700};
 
@@ -238,11 +238,11 @@ FriendTurtle.prototype = {
 	},
 	update: function() {
 
-		if (!this.entity.update())
+		if (!this.sprite.update())
 			return;
 
-		if (this.game.physics.arcade.distanceBetween(this.entity, this.target) > 100) {
-			this.entity.move(this.target, 400);
+		if (this.game.physics.arcade.distanceBetween(this.sprite, this.target) > 100) {
+			this.sprite.move(this.target, 400);
 		}
 		else {
 			if (this.waypoints !== undefined) {
@@ -252,7 +252,7 @@ FriendTurtle.prototype = {
 				this.target = this.waypoints[this.currentWp];
 			}
 			else
-				this.entity.idle();
+				this.sprite.idle();
 		}
 
 	}
@@ -268,8 +268,8 @@ var Dolphin = require('../sprites/dolphin');
 function Player(game, x, y) {
 	this.game = game;
 
-	this.entity = new Dolphin(game, x, y);
-	this.entity.create();
+	this.sprite = new Dolphin(game, x, y);
+	this.sprite.create();
 
 }
 
@@ -279,16 +279,16 @@ Player.prototype = {
 	},
 	update: function(cursors) {
 
-		if (!this.entity.update())
+		if (!this.sprite.update())
 			return;
 
 
 		if (this.game.input.activePointer.isDown)
-			this.entity.attack();
-		else if (this.game.physics.arcade.distanceToPointer(this.entity, this.game.input.activePointer) > 20)
-			this.entity.move();
+			this.sprite.attack();
+		else if (this.game.physics.arcade.distanceToPointer(this.sprite, this.game.input.activePointer) > 20)
+			this.sprite.move();
 		else
-			this.entity.idle();
+			this.sprite.idle();
 
 
 	}
@@ -1066,7 +1066,7 @@ Play.prototype = {
 		//Us
 		var spawn = this.map.objects.spawn[0];
 		this.player = new Player(this.game, spawn.x, spawn.y);
-		this.groupDolphins.add(this.player.entity);
+		this.groupDolphins.add(this.player.sprite);
 
 
 
@@ -1096,7 +1096,7 @@ Play.prototype = {
 		for (var i = 0; i < listObjectsDolphins.length;  i++) {
 			var cur = listObjectsDolphins[i];
 			var dolphin = new Friend(this.game, cur.x, cur.y, this.listWaypoints[cur.properties.wp]);
-			this.groupDolphins.add(dolphin.entity);
+			this.groupDolphins.add(dolphin.sprite);
 
 			this.list.push(dolphin);
 		}
@@ -1106,7 +1106,7 @@ Play.prototype = {
 		for (var i = 0; i < listObjectsSharks.length;  i++) {
 			var cur = listObjectsSharks[i];
 			var shark = new Shark(this.game, cur.x, cur.y, this.listWaypoints[cur.properties.wp]);
-			this.groupSharks.add(shark.entity);
+			this.groupSharks.add(shark.sprite);
 
 			this.listEnemy.push(shark);
 		}
@@ -1117,7 +1117,7 @@ Play.prototype = {
 		for (var i = 0; i < listObjectsOrcas.length;  i++) {
 			var cur = listObjectsOrcas[i];
 			var orca = new Orca(this.game, cur.x, cur.y, this.listWaypoints[cur.properties.wp]);
-			this.groupOrcas.add(orca.entity);
+			this.groupOrcas.add(orca.sprite);
 
 			this.list.push(orca);
 		}
@@ -1127,14 +1127,14 @@ Play.prototype = {
 		for (var i = 0; i < listObjectsTurtles.length;  i++) {
 			var cur = listObjectsTurtles[i];
 			var turtle = new Turtle(this.game, cur.x, cur.y, this.listWaypoints[cur.properties.wp]);
-			this.groupTurtles.add(turtle.entity);
+			this.groupTurtles.add(turtle.sprite);
 
 			this.list.push(turtle);
 		}
 
 
 		//Add camera to follow our player
-		this.game.camera.follow(this.player.entity);
+		this.game.camera.follow(this.player.sprite);
 
 		this.debugKey = this.game.input.keyboard.addKey(Phaser.Keyboard.Q);
 		this.debugKey.onDown.add(this.toggleDebug, this);
@@ -1169,10 +1169,10 @@ Play.prototype = {
 		});
 
 		for (var i = this.listEnemy.length-1; i >= 0; i--) {
-			if (this.listEnemy[i].entity.alive === false)
+			if (this.listEnemy[i].sprite.alive === false)
 				this.listEnemy.splice(i, 1);
 			else
-				this.listEnemy[i].update(this.player.entity);
+				this.listEnemy[i].update(this.player.sprite);
 		}
 
 		//Collide with friends
@@ -1209,7 +1209,7 @@ Play.prototype = {
 		this.game.physics.arcade.overlap(this.groupOrcas, this.overlapLayer, undefined, this.addGravity, this);
 		this.game.physics.arcade.overlap(this.groupTurtles, this.overlapLayer, undefined, this.addGravity, this);
 
-		this.txtHp.text = "Hp: " + this.player.entity.hp;
+		this.txtHp.text = "Hp: " + this.player.sprite.hp;
 
 	},
 
@@ -1217,16 +1217,16 @@ Play.prototype = {
 
 		if (this.showDebug) {
 
-			this.game.debug.bodyInfo(this.player.entity, 32, 32);
-			this.game.debug.body(this.player.entity);
+			this.game.debug.bodyInfo(this.player.sprite, 32, 32);
+			this.game.debug.body(this.player.sprite);
 
 
 			var game = this.game;
 			this.list.forEach(function(f) {
-				game.debug.body(f.entity);
+				game.debug.body(f.sprite);
 			});
 			this.listEnemy.forEach(function(f) {
-				game.debug.body(f.entity);
+				game.debug.body(f.sprite);
 			});
 
 		}

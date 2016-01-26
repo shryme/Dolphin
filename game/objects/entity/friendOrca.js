@@ -6,9 +6,9 @@ function FriendOrca(game, x, y, wp) {
 
 	this.game = game;
 
-	this.entity = new Orca(game, x, y);
-	// this.entity = new Orca(game, group, x, y);
-	this.entity.create();
+	this.sprite = new Orca(game, x, y);
+	// this.sprite = new Orca(game, group, x, y);
+	this.sprite.create();
 
 	this.target = {x: 700, y: 700};
 
@@ -26,11 +26,11 @@ FriendOrca.prototype = {
 	},
 	update: function() {
 
-		if (!this.entity.update())
+		if (!this.sprite.update())
 			return;
 
-		if (this.game.physics.arcade.distanceBetween(this.entity, this.target) > 100) {
-			this.entity.move(this.target, 400);
+		if (this.game.physics.arcade.distanceBetween(this.sprite, this.target) > 100) {
+			this.sprite.move(this.target, 400);
 		}
 		else {
 			if (this.waypoints !== undefined) {
@@ -40,7 +40,7 @@ FriendOrca.prototype = {
 				this.target = this.waypoints[this.currentWp];
 			}
 			else
-				this.entity.idle();
+				this.sprite.idle();
 		}
 
 	}

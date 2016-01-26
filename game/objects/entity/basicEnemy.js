@@ -5,8 +5,8 @@ var Shark = require('../sprites/shark');
 function BasicEnemy(game, x, y, wp) {
 	this.game = game;
 
-	this.entity = new Shark(game, x, y);
-	this.entity.create();
+	this.sprite = new Shark(game, x, y);
+	this.sprite.create();
 
 	this.listTargetPos = new Array();
 
@@ -26,16 +26,16 @@ BasicEnemy.prototype = {
 	},
 	update: function(target) {
 
-		if (!this.entity.update())
+		if (!this.sprite.update())
 			return;
 
-		var dist = this.game.physics.arcade.distanceBetween(this.entity, target);
+		var dist = this.game.physics.arcade.distanceBetween(this.sprite, target);
 
 
 
 		if (dist < 300) {
 			//If close enough, chase the target
-			this.entity.move(target, 500);
+			this.sprite.move(target, 500);
 
 			//Reset the list
 			this.listTargetPos = new Array();
@@ -50,11 +50,11 @@ BasicEnemy.prototype = {
 				y: target.y
 			});
 
-			this.entity.move(this.listTargetPos[0], 400);
+			this.sprite.move(this.listTargetPos[0], 400);
 
 			//If the enemy is close enough to the history position of the target,
 			//remove it from the list so the enemy chase the next point
-			if (this.game.physics.arcade.distanceBetween(this.entity, this.listTargetPos[0]) < 100)
+			if (this.game.physics.arcade.distanceBetween(this.sprite, this.listTargetPos[0]) < 100)
 				this.listTargetPos.shift();
 
 
@@ -62,8 +62,8 @@ BasicEnemy.prototype = {
 		else {
 			if (this.waypoints !== undefined) {
 
-				if (this.game.physics.arcade.distanceBetween(this.entity, this.target) > 100) {
-					this.entity.move(this.target, 300);
+				if (this.game.physics.arcade.distanceBetween(this.sprite, this.target) > 100) {
+					this.sprite.move(this.target, 300);
 				}
 				else {
 					this.currentWp++;
@@ -74,7 +74,7 @@ BasicEnemy.prototype = {
 
 			}
 			else
-				this.entity.idle();
+				this.sprite.idle();
 
 			//Reset the list
 			this.listTargetPos = new Array();
@@ -82,7 +82,7 @@ BasicEnemy.prototype = {
 
 
 		if (dist < 90)
-			this.entity.attack(target);
+			this.sprite.attack(target);
 
 	}
 }
