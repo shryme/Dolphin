@@ -211,6 +211,12 @@ Dolphin.prototype.updateGravity = function() {
 
 	if (this.isInGravity) {
 
+		if (this.game.time.time > this.jumpEnding) {
+			this.listGravityPos = new Array();
+			this.isInGravity = false;
+			return true;
+		}
+
 		this.targetJump = this.listGravityPos[this.currentWpJump];
 
 		if (this.game.physics.arcade.distanceBetween(this, this.targetJump) > 10) {
@@ -223,7 +229,7 @@ Dolphin.prototype.updateGravity = function() {
 
 				this.listGravityPos = new Array();
 				this.isInGravity = false;
-				return false;
+				return true;
 			}
 			this.targetJump = this.listGravityPos[this.currentWpJump];
 		}
@@ -253,10 +259,10 @@ Dolphin.prototype.addGravity = function() {
 		var vox = vo * Math.cos(toRadians(theta));
 		var voy = vo * Math.sin(toRadians(theta));
 
+		//Calculate time to go to the highest point * 2 to the ending + 1 to splash
+		var totalTime = ((voy) / g) * 2 + 1;
 
-		var totalTime = ((voy) / g) * 2;
-
-		totalTime += 1;
+		this.jumpEnding = this.game.time.time + totalTime * 200;
 
 		var isRightToLeft = false;
 
