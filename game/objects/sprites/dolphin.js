@@ -209,12 +209,31 @@ Dolphin.prototype.resetGravity = function() {
 	this.isInGravity = false;
 }
 
+Dolphin.prototype.reverseGravity = function() {
+	if (this.listGravityPos.length !== 0)
+		this.listGravityPos.pop();
+	if (this.listGravityPos.length !== 0)
+		this.listGravityPos.pop();
+	var toInvert = this.listGravityPos.slice(0);
+	toInvert.reverse();
+	this.listGravityPos = this.listGravityPos.concat(toInvert);
+}
+
 
 Dolphin.prototype.updateGravity = function() {
 
 	if (this.isInGravity) {
 
-		if (this.game.time.time > this.jumpEnding) {
+
+		//Fallback if he gets stuck
+		if (this.game.time.time > this.jumpEnding || this.listGravityPos.length === 0) {
+			this.resetGravity();
+			return true;
+		}
+
+		//If he gets stuck on a block
+		if (this.body.blocked.up || this.body.blocked.down || this.body.blocked.left || this.body.blocked.right ||
+			this.body.touching.up || this.body.touching.down || this.body.touching.left || this.body.touching.right) {
 			this.resetGravity();
 			return true;
 		}
@@ -235,13 +254,12 @@ Dolphin.prototype.updateGravity = function() {
 			this.targetJump = this.listGravityPos[this.currentWpJump];
 		}
 
-
 		return false;
 	}
 	return true;
 }
 
-Dolphin.prototype.addGravity = function() {
+Dolphin.prototype.addGravity = function(blockLayer, overlapLayer, water) {
 	if (!this.isInGravity) {
 		this.isInGravity = true;
 		this.currentWpJump = 0;
@@ -261,7 +279,7 @@ Dolphin.prototype.addGravity = function() {
 		var voy = vo * Math.sin(toRadians(theta));
 
 		//Calculate time to go to the highest point * 2 to the ending + 1 to splash
-		var totalTime = ((voy) / g) * 2 + 1;
+		var totalTime = ((voy) / g) * 2 + 100;
 
 		this.jumpEnding = this.game.time.time + totalTime * 200;
 
@@ -272,8 +290,9 @@ Dolphin.prototype.addGravity = function() {
 			totalTime = totalTime * -1;
 		}
 
-
 		this.listGravityPos = new Array();
+
+		var pos = {x: 0, y: 0};
 
 		for (var i = 0.0; i < totalTime; i = i + 0.5) {
 			var x = vox * i;
@@ -284,10 +303,38 @@ Dolphin.prototype.addGravity = function() {
 			else
 				x = this.x + x;
 
-			this.listGravityPos.push({x: x, y: this.y - y});
+			y = this.y - y;
+
+
+			blockLayer.getTileXY(x, y, pos);
+
+			//Sometime he was out of bound
+			pos.y = pos.y < 0 ? 0 : pos.y;
+			pos.y = pos.y >= blockLayer.layer.data.length ? blockLayer.layer.data.length - 1 : pos.y;
+
+			pos.x = pos.x < 0 ? 0 : pos.x;
+			pos.x = pos.x >= blockLayer.layer.data[pos.y].length ? blockLayer.layer.data[pos.y].length - 1 : pos.x;
+
+
+			//Detect if it will be a block
+			if (blockLayer.layer.data[pos.y][pos.x].index !== water) {
+				this.reverseGravity();
+				break;
+			}
+
+			this.listGravityPos.push({x: x, y: y});
+
+			//Look if he will be out of the game
+			if (x < 0 || x > overlapLayer.layer.widthInPixels || y < 0 || y > overlapLayer.layer.heightInPixels) {
+				this.reverseGravity();
+				break;
+			}
+
+			//Stop if he hits water again
+			if (overlapLayer.layer.data[pos.y][pos.x].index === water)
+				break;
+
 		}
-
-
 
 	}
 }

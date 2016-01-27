@@ -304,7 +304,7 @@ Play.prototype = {
 
 	addGravity: function(sprite, tile) {
 		if (tile.index !== tileIndex.empty && sprite.addGravity !== undefined)
-			sprite.addGravity();
+			sprite.addGravity(this.blockLayer, this.overlapLayer, tileIndex.empty);
 		else if (sprite.removeGravity !== undefined)
 			sprite.removeGravity();
 		return false;
