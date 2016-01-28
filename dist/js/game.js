@@ -523,7 +523,7 @@ Dolphin.prototype.updateGravity = function() {
 
 	if (this.isInGravity) {
 
-
+		this.stopAttack();
 		//Fallback if he gets stuck
 		if (this.game.time.time > this.jumpEnding || this.listGravityPos.length === 0) {
 			this.resetGravity();
