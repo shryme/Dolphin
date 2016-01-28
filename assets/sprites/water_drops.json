@@ -1,0 +1,44 @@
+{"frames": [
+
+{
+	"filename": "1.png",
+	"frame": {"x":56,"y":2,"w":15,"h":16},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":15,"h":16},
+	"sourceSize": {"w":15,"h":16}
+},
+{
+	"filename": "2.png",
+	"frame": {"x":39,"y":2,"w":15,"h":18},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":15,"h":18},
+	"sourceSize": {"w":15,"h":18}
+},
+{
+	"filename": "3.png",
+	"frame": {"x":21,"y":2,"w":16,"h":21},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":21},
+	"sourceSize": {"w":16,"h":21}
+},
+{
+	"filename": "4.png",
+	"frame": {"x":2,"y":2,"w":17,"h":24},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":17,"h":24},
+	"sourceSize": {"w":17,"h":24}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "water_drops.png",
+	"format": "RGBA8888",
+	"size": {"w":73,"h":28},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:c46b9c0332391d738afbd33a795b70ea:e5e1dde9270ee8857c958bd7e027089b:ad423069e725105f03bd4c8d8f707f0d$"
+}
+}
