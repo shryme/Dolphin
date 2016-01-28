@@ -1,7 +1,12 @@
 
+var Splash = require('../particle/splash');
+
+
 function Dolphin(game, x, y, entity) {
 
 	this.entity = entity;
+
+	this.splash = new Splash(game);
 
 	if (x === undefined && y === undefined) {
 		x = 0;
@@ -62,6 +67,7 @@ function Dolphin(game, x, y, entity) {
 	}
 
 	game.add.existing(this);
+
 
 }
 
@@ -216,6 +222,8 @@ Dolphin.prototype.processCallback = function(enemy) {
 Dolphin.prototype.resetGravity = function() {
 	this.listGravityPos = new Array();
 	this.isInGravity = false;
+
+	this.splash.start(this);
 }
 
 Dolphin.prototype.reverseGravity = function() {

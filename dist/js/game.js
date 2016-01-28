@@ -15,7 +15,7 @@ window.onload = function () {
 
   game.state.start('boot');
 };
-},{"./states/boot":12,"./states/gameover":13,"./states/menu":14,"./states/play":15,"./states/preload":16}],2:[function(require,module,exports){
+},{"./states/boot":13,"./states/gameover":14,"./states/menu":15,"./states/play":16,"./states/preload":17}],2:[function(require,module,exports){
 
 var Shark = require('../sprites/shark');
 
@@ -107,7 +107,7 @@ BasicEnemy.prototype = {
 
 module.exports = BasicEnemy;
 
-},{"../sprites/shark":10}],3:[function(require,module,exports){
+},{"../sprites/shark":11}],3:[function(require,module,exports){
 
 var Dolphin = require('../sprites/dolphin');
 
@@ -158,7 +158,7 @@ Friend.prototype = {
 
 module.exports = Friend;
 
-},{"../sprites/dolphin":7}],4:[function(require,module,exports){
+},{"../sprites/dolphin":8}],4:[function(require,module,exports){
 
 var Orca = require('../sprites/orca');
 
@@ -209,7 +209,7 @@ FriendOrca.prototype = {
 
 module.exports = FriendOrca;
 
-},{"../sprites/orca":8}],5:[function(require,module,exports){
+},{"../sprites/orca":9}],5:[function(require,module,exports){
 
 var Turtle = require('../sprites/turtle');
 
@@ -260,7 +260,7 @@ FriendTurtle.prototype = {
 
 module.exports = FriendTurtle;
 
-},{"../sprites/turtle":11}],6:[function(require,module,exports){
+},{"../sprites/turtle":12}],6:[function(require,module,exports){
 
 var Dolphin = require('../sprites/dolphin');
 
@@ -296,11 +296,45 @@ Player.prototype = {
 
 module.exports = Player;
 
-},{"../sprites/dolphin":7}],7:[function(require,module,exports){
+},{"../sprites/dolphin":8}],7:[function(require,module,exports){
+
+function Splash(game, sprite) {
+	this.emitter = game.add.emitter(0, 0, 1000);
+	this.emitter.makeParticles('waterdrops', ['1.png','2.png', '3.png', '4.png']);
+	this.emitter.minParticleSpeed.setTo(-200, -300);
+	this.emitter.maxParticleSpeed.setTo(200, -100);
+	this.emitter.gravity = 500;
+}
+
+Splash.prototype.start = function(sprite) {
+	this.emitter.x = sprite.x;
+	this.emitter.y = sprite.y;
+
+	this.emitter.start(true, 10000, null, 2);
+}
+
+
+module.exports = Splash;
+
+
+
+
+
+
+
+
+
+
+},{}],8:[function(require,module,exports){
+
+var Splash = require('../particle/splash');
+
 
 function Dolphin(game, x, y, entity) {
 
 	this.entity = entity;
+
+	this.splash = new Splash(game);
 
 	if (x === undefined && y === undefined) {
 		x = 0;
@@ -361,6 +395,7 @@ function Dolphin(game, x, y, entity) {
 	}
 
 	game.add.existing(this);
+
 
 }
 
@@ -515,6 +550,8 @@ Dolphin.prototype.processCallback = function(enemy) {
 Dolphin.prototype.resetGravity = function() {
 	this.listGravityPos = new Array();
 	this.isInGravity = false;
+
+	this.splash.start(this);
 }
 
 Dolphin.prototype.reverseGravity = function() {
@@ -669,7 +706,7 @@ module.exports = Dolphin;
 
 
 
-},{}],8:[function(require,module,exports){
+},{"../particle/splash":7}],9:[function(require,module,exports){
 
 function Orca(game, x, y, entity) {
 
@@ -751,7 +788,7 @@ module.exports = Orca;
 
 
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 
 function Powerup(game, x, y, type) {
 
@@ -815,7 +852,7 @@ module.exports = Powerup;
 
 
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 
 function Shark(game, x, y, entity) {
 
@@ -930,7 +967,7 @@ Shark.prototype.removeGravity = function() {
 module.exports = Shark;
 
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 
 function Turtle(game, x, y, entity) {
 
@@ -1009,7 +1046,7 @@ module.exports = Turtle;
 
 
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 
 'use strict';
 
@@ -1028,7 +1065,7 @@ Boot.prototype = {
 
 module.exports = Boot;
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 
 'use strict';
 function GameOver() {}
@@ -1050,7 +1087,7 @@ GameOver.prototype = {
 };
 module.exports = GameOver;
 
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 
 'use strict';
 function Menu() {}
@@ -1085,7 +1122,7 @@ Menu.prototype = {
 
 module.exports = Menu;
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 'use strict';
 
 var Player = require('../objects/entity/player');
@@ -1432,7 +1469,7 @@ module.exports = Play;
 
 
 
-},{"../objects/entity/basicEnemy":2,"../objects/entity/friend":3,"../objects/entity/friendOrca":4,"../objects/entity/friendTurtle":5,"../objects/entity/player":6,"../objects/sprites/powerup":9}],16:[function(require,module,exports){
+},{"../objects/entity/basicEnemy":2,"../objects/entity/friend":3,"../objects/entity/friendOrca":4,"../objects/entity/friendTurtle":5,"../objects/entity/player":6,"../objects/sprites/powerup":10}],17:[function(require,module,exports){
 
 'use strict';
 function Preload() {
@@ -1462,6 +1499,8 @@ Preload.prototype = {
 		this.load.atlasJSONHash('orca', 'assets/sprites/tara.png', 'assets/sprites/tara.json');
 		this.load.atlasJSONHash('turtle', 'assets/sprites/turtle.png', 'assets/sprites/turtle.json');
 		this.load.atlasJSONHash('powerup', 'assets/sprites/powerup.png', 'assets/sprites/powerup.json');
+
+		this.load.atlasJSONHash('waterdrops', 'assets/sprites/water_drops.png', 'assets/sprites/water_drops.json');
 
 
 	},
