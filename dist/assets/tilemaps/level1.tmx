@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" nextobjectid="44">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" nextobjectid="46">
  <tileset firstgid="1" name="basic" tilewidth="32" tileheight="32" tilecount="9">
   <image source="tileset.png" width="96" height="96"/>
  </tileset>
@@ -219,4 +219,16 @@
  <objectgroup name="orcas"/>
  <objectgroup name="waypoints"/>
  <objectgroup name="turtles"/>
+ <objectgroup name="powerups">
+  <object id="44" name="jump" x="669.697" y="790.909" width="172.727" height="100">
+   <properties>
+    <property name="type" value="jump"/>
+   </properties>
+  </object>
+  <object id="45" name="attack" x="662.121" y="1150" width="172.727" height="100">
+   <properties>
+    <property name="type" value="attack"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>

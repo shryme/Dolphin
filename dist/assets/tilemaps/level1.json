@@ -108,8 +108,50 @@
          "width":0,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "height":100,
+         "name":"powerups",
+         "objects":[
+                {
+                 "height":100,
+                 "id":44,
+                 "name":"jump",
+                 "properties":
+                    {
+                     "type":"jump"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":172.727272727273,
+                 "x":669.69696969697,
+                 "y":790.909090909091
+                }, 
+                {
+                 "height":100,
+                 "id":45,
+                 "name":"attack",
+                 "properties":
+                    {
+                     "type":"attack"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":172.727,
+                 "x":662.121348484848,
+                 "y":1150
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "width":100,
+         "x":0,
+         "y":0
         }],
- "nextobjectid":44,
+ "nextobjectid":46,
  "orientation":"orthogonal",
  "properties":
     {

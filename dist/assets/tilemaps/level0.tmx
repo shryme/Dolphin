@@ -268,4 +268,5 @@
    </properties>
   </object>
  </objectgroup>
+ <objectgroup name="powerups"/>
 </map>
