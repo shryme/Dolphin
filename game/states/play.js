@@ -6,6 +6,9 @@ var Shark = require('../objects/entity/basicEnemy');
 var Orca = require('../objects/entity/friendOrca');
 var Turtle = require('../objects/entity/friendTurtle');
 
+var Powerup = require('../objects/sprites/powerup');
+
+
 var tileIndex = {
 	empty: -1,
 	invisibleGravity: 8
@@ -95,6 +98,9 @@ Play.prototype = {
 		//Group of turtles
 		this.groupTurtles = this.game.add.group();
 
+		//Group of powerups
+		this.groupPowerups = this.game.add.group();
+
 
 		//Us
 		var spawn = this.map.objects.spawn[0];
@@ -163,6 +169,16 @@ Play.prototype = {
 			this.groupTurtles.add(turtle.sprite);
 
 			this.list.push(turtle);
+		}
+
+		var listObjectsPowerups = this.map.objects.powerups;
+
+		for (var i = 0; i < listObjectsPowerups.length;  i++) {
+			var cur = listObjectsPowerups[i];
+			var powerup = new Powerup(this.game, cur.x, cur.y, cur.properties.type);
+			this.groupPowerups.add(powerup);
+
+			// this.list.push(powerup);
 		}
 
 
@@ -255,6 +271,10 @@ Play.prototype = {
 		this.game.physics.arcade.overlap(this.groupOrcas, this.overlapLayer, undefined, this.addGravity, this);
 		this.game.physics.arcade.overlap(this.groupTurtles, this.overlapLayer, undefined, this.addGravity, this);
 
+
+		//Detect powerup collision
+		this.game.physics.arcade.overlap(this.groupPowerups, this.player.sprite, undefined, this.powerupCollision, this);
+
 		this.txtHp.text = "Hp: " + this.player.sprite.hp;
 
 	},
@@ -308,6 +328,11 @@ Play.prototype = {
 		else if (sprite.removeGravity !== undefined)
 			sprite.removeGravity();
 		return false;
+	},
+
+	powerupCollision: function(dolphin, powerup) {
+		dolphin.items[powerup.powerupType] = true;
+		powerup.destroy();
 	}
 
 

@@ -15,7 +15,7 @@ window.onload = function () {
 
   game.state.start('boot');
 };
-},{"./states/boot":11,"./states/gameover":12,"./states/menu":13,"./states/play":14,"./states/preload":15}],2:[function(require,module,exports){
+},{"./states/boot":12,"./states/gameover":13,"./states/menu":14,"./states/play":15,"./states/preload":16}],2:[function(require,module,exports){
 
 var Shark = require('../sprites/shark');
 
@@ -107,7 +107,7 @@ BasicEnemy.prototype = {
 
 module.exports = BasicEnemy;
 
-},{"../sprites/shark":9}],3:[function(require,module,exports){
+},{"../sprites/shark":10}],3:[function(require,module,exports){
 
 var Dolphin = require('../sprites/dolphin');
 
@@ -260,7 +260,7 @@ FriendTurtle.prototype = {
 
 module.exports = FriendTurtle;
 
-},{"../sprites/turtle":10}],6:[function(require,module,exports){
+},{"../sprites/turtle":11}],6:[function(require,module,exports){
 
 var Dolphin = require('../sprites/dolphin');
 
@@ -355,6 +355,11 @@ function Dolphin(game, x, y, entity) {
 	this.isInGravity = false;
 	this.listGravityPos = new Array();
 
+	this.items = {
+		attack: false,
+		jump: false,
+	}
+
 	game.add.existing(this);
 
 }
@@ -427,6 +432,10 @@ Dolphin.prototype.stopAttack = function() {
 }
 
 Dolphin.prototype.attack = function(x, y) {
+
+	if (!this.items.attack)
+		return;
+
 	if (!this.isAttacking) {
 
 		this.isAttacking = true;
@@ -559,6 +568,12 @@ Dolphin.prototype.updateGravity = function() {
 }
 
 Dolphin.prototype.addGravity = function(blockLayer, overlapLayer, water) {
+
+	if (!this.items.jump) {
+		this.body.gravity.y = 50000;
+		return
+	}
+
 	if (!this.isInGravity) {
 		this.isInGravity = true;
 		this.currentWpJump = 0;
@@ -639,7 +654,7 @@ Dolphin.prototype.addGravity = function(blockLayer, overlapLayer, water) {
 }
 
 Dolphin.prototype.removeGravity = function() {
-
+	this.body.gravity.y = 0;
 }
 
 
@@ -737,6 +752,70 @@ module.exports = Orca;
 
 
 },{}],9:[function(require,module,exports){
+
+function Powerup(game, x, y, type) {
+
+	if (x === undefined && y === undefined) {
+		x = 0;
+		y = 0;
+	}
+
+	Phaser.Sprite.call(this, game, x, y, 'powerup', 'p1.png');
+
+	this.initialize();
+
+	this.powerupType = type;
+
+	this.game.physics.arcade.enableBody(this);
+	this.body.gravity.y = 0;
+	this.body.collideWorldBounds = true;
+
+	this.body.allowRotation = false;
+	this.anchor.setTo(.5, .5);
+
+	this.body.setSize(75, 50, 0, 0);
+
+
+	var listImages = new Array();
+
+	for (var i = 1; i <= 8; i++) {
+		listImages.push('p' + i + '.png');
+	}
+
+	this.animations.add('idle', listImages, 5, true, false);
+	this.animations.play('idle');
+
+	if (this.powerupType === 'jump')
+		this.tint = 0x00ff00
+	else
+		this.tint = 0xffff00
+
+	game.add.existing(this);
+
+
+
+}
+
+Powerup.prototype = Object.create(Phaser.Sprite.prototype);
+Powerup.prototype.constructor = Powerup;
+
+Powerup.prototype.create = function() {
+
+}
+
+
+module.exports = Powerup;
+
+
+
+
+
+
+
+
+
+
+},{}],10:[function(require,module,exports){
 
 function Shark(game, x, y, entity) {
 
@@ -851,7 +930,7 @@ Shark.prototype.removeGravity = function() {
 module.exports = Shark;
 
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 
 function Turtle(game, x, y, entity) {
 
@@ -930,7 +1009,7 @@ module.exports = Turtle;
 
 
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 
 'use strict';
 
@@ -949,7 +1028,7 @@ Boot.prototype = {
 
 module.exports = Boot;
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 
 'use strict';
 function GameOver() {}
@@ -971,7 +1050,7 @@ GameOver.prototype = {
 };
 module.exports = GameOver;
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 
 'use strict';
 function Menu() {}
@@ -1006,7 +1085,7 @@ Menu.prototype = {
 
 module.exports = Menu;
 
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 'use strict';
 
 var Player = require('../objects/entity/player');
@@ -1014,6 +1093,9 @@ var Friend = require('../objects/entity/friend');
 var Shark = require('../objects/entity/basicEnemy');
 var Orca = require('../objects/entity/friendOrca');
 var Turtle = require('../objects/entity/friendTurtle');
+
+var Powerup = require('../objects/sprites/powerup');
+
 
 var tileIndex = {
 	empty: -1,
@@ -1104,6 +1186,9 @@ Play.prototype = {
 		//Group of turtles
 		this.groupTurtles = this.game.add.group();
 
+		//Group of powerups
+		this.groupPowerups = this.game.add.group();
+
 
 		//Us
 		var spawn = this.map.objects.spawn[0];
@@ -1172,6 +1257,16 @@ Play.prototype = {
 			this.groupTurtles.add(turtle.sprite);
 
 			this.list.push(turtle);
+		}
+
+		var listObjectsPowerups = this.map.objects.powerups;
+
+		for (var i = 0; i < listObjectsPowerups.length;  i++) {
+			var cur = listObjectsPowerups[i];
+			var powerup = new Powerup(this.game, cur.x, cur.y, cur.properties.type);
+			this.groupPowerups.add(powerup);
+
+			// this.list.push(powerup);
 		}
 
 
@@ -1264,6 +1359,10 @@ Play.prototype = {
 		this.game.physics.arcade.overlap(this.groupOrcas, this.overlapLayer, undefined, this.addGravity, this);
 		this.game.physics.arcade.overlap(this.groupTurtles, this.overlapLayer, undefined, this.addGravity, this);
 
+
+		//Detect powerup collision
+		this.game.physics.arcade.overlap(this.groupPowerups, this.player.sprite, undefined, this.powerupCollision, this);
+
 		this.txtHp.text = "Hp: " + this.player.sprite.hp;
 
 	},
@@ -1317,6 +1416,11 @@ Play.prototype = {
 		else if (sprite.removeGravity !== undefined)
 			sprite.removeGravity();
 		return false;
+	},
+
+	powerupCollision: function(dolphin, powerup) {
+		dolphin.items[powerup.powerupType] = true;
+		powerup.destroy();
 	}
 
 
@@ -1328,7 +1432,7 @@ module.exports = Play;
 
 
 
-},{"../objects/entity/basicEnemy":2,"../objects/entity/friend":3,"../objects/entity/friendOrca":4,"../objects/entity/friendTurtle":5,"../objects/entity/player":6}],15:[function(require,module,exports){
+},{"../objects/entity/basicEnemy":2,"../objects/entity/friend":3,"../objects/entity/friendOrca":4,"../objects/entity/friendTurtle":5,"../objects/entity/player":6,"../objects/sprites/powerup":9}],16:[function(require,module,exports){
 
 'use strict';
 function Preload() {
@@ -1357,6 +1461,7 @@ Preload.prototype = {
 		this.load.atlasJSONHash('shark', 'assets/sprites/shark.png', 'assets/sprites/shark.json');
 		this.load.atlasJSONHash('orca', 'assets/sprites/tara.png', 'assets/sprites/tara.json');
 		this.load.atlasJSONHash('turtle', 'assets/sprites/turtle.png', 'assets/sprites/turtle.json');
+		this.load.atlasJSONHash('powerup', 'assets/sprites/powerup.png', 'assets/sprites/powerup.json');
 
 
 	},

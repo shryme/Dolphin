@@ -56,6 +56,11 @@ function Dolphin(game, x, y, entity) {
 	this.isInGravity = false;
 	this.listGravityPos = new Array();
 
+	this.items = {
+		attack: false,
+		jump: false,
+	}
+
 	game.add.existing(this);
 
 }
@@ -128,6 +133,10 @@ Dolphin.prototype.stopAttack = function() {
 }
 
 Dolphin.prototype.attack = function(x, y) {
+
+	if (!this.items.attack)
+		return;
+
 	if (!this.isAttacking) {
 
 		this.isAttacking = true;
@@ -260,6 +269,12 @@ Dolphin.prototype.updateGravity = function() {
 }
 
 Dolphin.prototype.addGravity = function(blockLayer, overlapLayer, water) {
+
+	if (!this.items.jump) {
+		this.body.gravity.y = 50000;
+		return
+	}
+
 	if (!this.isInGravity) {
 		this.isInGravity = true;
 		this.currentWpJump = 0;
@@ -340,7 +355,7 @@ Dolphin.prototype.addGravity = function(blockLayer, overlapLayer, water) {
 }
 
 Dolphin.prototype.removeGravity = function() {
-
+	this.body.gravity.y = 0;
 }
 
 
