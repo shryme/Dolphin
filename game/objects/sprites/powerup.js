@@ -28,7 +28,7 @@ function Powerup(game, x, y, type) {
 		listImages.push('p' + i + '.png');
 	}
 
-	this.animations.add('idle', listImages, 5, true, false);
+	this.animations.add('idle', listImages, 10, true, false);
 	this.animations.play('idle');
 
 	if (this.powerupType === 'jump')
