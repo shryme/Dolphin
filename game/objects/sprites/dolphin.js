@@ -81,6 +81,8 @@ Dolphin.prototype.create = function() {
 
 Dolphin.prototype.update = function() {
 
+	this.splash.updated();
+
 	if (!this.updateGravity())
 		return false;
 

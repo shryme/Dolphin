@@ -310,7 +310,14 @@ Splash.prototype.start = function(sprite) {
 	this.emitter.x = sprite.x;
 	this.emitter.y = sprite.y;
 
-	this.emitter.start(true, 10000, null, 2);
+	this.emitter.start(true, 500, null, 2);
+}
+
+Splash.prototype.updated = function() {
+	var emitter = this.emitter;
+	this.emitter.forEachAlive( function(p) {
+		p.alpha = p.lifespan / emitter.lifespan;
+	});
 }
 
 
@@ -408,6 +415,8 @@ Dolphin.prototype.create = function() {
 }
 
 Dolphin.prototype.update = function() {
+
+	this.splash.updated();
 
 	if (!this.updateGravity())
 		return false;
