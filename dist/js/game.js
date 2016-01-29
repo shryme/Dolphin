@@ -855,8 +855,10 @@ function Powerup(game, x, y, type) {
 	this.animations.add('idle', listImages, 10, true, false);
 	this.animations.play('idle');
 
-	if (this.powerupType === 'jump')
+	if (this.powerupType === 'jump') {
 		this.tint = 0x00ff00
+		this.animations.next(4);
+	}
 	else
 		this.tint = 0xffff00
 
