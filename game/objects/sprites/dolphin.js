@@ -283,7 +283,7 @@ Dolphin.prototype.addGravity = function(blockLayer, overlapLayer, water) {
 		return
 	}
 
-	if (!this.isInGravity) {
+	if (!this.isInGravity && this.body.velocity.x !== 0 && this.body.velocity.y !== 0) {
 		this.splash.start(this);
 
 		this.isInGravity = true;
