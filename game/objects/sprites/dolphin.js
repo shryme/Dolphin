@@ -1,12 +1,7 @@
 
-var Splash = require('../particle/splash');
-
-
 function Dolphin(game, x, y, entity) {
 
 	this.entity = entity;
-
-	this.splash = new Splash(game);
 
 	if (x === undefined && y === undefined) {
 		x = 0;
@@ -80,8 +75,6 @@ Dolphin.prototype.create = function() {
 }
 
 Dolphin.prototype.update = function() {
-
-	this.splash.updated();
 
 	if (!this.updateGravity())
 		return false;
@@ -284,7 +277,7 @@ Dolphin.prototype.addGravity = function(blockLayer, overlapLayer, water) {
 	}
 
 	if (!this.isInGravity && this.body.velocity.x !== 0 && this.body.velocity.y !== 0) {
-		this.splash.start(this);
+		this.game.customParticles.splash(this);
 
 		this.isInGravity = true;
 		this.currentWpJump = 0;

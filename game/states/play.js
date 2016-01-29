@@ -8,6 +8,8 @@ var Turtle = require('../objects/entity/friendTurtle');
 
 var Powerup = require('../objects/sprites/powerup');
 
+var Particles = require('../objects/particle/particles');
+
 
 var tileIndex = {
 	empty: -1,
@@ -52,9 +54,11 @@ Play.prototype = {
 
 	create: function() {
 		console.log('create');
+
 		this.showDebug = true;
 
 		this.game.physics.startSystem(Phaser.Physics.ARCADE);
+
 
 		// background
 		this.bg = this.game.add.sprite(0, 0, 'background');
@@ -101,12 +105,13 @@ Play.prototype = {
 		//Group of powerups
 		this.groupPowerups = this.game.add.group();
 
+		this.particles = new Particles(this);
+		this.game.customParticles = this.particles;
 
 		//Us
 		var spawn = this.map.objects.spawn[0];
 		this.player = new Player(this.game, spawn.x, spawn.y);
 		this.groupDolphins.add(this.player.sprite);
-
 
 
 		var listObjectsWaypoints = this.map.objects.waypoints;
@@ -177,8 +182,6 @@ Play.prototype = {
 			var cur = listObjectsPowerups[i];
 			var powerup = new Powerup(this.game, cur.x, cur.y, cur.properties.type);
 			this.groupPowerups.add(powerup);
-
-			// this.list.push(powerup);
 		}
 
 
@@ -216,6 +219,8 @@ Play.prototype = {
 	},
 
 	update: function() {
+
+		this.particles.update();
 
 		//Get cursor
 		var cursors = this.game.input.keyboard.createCursorKeys();
