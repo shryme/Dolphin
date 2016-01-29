@@ -222,8 +222,6 @@ Dolphin.prototype.processCallback = function(enemy) {
 Dolphin.prototype.resetGravity = function() {
 	this.listGravityPos = new Array();
 	this.isInGravity = false;
-
-	this.splash.start(this);
 }
 
 Dolphin.prototype.reverseGravity = function() {
@@ -284,6 +282,8 @@ Dolphin.prototype.addGravity = function(blockLayer, overlapLayer, water) {
 	}
 
 	if (!this.isInGravity) {
+		this.splash.start(this);
+
 		this.isInGravity = true;
 		this.currentWpJump = 0;
 
