@@ -635,7 +635,7 @@ Dolphin.prototype.updateGravity = function() {
 	return true;
 }
 
-Dolphin.prototype.addGravity = function(blockLayer, overlapLayer, water) {
+Dolphin.prototype.addGravity = function(blockLayer, overlapLayer, listWater) {
 
 	if (!this.items.jump) {
 		this.body.gravity.y = 50000;
@@ -701,7 +701,7 @@ Dolphin.prototype.addGravity = function(blockLayer, overlapLayer, water) {
 
 
 			//Detect if it will be a block
-			if (blockLayer.layer.data[pos.y][pos.x].index !== water) {
+			if (listWater.indexOf(blockLayer.layer.data[pos.y][pos.x].index) === -1) {
 				this.reverseGravity();
 				break;
 			}
@@ -715,7 +715,8 @@ Dolphin.prototype.addGravity = function(blockLayer, overlapLayer, water) {
 			}
 
 			//Stop if he hits water again
-			if (overlapLayer.layer.data[pos.y][pos.x].index === water)
+
+			if (overlapLayer.layer.data[pos.y][pos.x].index === listWater[0])
 				break;
 
 		}
@@ -1234,9 +1235,15 @@ Play.prototype = {
 		this.overlapLayer = this.map.createLayer('overlap');
 
 
-		this.map.setCollisionBetween(0, 10, true, this.blockLayer);
+		this.map.setCollisionBetween(0, 7, true, this.blockLayer);
 		this.map.setCollisionBetween(0, 10, true, this.overlapLayer);
 
+
+		this.groupWaves = this.game.add.group();
+		this.map.createFromTiles(9, 6, 'waterwave', undefined, this.groupWaves);
+
+		this.groupWaves.callAll('animations.add', 'animations', 'waterwave', ['water1.png', 'water2.png'], 2, true);
+		this.groupWaves.callAll('animations.play', 'animations', 'waterwave');
 
 		//Set background size with the size if the tileset
 		this.bg.height = this.map.widthInPixels;
@@ -1489,7 +1496,7 @@ Play.prototype = {
 
 	addGravity: function(sprite, tile) {
 		if (tile.index !== tileIndex.empty && sprite.addGravity !== undefined)
-			sprite.addGravity(this.blockLayer, this.overlapLayer, tileIndex.empty);
+			sprite.addGravity(this.blockLayer, this.overlapLayer, [tileIndex.empty, 9, 8, 6]);
 		else if (sprite.removeGravity !== undefined)
 			sprite.removeGravity();
 		return false;
@@ -1541,6 +1548,7 @@ Preload.prototype = {
 		this.load.atlasJSONHash('powerup', 'assets/sprites/powerup.png', 'assets/sprites/powerup.json');
 
 		this.load.atlasJSONHash('waterdrops', 'assets/sprites/water_drops.png', 'assets/sprites/water_drops.json');
+		this.load.atlasJSONHash('waterwave', 'assets/sprites/water_wave.png', 'assets/sprites/water_wave.json');
 
 
 	},

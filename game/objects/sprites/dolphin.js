@@ -269,7 +269,7 @@ Dolphin.prototype.updateGravity = function() {
 	return true;
 }
 
-Dolphin.prototype.addGravity = function(blockLayer, overlapLayer, water) {
+Dolphin.prototype.addGravity = function(blockLayer, overlapLayer, listWater) {
 
 	if (!this.items.jump) {
 		this.body.gravity.y = 50000;
@@ -335,7 +335,7 @@ Dolphin.prototype.addGravity = function(blockLayer, overlapLayer, water) {
 
 
 			//Detect if it will be a block
-			if (blockLayer.layer.data[pos.y][pos.x].index !== water) {
+			if (listWater.indexOf(blockLayer.layer.data[pos.y][pos.x].index) === -1) {
 				this.reverseGravity();
 				break;
 			}
@@ -349,7 +349,8 @@ Dolphin.prototype.addGravity = function(blockLayer, overlapLayer, water) {
 			}
 
 			//Stop if he hits water again
-			if (overlapLayer.layer.data[pos.y][pos.x].index === water)
+
+			if (overlapLayer.layer.data[pos.y][pos.x].index === listWater[0])
 				break;
 
 		}

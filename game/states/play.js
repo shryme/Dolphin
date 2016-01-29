@@ -74,9 +74,15 @@ Play.prototype = {
 		this.overlapLayer = this.map.createLayer('overlap');
 
 
-		this.map.setCollisionBetween(0, 10, true, this.blockLayer);
+		this.map.setCollisionBetween(0, 7, true, this.blockLayer);
 		this.map.setCollisionBetween(0, 10, true, this.overlapLayer);
 
+
+		this.groupWaves = this.game.add.group();
+		this.map.createFromTiles(9, 6, 'waterwave', undefined, this.groupWaves);
+
+		this.groupWaves.callAll('animations.add', 'animations', 'waterwave', ['water1.png', 'water2.png'], 2, true);
+		this.groupWaves.callAll('animations.play', 'animations', 'waterwave');
 
 		//Set background size with the size if the tileset
 		this.bg.height = this.map.widthInPixels;
@@ -329,7 +335,7 @@ Play.prototype = {
 
 	addGravity: function(sprite, tile) {
 		if (tile.index !== tileIndex.empty && sprite.addGravity !== undefined)
-			sprite.addGravity(this.blockLayer, this.overlapLayer, tileIndex.empty);
+			sprite.addGravity(this.blockLayer, this.overlapLayer, [tileIndex.empty, 9, 8, 6]);
 		else if (sprite.removeGravity !== undefined)
 			sprite.removeGravity();
 		return false;
