@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" nextobjectid="44">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" nextobjectid="46">
  <tileset firstgid="1" name="basic" tilewidth="32" tileheight="32" tilecount="9">
   <image source="tileset.png" width="96" height="96"/>
  </tileset>
@@ -268,5 +268,16 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="powerups"/>
+ <objectgroup name="powerups">
+  <object id="44" name="attack" x="1313.85" y="633.545" width="172.727" height="100">
+   <properties>
+    <property name="type" value="attack"/>
+   </properties>
+  </object>
+  <object id="45" name="jump" x="1333.42" y="634.454" width="172.727" height="100">
+   <properties>
+    <property name="type" value="jump"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>
