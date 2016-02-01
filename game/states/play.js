@@ -13,8 +13,8 @@ var Particles = require('../objects/particle/particles');
 
 var tileIndex = {
 	empty: -1,
-	invisibleGravity: 8,
-	waterwave: 9
+	invisibleGravity: 900,
+	waterwave: 871
 }
 
 
@@ -76,8 +76,8 @@ Play.prototype = {
 		this.overlapLayer = this.map.createLayer('overlap');
 
 
-		this.map.setCollisionBetween(0, 7, true, this.blockLayer);
-		this.map.setCollisionBetween(0, 10, true, this.overlapLayer);
+		this.map.setCollisionBetween(0, 1000, true, this.blockLayer);
+		this.map.setCollisionBetween(0, 1000, true, this.overlapLayer);
 
 
 		this.groupWaves = this.game.add.group();
@@ -87,7 +87,7 @@ Play.prototype = {
 
 		this.groupWaves.forEach(
 			function(tile){
-				tile.animations.add('waterwave', waterAnimation, 2, true, false);
+				tile.animations.add('waterwave', waterAnimation, 5, true, false);
 				tile.animations.play('waterwave');
 
 				tile.animations.next(this.blockLayer.getTileX(tile.x) % 3);
