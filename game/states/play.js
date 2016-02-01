@@ -14,6 +14,8 @@ var Particles = require('../objects/particle/particles');
 var tileIndex = {
 	empty: -1,
 	invisibleGravity: 900,
+	visibleGravity: 866,
+	downForce: 894,
 	waterwave: 871,
 	waterfall_top: 845,
 	waterfall: 875
@@ -109,8 +111,6 @@ Play.prototype = {
 			function(tile){
 				tile.animations.add('waterfall', waterfallTopAnimation, 2, true, false);
 				tile.animations.play('waterfall');
-
-				// tile.animations.next(this.blockLayer.getTileX(tile.x) % 3);
 
 			}, this
 		);
@@ -390,6 +390,7 @@ Play.prototype = {
 			sprite.addGravity(this.blockLayer, this.overlapLayer, [tileIndex.empty, 9, 8, 6]);
 		else if (sprite.removeGravity !== undefined)
 			sprite.removeGravity();
+
 		return false;
 	},
 
