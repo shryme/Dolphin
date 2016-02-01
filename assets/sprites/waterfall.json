@@ -17,7 +17,7 @@
 	"sourceSize": {"w":32,"h":32}
 },
 {
-	"filename": "waterfall_top1.png",
+	"filename": "waterfall3.png",
 	"frame": {"x":70,"y":2,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
@@ -25,8 +25,24 @@
 	"sourceSize": {"w":32,"h":32}
 },
 {
-	"filename": "waterfall_top2.png",
+	"filename": "waterfall4.png",
 	"frame": {"x":104,"y":2,"w":32,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
+	"sourceSize": {"w":32,"h":32}
+},
+{
+	"filename": "waterfall_top1.png",
+	"frame": {"x":138,"y":2,"w":32,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
+	"sourceSize": {"w":32,"h":32}
+},
+{
+	"filename": "waterfall_top2.png",
+	"frame": {"x":172,"y":2,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
@@ -37,8 +53,8 @@
 	"version": "1.0",
 	"image": "waterfall.png",
 	"format": "RGBA8888",
-	"size": {"w":138,"h":36},
+	"size": {"w":206,"h":36},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:902a6da1fe433bc617e866931e17db36:de8815d3c96c3f9cbc5dbf6fc79f1a22:c982b8539ee9417b47924587337d3b07$"
+	"smartupdate": "$TexturePacker:SmartUpdate:ddb43533e62b7db9559d04d7b5cd24c4:caef6f6c753b05e541dc14e0f5a1dd28:c982b8539ee9417b47924587337d3b07$"
 }
 }
