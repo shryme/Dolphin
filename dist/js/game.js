@@ -1174,7 +1174,8 @@ var Particles = require('../objects/particle/particles');
 
 var tileIndex = {
 	empty: -1,
-	invisibleGravity: 8
+	invisibleGravity: 8,
+	waterwave: 9
 }
 
 
@@ -1230,6 +1231,7 @@ Play.prototype = {
 		this.map.addTilesetImage('basic', 'tileset');
 
 		//Create block layer, and add collision
+		this.map.createLayer('background');
 		this.blockLayer = this.map.createLayer('block');
 		this.blockLayer.resizeWorld();
 		this.overlapLayer = this.map.createLayer('overlap');
@@ -1240,10 +1242,19 @@ Play.prototype = {
 
 
 		this.groupWaves = this.game.add.group();
-		this.map.createFromTiles(9, 6, 'waterwave', undefined, this.groupWaves);
+		this.map.createFromTiles(tileIndex.waterwave, tileIndex.empty, 'waterwave', "background", this.groupWaves);
 
-		this.groupWaves.callAll('animations.add', 'animations', 'waterwave', ['water1.png', 'water2.png'], 2, true);
-		this.groupWaves.callAll('animations.play', 'animations', 'waterwave');
+		var waterAnimation = ['water1.png', 'water2.png', 'water2.png'];
+
+		this.groupWaves.forEach(
+			function(tile){
+				tile.animations.add('waterwave', waterAnimation, 2, true, false);
+				tile.animations.play('waterwave');
+
+				tile.animations.next(this.blockLayer.getTileX(tile.x) % 3);
+
+			}, this
+		);
 
 		//Set background size with the size if the tileset
 		this.bg.height = this.map.widthInPixels;
