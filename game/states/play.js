@@ -14,7 +14,9 @@ var Particles = require('../objects/particle/particles');
 var tileIndex = {
 	empty: -1,
 	invisibleGravity: 900,
-	waterwave: 871
+	waterwave: 871,
+	waterfall_top: 845,
+	waterfall: 875
 }
 
 
@@ -94,6 +96,45 @@ Play.prototype = {
 
 			}, this
 		);
+
+
+
+
+		this.groupWaterfallsTop = this.game.add.group();
+		this.map.createFromTiles(tileIndex.waterfall_top, tileIndex.empty, 'waterfall', "background", this.groupWaterfallsTop);
+
+		var waterfallTopAnimation = ['waterfall_top1.png', 'waterfall_top2.png'];
+
+		this.groupWaterfallsTop.forEach(
+			function(tile){
+				tile.animations.add('waterfall', waterfallTopAnimation, 2, true, false);
+				tile.animations.play('waterfall');
+
+				// tile.animations.next(this.blockLayer.getTileX(tile.x) % 3);
+
+			}, this
+		);
+
+
+
+		this.groupWaterfalls = this.game.add.group();
+		this.map.createFromTiles(tileIndex.waterfall, tileIndex.empty, 'waterfall', "background", this.groupWaterfalls);
+
+		var waterfallAnimation = ['waterfall1.png', 'waterfall2.png', 'waterfall3.png', 'waterfall4.png'];
+
+		this.groupWaterfalls.forEach(
+			function(tile){
+				tile.animations.add('waterfall', waterfallAnimation, 10, true, false);
+				tile.animations.play('waterfall');
+
+				tile.animations.next(this.blockLayer.getTileX(tile.x) % 3);
+
+			}, this
+		);
+
+
+
+
 
 		//Set background size with the size if the tileset
 		this.bg.height = this.map.widthInPixels;
