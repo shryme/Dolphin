@@ -136,7 +136,7 @@ Dolphin.prototype.stopAttack = function() {
 Dolphin.prototype.attack = function(x, y) {
 
 	if (!this.items.attack)
-		return;
+		return false;
 
 	if (!this.isAttacking) {
 
@@ -164,6 +164,8 @@ Dolphin.prototype.attack = function(x, y) {
 
 
 	}
+
+	return true;
 }
 
 Dolphin.prototype.move = function(target, speed, maxTime) {
@@ -236,7 +238,7 @@ Dolphin.prototype.updateGravity = function() {
 
 		this.stopAttack();
 		//Fallback if he gets stuck
-		if (this.game.time.time > this.jumpEnding || this.listGravityPos.length === 0 || this.body.gravity.y !== 0) {
+		if (this.game.time.time > this.jumpEnding || this.listGravityPos.length === 0 || this.body.gravity.x !== 0 || this.body.gravity.y !== 0) {
 			this.resetGravity();
 			return true;
 		}

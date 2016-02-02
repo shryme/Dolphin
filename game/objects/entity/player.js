@@ -19,13 +19,17 @@ Player.prototype = {
 		if (!this.sprite.update())
 			return;
 
+		var attacked;
 
 		if (this.game.input.activePointer.isDown)
-			this.sprite.attack();
-		else if (this.game.physics.arcade.distanceToPointer(this.sprite, this.game.input.activePointer) > 20)
-			this.sprite.move();
-		else
-			this.sprite.idle();
+			attacked = this.sprite.attack();
+
+		if (!attacked) {
+			if (this.game.physics.arcade.distanceToPointer(this.sprite, this.game.input.activePointer) > 20)
+				this.sprite.move();
+			else
+				this.sprite.idle();
+		}
 
 
 	}

@@ -282,13 +282,17 @@ Player.prototype = {
 		if (!this.sprite.update())
 			return;
 
+		var attacked;
 
 		if (this.game.input.activePointer.isDown)
-			this.sprite.attack();
-		else if (this.game.physics.arcade.distanceToPointer(this.sprite, this.game.input.activePointer) > 20)
-			this.sprite.move();
-		else
-			this.sprite.idle();
+			attacked = this.sprite.attack();
+
+		if (!attacked) {
+			if (this.game.physics.arcade.distanceToPointer(this.sprite, this.game.input.activePointer) > 20)
+				this.sprite.move();
+			else
+				this.sprite.idle();
+		}
 
 
 	}
@@ -502,7 +506,7 @@ Dolphin.prototype.stopAttack = function() {
 Dolphin.prototype.attack = function(x, y) {
 
 	if (!this.items.attack)
-		return;
+		return false;
 
 	if (!this.isAttacking) {
 
@@ -530,6 +534,8 @@ Dolphin.prototype.attack = function(x, y) {
 
 
 	}
+
+	return true;
 }
 
 Dolphin.prototype.move = function(target, speed, maxTime) {
@@ -602,7 +608,7 @@ Dolphin.prototype.updateGravity = function() {
 
 		this.stopAttack();
 		//Fallback if he gets stuck
-		if (this.game.time.time > this.jumpEnding || this.listGravityPos.length === 0 || this.body.gravity.y !== 0) {
+		if (this.game.time.time > this.jumpEnding || this.listGravityPos.length === 0 || this.body.gravity.x !== 0 || this.body.gravity.y !== 0) {
 			this.resetGravity();
 			return true;
 		}
@@ -1181,11 +1187,21 @@ var tileIndex = {
 	empty: -1,
 	invisibleGravity: 900,
 	visibleGravity: 866,
-	waterCurrentDownMedium: 889,
-	waterCurrentLeftMedium: 892,
 	waterwave: 871,
 	waterfall_top: 845,
-	waterfall: 875
+	waterfall: 875,
+	waterCurrentUpLow: 885,
+	waterCurrentUpMedium: 886,
+	waterCurrentUpHigh: 887,
+	waterCurrentDownLow: 888,
+	waterCurrentDownMedium: 889,
+	waterCurrentDownHigh: 890,
+	waterCurrentLeftLow: 891,
+	waterCurrentLeftMedium: 892,
+	waterCurrentLeftHigh: 893,
+	waterCurrentRightLow: 894,
+	waterCurrentRightMedium: 895,
+	waterCurrentRightHigh: 896,
 }
 
 
@@ -1438,8 +1454,8 @@ Play.prototype = {
 		for (var i = 0; i < this.overlapLayer.layer.data.length; i++)
 			for (var j = 0; j < this.overlapLayer.layer.data[i].length; j++)
 				if (this.overlapLayer.layer.data[i][j].index === tileIndex.invisibleGravity ||
-					this.overlapLayer.layer.data[i][j].index === tileIndex.waterCurrentDownMedium ||
-					this.overlapLayer.layer.data[i][j].index === tileIndex.waterCurrentLeftMedium)
+					(this.overlapLayer.layer.data[i][j].index >= tileIndex.waterCurrentUpLow &&
+					this.overlapLayer.layer.data[i][j].index <= tileIndex.waterCurrentRightHigh))
 					this.overlapLayer.layer.data[i][j].alpha = 0;
 
 
@@ -1558,13 +1574,67 @@ Play.prototype = {
 
 		if (tile.index === tileIndex.invisibleGravity || tile.index === tileIndex.visibleGravity) {
 			if(sprite.addGravity !== undefined)
-				sprite.addGravity(this.blockLayer, this.overlapLayer, [tileIndex.empty, tileIndex.waterCurrentDownMedium, tileIndex.waterCurrentLeftMedium]);
+				sprite.addGravity(this.blockLayer, this.overlapLayer, [tileIndex.empty,
+					tileIndex.waterCurrentUpLow,
+					tileIndex.waterCurrentUpMedium,
+					tileIndex.waterCurrentUpHigh,
+					tileIndex.waterCurrentDownLow,
+					tileIndex.waterCurrentDownMedium,
+					tileIndex.waterCurrentDownHigh,
+					tileIndex.waterCurrentLeftLow,
+					tileIndex.waterCurrentLeftMedium,
+					tileIndex.waterCurrentLeftHigh,
+					tileIndex.waterCurrentRightLow,
+					tileIndex.waterCurrentRightMedium,
+					tileIndex.waterCurrentRightHigh]);
+		}
+		else if (tile.index === tileIndex.waterCurrentUpLow) {
+			sprite.body.gravity.x = 0;
+			sprite.body.gravity.y = -5000;
+		}
+		else if (tile.index === tileIndex.waterCurrentUpMedium) {
+			sprite.body.gravity.x = 0;
+			sprite.body.gravity.y = -10000;
+		}
+		else if (tile.index === tileIndex.waterCurrentUpHigh) {
+			sprite.body.gravity.x = 0;
+			sprite.body.gravity.y = -18000;
+		}
+		else if (tile.index === tileIndex.waterCurrentDownLow) {
+			sprite.body.gravity.x = 0;
+			sprite.body.gravity.y = 5000;
 		}
 		else if (tile.index === tileIndex.waterCurrentDownMedium) {
+			sprite.body.gravity.x = 0;
+			sprite.body.gravity.y = 10000;
+		}
+		else if (tile.index === tileIndex.waterCurrentDownHigh) {
+			sprite.body.gravity.x = 0;
 			sprite.body.gravity.y = 18000;
+		}
+		else if (tile.index === tileIndex.waterCurrentLeftLow) {
+			sprite.body.gravity.x = -15000;
+			sprite.body.gravity.y = 0;
 		}
 		else if (tile.index === tileIndex.waterCurrentLeftMedium) {
 			sprite.body.gravity.x = -25000;
+			sprite.body.gravity.y = 0;
+		}
+		else if (tile.index === tileIndex.waterCurrentLeftHigh) {
+			sprite.body.gravity.x = -35000;
+			sprite.body.gravity.y = 0;
+		}
+		else if (tile.index === tileIndex.waterCurrentRightLow) {
+			sprite.body.gravity.x = 15000;
+			sprite.body.gravity.y = 0;
+		}
+		else if (tile.index === tileIndex.waterCurrentRightMedium) {
+			sprite.body.gravity.x = 25000;
+			sprite.body.gravity.y = 0;
+		}
+		else if (tile.index === tileIndex.waterCurrentRightHigh) {
+			sprite.body.gravity.x = 35000;
+			sprite.body.gravity.y = 0;
 		}
 		else {
 			if(sprite.removeGravity !== undefined)
