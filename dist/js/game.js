@@ -602,7 +602,7 @@ Dolphin.prototype.updateGravity = function() {
 
 		this.stopAttack();
 		//Fallback if he gets stuck
-		if (this.game.time.time > this.jumpEnding || this.listGravityPos.length === 0) {
+		if (this.game.time.time > this.jumpEnding || this.listGravityPos.length === 0 || this.body.gravity.y !== 0) {
 			this.resetGravity();
 			return true;
 		}
@@ -643,6 +643,11 @@ Dolphin.prototype.addGravity = function(blockLayer, overlapLayer, listWater) {
 	}
 
 	if (!this.isInGravity && this.body.velocity.x !== 0 && this.body.velocity.y !== 0) {
+
+		//Need to set it because the forces were making it fly
+		this.body.gravity.y = 0;
+
+
 		this.game.customParticles.splash(this);
 
 		this.isInGravity = true;
@@ -715,9 +720,9 @@ Dolphin.prototype.addGravity = function(blockLayer, overlapLayer, listWater) {
 			}
 
 			//Stop if he hits water again
+			if (listWater.indexOf(overlapLayer.layer.data[pos.y][pos.x].index) !== -1)
+				break
 
-			if (overlapLayer.layer.data[pos.y][pos.x].index === listWater[0])
-				break;
 
 		}
 
@@ -1433,7 +1438,8 @@ Play.prototype = {
 
 		for (var i = 0; i < this.overlapLayer.layer.data.length; i++)
 			for (var j = 0; j < this.overlapLayer.layer.data[i].length; j++)
-				if (this.overlapLayer.layer.data[i][j].index === tileIndex.invisibleGravity)
+				if (this.overlapLayer.layer.data[i][j].index === tileIndex.invisibleGravity ||
+					this.overlapLayer.layer.data[i][j].index === tileIndex.downForce)
 					this.overlapLayer.layer.data[i][j].alpha = 0;
 
 
@@ -1549,10 +1555,19 @@ Play.prototype = {
 	},
 
 	addGravity: function(sprite, tile) {
-		if (tile.index !== tileIndex.empty && sprite.addGravity !== undefined)
-			sprite.addGravity(this.blockLayer, this.overlapLayer, [tileIndex.empty, tileIndex.downForce]);
-		else if (sprite.removeGravity !== undefined)
-			sprite.removeGravity();
+
+		if (tile.index === tileIndex.invisibleGravity || tile.index === tileIndex.visibleGravity) {
+			if(sprite.addGravity !== undefined)
+				sprite.addGravity(this.blockLayer, this.overlapLayer, [tileIndex.empty, tileIndex.downForce]);
+		}
+		else if (tile.index === tileIndex.downForce) {
+			sprite.body.gravity.y = 18000;
+		}
+		else {
+			if(sprite.removeGravity !== undefined)
+				sprite.removeGravity();
+		}
+
 
 		return false;
 	},

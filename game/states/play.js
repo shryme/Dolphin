@@ -272,7 +272,8 @@ Play.prototype = {
 
 		for (var i = 0; i < this.overlapLayer.layer.data.length; i++)
 			for (var j = 0; j < this.overlapLayer.layer.data[i].length; j++)
-				if (this.overlapLayer.layer.data[i][j].index === tileIndex.invisibleGravity)
+				if (this.overlapLayer.layer.data[i][j].index === tileIndex.invisibleGravity ||
+					this.overlapLayer.layer.data[i][j].index === tileIndex.downForce)
 					this.overlapLayer.layer.data[i][j].alpha = 0;
 
 
@@ -388,10 +389,19 @@ Play.prototype = {
 	},
 
 	addGravity: function(sprite, tile) {
-		if (tile.index !== tileIndex.empty && sprite.addGravity !== undefined)
-			sprite.addGravity(this.blockLayer, this.overlapLayer, [tileIndex.empty, tileIndex.downForce]);
-		else if (sprite.removeGravity !== undefined)
-			sprite.removeGravity();
+
+		if (tile.index === tileIndex.invisibleGravity || tile.index === tileIndex.visibleGravity) {
+			if(sprite.addGravity !== undefined)
+				sprite.addGravity(this.blockLayer, this.overlapLayer, [tileIndex.empty, tileIndex.downForce]);
+		}
+		else if (tile.index === tileIndex.downForce) {
+			sprite.body.gravity.y = 18000;
+		}
+		else {
+			if(sprite.removeGravity !== undefined)
+				sprite.removeGravity();
+		}
+
 
 		return false;
 	},

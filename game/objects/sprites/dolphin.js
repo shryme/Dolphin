@@ -236,7 +236,7 @@ Dolphin.prototype.updateGravity = function() {
 
 		this.stopAttack();
 		//Fallback if he gets stuck
-		if (this.game.time.time > this.jumpEnding || this.listGravityPos.length === 0) {
+		if (this.game.time.time > this.jumpEnding || this.listGravityPos.length === 0 || this.body.gravity.y !== 0) {
 			this.resetGravity();
 			return true;
 		}
@@ -277,6 +277,11 @@ Dolphin.prototype.addGravity = function(blockLayer, overlapLayer, listWater) {
 	}
 
 	if (!this.isInGravity && this.body.velocity.x !== 0 && this.body.velocity.y !== 0) {
+
+		//Need to set it because the forces were making it fly
+		this.body.gravity.y = 0;
+
+
 		this.game.customParticles.splash(this);
 
 		this.isInGravity = true;
@@ -349,9 +354,9 @@ Dolphin.prototype.addGravity = function(blockLayer, overlapLayer, listWater) {
 			}
 
 			//Stop if he hits water again
+			if (listWater.indexOf(overlapLayer.layer.data[pos.y][pos.x].index) !== -1)
+				break
 
-			if (overlapLayer.layer.data[pos.y][pos.x].index === listWater[0])
-				break;
 
 		}
 
