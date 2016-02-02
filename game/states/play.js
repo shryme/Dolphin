@@ -16,6 +16,7 @@ var tileIndex = {
 	invisibleGravity: 900,
 	visibleGravity: 866,
 	downForce: 894,
+	leftForce: 891,
 	waterwave: 871,
 	waterfall_top: 845,
 	waterfall: 875
@@ -82,7 +83,7 @@ Play.prototype = {
 
 		this.map.setCollisionBetween(0, 890, true, this.blockLayer);
 		this.map.setCollisionBetween(900, 1000, true, this.blockLayer);
-		// this.map.setCollisionByExclusion([tileIndex.downForce], true, this.blockLayer);
+
 		this.map.setCollisionBetween(0, 1000, true, this.overlapLayer);
 
 
@@ -273,7 +274,8 @@ Play.prototype = {
 		for (var i = 0; i < this.overlapLayer.layer.data.length; i++)
 			for (var j = 0; j < this.overlapLayer.layer.data[i].length; j++)
 				if (this.overlapLayer.layer.data[i][j].index === tileIndex.invisibleGravity ||
-					this.overlapLayer.layer.data[i][j].index === tileIndex.downForce)
+					this.overlapLayer.layer.data[i][j].index === tileIndex.downForce ||
+					this.overlapLayer.layer.data[i][j].index === tileIndex.leftForce)
 					this.overlapLayer.layer.data[i][j].alpha = 0;
 
 
@@ -392,14 +394,19 @@ Play.prototype = {
 
 		if (tile.index === tileIndex.invisibleGravity || tile.index === tileIndex.visibleGravity) {
 			if(sprite.addGravity !== undefined)
-				sprite.addGravity(this.blockLayer, this.overlapLayer, [tileIndex.empty, tileIndex.downForce]);
+				sprite.addGravity(this.blockLayer, this.overlapLayer, [tileIndex.empty, tileIndex.downForce, tileIndex.leftForce]);
 		}
 		else if (tile.index === tileIndex.downForce) {
 			sprite.body.gravity.y = 18000;
 		}
+		else if (tile.index === tileIndex.leftForce) {
+			sprite.body.gravity.x = -25000;
+		}
 		else {
 			if(sprite.removeGravity !== undefined)
 				sprite.removeGravity();
+			sprite.body.gravity.x = 0;
+			sprite.body.gravity.y = 0;
 		}
 
 
