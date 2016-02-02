@@ -1240,6 +1240,31 @@ Play.prototype = {
 		this.currentLevel = level;
 	},
 
+	createAnimation: function(tile, animation, listAnim, speed, next) {
+		var group = this.game.add.group();
+		this.map.createFromTiles(tile, tileIndex.empty, animation, "background", group);
+
+		group.forEach(
+			function(tile){
+				tile.animations.add('idle', listAnim, speed, true, false);
+				tile.animations.play('idle');
+
+				if (next !== undefined) {
+					if (next.plan !== undefined && next.interval !== undefined) {
+						var toTest;
+						if (next.plan === 'x')
+							toTest = this.blockLayer.getTileX(tile.x);
+						else
+							toTest = this.blockLayer.getTileY(tile.y);
+
+						tile.animations.next(toTest % next.interval);
+					}
+				}
+
+			}, this
+		);
+	},
+
 	create: function() {
 		console.log('create');
 
@@ -1267,56 +1292,14 @@ Play.prototype = {
 		this.map.setCollisionBetween(0, 1000, true, this.overlapLayer);
 
 
-		this.groupWaves = this.game.add.group();
-		this.map.createFromTiles(tileIndex.waterwave, tileIndex.empty, 'waterwave', "background", this.groupWaves);
-
 		var waterAnimation = ['water1.png', 'water2.png', 'water2.png'];
-
-		this.groupWaves.forEach(
-			function(tile){
-				tile.animations.add('waterwave', waterAnimation, 5, true, false);
-				tile.animations.play('waterwave');
-
-				tile.animations.next(this.blockLayer.getTileX(tile.x) % 3);
-
-			}, this
-		);
-
-
-
-
-		this.groupWaterfallsTop = this.game.add.group();
-		this.map.createFromTiles(tileIndex.waterfall_top, tileIndex.empty, 'waterfall', "background", this.groupWaterfallsTop);
+		this.createAnimation(tileIndex.waterwave, 'waterwave', waterAnimation, 5, {plan: 'x', interval: 3});
 
 		var waterfallTopAnimation = ['waterfall_top1.png', 'waterfall_top2.png'];
-
-		this.groupWaterfallsTop.forEach(
-			function(tile){
-				tile.animations.add('waterfall', waterfallTopAnimation, 2, true, false);
-				tile.animations.play('waterfall');
-
-			}, this
-		);
-
-
-
-		this.groupWaterfalls = this.game.add.group();
-		this.map.createFromTiles(tileIndex.waterfall, tileIndex.empty, 'waterfall', "background", this.groupWaterfalls);
+		this.createAnimation(tileIndex.waterfall_top, 'waterfall', waterfallTopAnimation, 2);
 
 		var waterfallAnimation = ['waterfall1.png', 'waterfall2.png', 'waterfall3.png', 'waterfall4.png'];
-
-		this.groupWaterfalls.forEach(
-			function(tile){
-				tile.animations.add('waterfall', waterfallAnimation, 10, true, false);
-				tile.animations.play('waterfall');
-
-				tile.animations.next(this.blockLayer.getTileX(tile.x) % 3);
-
-			}, this
-		);
-
-
-
+		this.createAnimation(tileIndex.waterfall, 'waterfall', waterfallAnimation, 10, {plan: 'x', interval: 3});
 
 
 		//Set background size with the size if the tileset
