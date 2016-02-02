@@ -1241,7 +1241,9 @@ Play.prototype = {
 		this.overlapLayer = this.map.createLayer('overlap');
 
 
-		this.map.setCollisionBetween(0, 1000, true, this.blockLayer);
+		this.map.setCollisionBetween(0, 890, true, this.blockLayer);
+		this.map.setCollisionBetween(900, 1000, true, this.blockLayer);
+		// this.map.setCollisionByExclusion([tileIndex.downForce], true, this.blockLayer);
 		this.map.setCollisionBetween(0, 1000, true, this.overlapLayer);
 
 
@@ -1548,7 +1550,7 @@ Play.prototype = {
 
 	addGravity: function(sprite, tile) {
 		if (tile.index !== tileIndex.empty && sprite.addGravity !== undefined)
-			sprite.addGravity(this.blockLayer, this.overlapLayer, [tileIndex.empty, 9, 8, 6]);
+			sprite.addGravity(this.blockLayer, this.overlapLayer, [tileIndex.empty, tileIndex.downForce]);
 		else if (sprite.removeGravity !== undefined)
 			sprite.removeGravity();
 
