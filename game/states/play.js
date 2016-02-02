@@ -15,8 +15,8 @@ var tileIndex = {
 	empty: -1,
 	invisibleGravity: 900,
 	visibleGravity: 866,
-	waterCurrentDown: 894,
-	waterCurrentLeft: 891,
+	waterCurrentDownMedium: 889,
+	waterCurrentLeftMedium: 892,
 	waterwave: 871,
 	waterfall_top: 845,
 	waterfall: 875
@@ -81,9 +81,7 @@ Play.prototype = {
 		this.overlapLayer = this.map.createLayer('overlap');
 
 
-		this.map.setCollisionBetween(0, 890, true, this.blockLayer);
-		this.map.setCollisionBetween(900, 1000, true, this.blockLayer);
-
+		this.map.setCollisionBetween(0, 1000, true, this.blockLayer);
 		this.map.setCollisionBetween(0, 1000, true, this.overlapLayer);
 
 
@@ -274,8 +272,8 @@ Play.prototype = {
 		for (var i = 0; i < this.overlapLayer.layer.data.length; i++)
 			for (var j = 0; j < this.overlapLayer.layer.data[i].length; j++)
 				if (this.overlapLayer.layer.data[i][j].index === tileIndex.invisibleGravity ||
-					this.overlapLayer.layer.data[i][j].index === tileIndex.waterCurrentDown ||
-					this.overlapLayer.layer.data[i][j].index === tileIndex.waterCurrentLeft)
+					this.overlapLayer.layer.data[i][j].index === tileIndex.waterCurrentDownMedium ||
+					this.overlapLayer.layer.data[i][j].index === tileIndex.waterCurrentLeftMedium)
 					this.overlapLayer.layer.data[i][j].alpha = 0;
 
 
@@ -394,12 +392,12 @@ Play.prototype = {
 
 		if (tile.index === tileIndex.invisibleGravity || tile.index === tileIndex.visibleGravity) {
 			if(sprite.addGravity !== undefined)
-				sprite.addGravity(this.blockLayer, this.overlapLayer, [tileIndex.empty, tileIndex.waterCurrentDown, tileIndex.waterCurrentLeft]);
+				sprite.addGravity(this.blockLayer, this.overlapLayer, [tileIndex.empty, tileIndex.waterCurrentDownMedium, tileIndex.waterCurrentLeftMedium]);
 		}
-		else if (tile.index === tileIndex.waterCurrentDown) {
+		else if (tile.index === tileIndex.waterCurrentDownMedium) {
 			sprite.body.gravity.y = 18000;
 		}
-		else if (tile.index === tileIndex.waterCurrentLeft) {
+		else if (tile.index === tileIndex.waterCurrentLeftMedium) {
 			sprite.body.gravity.x = -25000;
 		}
 		else {
