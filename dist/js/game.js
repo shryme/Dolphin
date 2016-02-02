@@ -1181,8 +1181,8 @@ var tileIndex = {
 	empty: -1,
 	invisibleGravity: 900,
 	visibleGravity: 866,
-	downForce: 894,
-	leftForce: 891,
+	waterCurrentDown: 894,
+	waterCurrentLeft: 891,
 	waterwave: 871,
 	waterfall_top: 845,
 	waterfall: 875
@@ -1440,8 +1440,8 @@ Play.prototype = {
 		for (var i = 0; i < this.overlapLayer.layer.data.length; i++)
 			for (var j = 0; j < this.overlapLayer.layer.data[i].length; j++)
 				if (this.overlapLayer.layer.data[i][j].index === tileIndex.invisibleGravity ||
-					this.overlapLayer.layer.data[i][j].index === tileIndex.downForce ||
-					this.overlapLayer.layer.data[i][j].index === tileIndex.leftForce)
+					this.overlapLayer.layer.data[i][j].index === tileIndex.waterCurrentDown ||
+					this.overlapLayer.layer.data[i][j].index === tileIndex.waterCurrentLeft)
 					this.overlapLayer.layer.data[i][j].alpha = 0;
 
 
@@ -1560,12 +1560,12 @@ Play.prototype = {
 
 		if (tile.index === tileIndex.invisibleGravity || tile.index === tileIndex.visibleGravity) {
 			if(sprite.addGravity !== undefined)
-				sprite.addGravity(this.blockLayer, this.overlapLayer, [tileIndex.empty, tileIndex.downForce, tileIndex.leftForce]);
+				sprite.addGravity(this.blockLayer, this.overlapLayer, [tileIndex.empty, tileIndex.waterCurrentDown, tileIndex.waterCurrentLeft]);
 		}
-		else if (tile.index === tileIndex.downForce) {
+		else if (tile.index === tileIndex.waterCurrentDown) {
 			sprite.body.gravity.y = 18000;
 		}
-		else if (tile.index === tileIndex.leftForce) {
+		else if (tile.index === tileIndex.waterCurrentLeft) {
 			sprite.body.gravity.x = -25000;
 		}
 		else {
