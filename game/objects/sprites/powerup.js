@@ -1,5 +1,5 @@
 
-function Powerup(game, x, y, type) {
+function Powerup(game, x, y, useless, prop) {
 
 	if (x === undefined && y === undefined) {
 		x = 0;
@@ -10,7 +10,7 @@ function Powerup(game, x, y, type) {
 
 	this.initialize();
 
-	this.powerupType = type;
+	this.powerupType = prop.type;
 
 	this.game.physics.arcade.enableBody(this);
 	this.body.gravity.y = 0;
