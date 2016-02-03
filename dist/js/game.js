@@ -835,7 +835,7 @@ module.exports = Orca;
 
 },{}],11:[function(require,module,exports){
 
-function Powerup(game, x, y, type) {
+function Powerup(game, x, y, useless, prop) {
 
 	if (x === undefined && y === undefined) {
 		x = 0;
@@ -846,7 +846,7 @@ function Powerup(game, x, y, type) {
 
 	this.initialize();
 
-	this.powerupType = type;
+	this.powerupType = prop.type;
 
 	this.game.physics.arcade.enableBody(this);
 	this.body.gravity.y = 0;
@@ -1265,6 +1265,23 @@ Play.prototype = {
 		);
 	},
 
+	createObject: function(layer, constructor, group, list) {
+		var listObjects = layer;
+
+		for (var i = 0; i < listObjects.length;  i++) {
+			var cur = listObjects[i];
+			var obj = new constructor(this.game, cur.x, cur.y, this.listWaypoints[cur.properties.wp], cur.properties);
+			if (obj.sprite !== undefined)
+				group.add(obj.sprite);
+			else
+				group.add(obj);
+
+			if (list !== undefined)
+				list.push(obj);
+		}
+
+	},
+
 	create: function() {
 		console.log('create');
 
@@ -1357,56 +1374,11 @@ Play.prototype = {
 			this.listWaypoints[cur.name] = listWpUpdated;
 		}
 
-
-
-		var listObjectsDolphins = this.map.objects.dolphins;
-
-		for (var i = 0; i < listObjectsDolphins.length;  i++) {
-			var cur = listObjectsDolphins[i];
-			var dolphin = new Friend(this.game, cur.x, cur.y, this.listWaypoints[cur.properties.wp]);
-			this.groupDolphins.add(dolphin.sprite);
-
-			this.list.push(dolphin);
-		}
-
-		var listObjectsSharks = this.map.objects.sharks;
-
-		for (var i = 0; i < listObjectsSharks.length;  i++) {
-			var cur = listObjectsSharks[i];
-			var shark = new Shark(this.game, cur.x, cur.y, this.listWaypoints[cur.properties.wp]);
-			this.groupSharks.add(shark.sprite);
-
-			this.listEnemy.push(shark);
-		}
-
-
-		var listObjectsOrcas = this.map.objects.orcas;
-
-		for (var i = 0; i < listObjectsOrcas.length;  i++) {
-			var cur = listObjectsOrcas[i];
-			var orca = new Orca(this.game, cur.x, cur.y, this.listWaypoints[cur.properties.wp]);
-			this.groupOrcas.add(orca.sprite);
-
-			this.list.push(orca);
-		}
-
-		var listObjectsTurtles = this.map.objects.turtles;
-
-		for (var i = 0; i < listObjectsTurtles.length;  i++) {
-			var cur = listObjectsTurtles[i];
-			var turtle = new Turtle(this.game, cur.x, cur.y, this.listWaypoints[cur.properties.wp]);
-			this.groupTurtles.add(turtle.sprite);
-
-			this.list.push(turtle);
-		}
-
-		var listObjectsPowerups = this.map.objects.powerups;
-
-		for (var i = 0; i < listObjectsPowerups.length;  i++) {
-			var cur = listObjectsPowerups[i];
-			var powerup = new Powerup(this.game, cur.x, cur.y, cur.properties.type);
-			this.groupPowerups.add(powerup);
-		}
+		this.createObject(this.map.objects.dolphins, Friend, this.groupDolphins, this.list);
+		this.createObject(this.map.objects.sharks, Shark, this.groupSharks, this.listEnemy);
+		this.createObject(this.map.objects.orcas, Orca, this.groupOrcas, this.list);
+		this.createObject(this.map.objects.turtles, Turtle, this.groupTurtles, this.list);
+		this.createObject(this.map.objects.powerups, Powerup, this.groupPowerups);
 
 
 		//Add camera to follow our player
