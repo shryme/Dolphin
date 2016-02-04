@@ -1346,6 +1346,7 @@ Play.prototype = {
 		//Group of powerups
 		this.groupPowerups = this.game.add.group();
 
+
 		this.particles = new Particles(this);
 		this.game.customParticles = this.particles;
 
@@ -1440,17 +1441,14 @@ Play.prototype = {
 				this.listEnemy[i].update(this.player.sprite);
 		}
 
-		//Collide with friends
-		this.game.physics.arcade.collide(this.groupDolphins);
+		this.checkCollision();
 
-		//Colision of sharks
-		this.game.physics.arcade.collide(this.groupSharks);
+		this.txtHp.text = "Hp: " + this.player.sprite.hp;
 
-		//Colision of orcas
-		this.game.physics.arcade.collide(this.groupOrcas);
+	},
 
-		//Colision of turtles
-		this.game.physics.arcade.collide(this.groupTurtles);
+	checkCollision: function() {
+
 
 		//Collision between sharks and dolphins
 		this.game.physics.arcade.collide(this.groupDolphins, this.groupSharks, undefined, this.dolphinProcessCallback, this);
@@ -1462,23 +1460,31 @@ Play.prototype = {
 		this.game.physics.arcade.collide(this.groupDolphins, this.groupTurtles);
 		this.game.physics.arcade.collide(this.groupSharks, this.groupTurtles);
 
-		//Collide with blocks
-		this.game.physics.arcade.collide(this.groupSharks, this.blockLayer);
-		this.game.physics.arcade.collide(this.groupDolphins, this.blockLayer);
-		this.game.physics.arcade.collide(this.groupOrcas, this.blockLayer);
-		this.game.physics.arcade.collide(this.groupTurtles, this.blockLayer);
 
-		//Overlap for gravity
-		this.game.physics.arcade.overlap(this.groupDolphins, this.overlapLayer, undefined, this.addGravity, this);
-		this.game.physics.arcade.overlap(this.groupSharks, this.overlapLayer, undefined, this.addGravity, this);
-		this.game.physics.arcade.overlap(this.groupOrcas, this.overlapLayer, undefined, this.addGravity, this);
-		this.game.physics.arcade.overlap(this.groupTurtles, this.overlapLayer, undefined, this.addGravity, this);
+		this.collisionGlobal(this.groupDolphins);
+		this.collisionGlobal(this.groupSharks);
+		this.collisionGlobal(this.groupOrcas);
+		this.collisionGlobal(this.groupTurtles);
 
 
 		//Detect powerup collision
 		this.game.physics.arcade.overlap(this.groupPowerups, this.player.sprite, undefined, this.powerupCollision, this);
 
-		this.txtHp.text = "Hp: " + this.player.sprite.hp;
+
+
+
+	},
+
+	collisionGlobal: function(group) {
+
+		//Collide with blocks
+		this.game.physics.arcade.collide(group, this.blockLayer);
+
+		//Collide with themself
+		this.game.physics.arcade.collide(group);
+
+		//Overlap for gravity
+		this.game.physics.arcade.overlap(group, this.overlapLayer, undefined, this.addGravity, this);
 
 	},
 
