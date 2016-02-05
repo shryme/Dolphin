@@ -1287,6 +1287,11 @@ Play.prototype = {
 
 		this.showDebug = true;
 
+
+		this.music = this.game.add.audio('greenHills');
+		this.music.play();
+
+
 		this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
 
@@ -1520,14 +1525,17 @@ Play.prototype = {
 	},
 
 	resetGame: function() {
+		this.music.stop();
 		this.game.state.start('play', true, false, this.currentLevel);
 	},
 
 	goToLevelZero: function() {
+		this.music.stop();
 		this.game.state.start('play', true, false, 'level0');
 	},
 
 	goToLevelOne: function() {
+		this.music.stop();
 		this.game.state.start('play', true, false, 'level1');
 	},
 
@@ -1656,6 +1664,9 @@ Preload.prototype = {
 		this.load.atlasJSONHash('waterdrops', 'assets/sprites/water_drops.png', 'assets/sprites/water_drops.json');
 		this.load.atlasJSONHash('waterwave', 'assets/sprites/water_wave.png', 'assets/sprites/water_wave.json');
 		this.load.atlasJSONHash('waterfall', 'assets/sprites/waterfall.png', 'assets/sprites/waterfall.json');
+
+
+		this.load.audio('greenHills', 'assets/music/Green_Hills.mp3');
 
 
 	},

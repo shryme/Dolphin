@@ -115,6 +115,11 @@ Play.prototype = {
 
 		this.showDebug = true;
 
+
+		this.music = this.game.add.audio('greenHills');
+		this.music.play();
+
+
 		this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
 
@@ -348,14 +353,17 @@ Play.prototype = {
 	},
 
 	resetGame: function() {
+		this.music.stop();
 		this.game.state.start('play', true, false, this.currentLevel);
 	},
 
 	goToLevelZero: function() {
+		this.music.stop();
 		this.game.state.start('play', true, false, 'level0');
 	},
 
 	goToLevelOne: function() {
+		this.music.stop();
 		this.game.state.start('play', true, false, 'level1');
 	},
 

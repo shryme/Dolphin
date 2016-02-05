@@ -33,6 +33,9 @@ Preload.prototype = {
 		this.load.atlasJSONHash('waterfall', 'assets/sprites/waterfall.png', 'assets/sprites/waterfall.json');
 
 
+		this.load.audio('greenHills', 'assets/music/Green_Hills.mp3');
+
+
 	},
 	create: function() {
 		this.asset.cropEnabled = false;
