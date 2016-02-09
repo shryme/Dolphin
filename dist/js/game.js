@@ -655,7 +655,7 @@ Dolphin.prototype.addGravity = function(blockLayer, overlapLayer, listWater) {
 
 
 		this.game.customParticles.splash(this);
-		this.game.customSounds.play('Water-splash');
+		this.game.customSounds.play('water_splash');
 
 		this.isInGravity = true;
 		this.currentWpJump = 0;
@@ -1295,9 +1295,24 @@ Play.prototype = {
 
 
 		var jsonAudio = {
-			"Water-splash": {
+			"water_splash": {
 				"start": 0,
 				"end": 4.7542857142857144,
+				"loop": false
+			},
+			"dolphin_attack": {
+				"start": 6,
+				"end": 7.885260770975057,
+				"loop": false
+			},
+			"shark_attack": {
+				"start": 9,
+				"end": 13.543083900226758,
+				"loop": false
+			},
+			"waterfall": {
+				"start": 15,
+				"end": 23.7902947845805,
 				"loop": false
 			}
 		}

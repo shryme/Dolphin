@@ -1,1 +1,1 @@
-audiosprite -o sfx -e ogg  *.mp3
+audiosprite -o sfx -e ogg  *.mp3 *.wav
