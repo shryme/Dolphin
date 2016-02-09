@@ -35,6 +35,8 @@ Preload.prototype = {
 
 		this.load.audio('greenHills', 'assets/music/Green_Hills.mp3');
 
+		this.load.audiosprite('sfx', 'assets/sound/sfx.ogg', 'assets/sound/sfx.json');
+
 
 	},
 	create: function() {
