@@ -1,0 +1,12 @@
+{
+  "resources": [
+    "sfx.ogg"
+  ],
+  "spritemap": {
+    "Water-splash": {
+      "start": 0,
+      "end": 4.7542857142857144,
+      "loop": false
+    }
+  }
+}
