@@ -110,15 +110,28 @@ Play.prototype = {
 
 	},
 
-	create: function() {
-		console.log('create');
-
-		this.showDebug = true;
-
+	initializeAudio: function() {
 
 		this.music = this.game.add.audio('greenHills');
 		this.music.play();
 
+
+
+		this.fx = this.game.add.audio('sfx');
+		this.fx.allowMultiple = true;
+
+
+		this.fx.addMarker('Water-splash', 0, 4.7542857142857144);
+
+
+		this.game.customSounds = this.fx;
+
+	},
+
+	create: function() {
+		console.log('create');
+
+		this.showDebug = true;
 
 
 		this.game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -184,9 +197,7 @@ Play.prototype = {
 		this.particles = new Particles(this);
 		this.game.customParticles = this.particles;
 
-		this.fx = this.game.add.audioSprite('sfx');
-		this.fx.allowMultiple = true;
-		this.game.customSounds = this.fx;
+		this.initializeAudio();
 
 		//Us
 		var spawn = this.map.objects.spawn[0];
