@@ -1294,8 +1294,18 @@ Play.prototype = {
 		this.fx.allowMultiple = true;
 
 
-		this.fx.addMarker('Water-splash', 0, 4.7542857142857144);
+		var jsonAudio = {
+			"Water-splash": {
+				"start": 0,
+				"end": 4.7542857142857144,
+				"loop": false
+			}
+		}
 
+		for(var key in jsonAudio){
+			var s = jsonAudio[key];
+			this.fx.addMarker(key, s.start, s.end - s.start);
+		}
 
 		this.game.customSounds = this.fx;
 
