@@ -140,6 +140,8 @@ Dolphin.prototype.attack = function(x, y) {
 
 	if (!this.isAttacking) {
 
+		this.game.customSounds.play('dolphin_attack');
+
 		this.isAttacking = true;
 		this.animations.play('attack');
 

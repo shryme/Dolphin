@@ -510,6 +510,8 @@ Dolphin.prototype.attack = function(x, y) {
 
 	if (!this.isAttacking) {
 
+		this.game.customSounds.play('dolphin_attack');
+
 		this.isAttacking = true;
 		this.animations.play('attack');
 
@@ -982,6 +984,8 @@ Shark.prototype.attack = function(target) {
 	this.currentTarget = target;
 	this.isAttacking = true;
 	this.animations.play('attack');
+
+	this.game.customSounds.play('shark_attack');
 }
 
 Shark.prototype.move = function(target, speed) {
@@ -1307,7 +1311,7 @@ Play.prototype = {
 			},
 			"shark_attack": {
 				"start": 9,
-				"end": 13.543083900226758,
+				"end": 10,
 				"loop": false
 			},
 			"waterfall": {
