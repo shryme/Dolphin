@@ -134,7 +134,7 @@ Play.prototype = {
 			},
 			"shark_attack": {
 				"start": 9,
-				"end": 13.543083900226758,
+				"end": 10,
 				"loop": false
 			},
 			"waterfall": {
