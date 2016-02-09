@@ -1405,6 +1405,15 @@ Play.prototype = {
 		this.resetKey = this.game.input.keyboard.addKey(Phaser.Keyboard.TWO);
 		this.resetKey.onDown.add(this.goToLevelOne, this);
 
+		//Mute
+		this.muteMusicKey = this.game.input.keyboard.addKey(Phaser.Keyboard.O);
+		this.muteMusicKey.onDown.add(this.muteMusic, this);
+
+		//Unmute
+		this.unmuteMusicKey = this.game.input.keyboard.addKey(Phaser.Keyboard.I);
+		this.unmuteMusicKey.onDown.add(this.unmuteMusic, this);
+
+
 
 
 
@@ -1537,6 +1546,14 @@ Play.prototype = {
 	goToLevelOne: function() {
 		this.music.stop();
 		this.game.state.start('play', true, false, 'level1');
+	},
+
+	muteMusic: function() {
+		this.music.volume = 0;
+	},
+
+	unmuteMusic: function() {
+		this.music.volume = 1;
 	},
 
 	addGravity: function(sprite, tile) {
