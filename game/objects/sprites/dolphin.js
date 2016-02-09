@@ -285,6 +285,7 @@ Dolphin.prototype.addGravity = function(blockLayer, overlapLayer, listWater) {
 
 
 		this.game.customParticles.splash(this);
+		this.game.customSounds.play('Water-splash');
 
 		this.isInGravity = true;
 		this.currentWpJump = 0;

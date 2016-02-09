@@ -655,6 +655,7 @@ Dolphin.prototype.addGravity = function(blockLayer, overlapLayer, listWater) {
 
 
 		this.game.customParticles.splash(this);
+		this.game.customSounds.play('Water-splash');
 
 		this.isInGravity = true;
 		this.currentWpJump = 0;
@@ -1292,6 +1293,7 @@ Play.prototype = {
 		this.music.play();
 
 
+
 		this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
 
@@ -1354,6 +1356,10 @@ Play.prototype = {
 
 		this.particles = new Particles(this);
 		this.game.customParticles = this.particles;
+
+		this.fx = this.game.add.audioSprite('sfx');
+		this.fx.allowMultiple = true;
+		this.game.customSounds = this.fx;
 
 		//Us
 		var spawn = this.map.objects.spawn[0];
@@ -1684,6 +1690,8 @@ Preload.prototype = {
 
 
 		this.load.audio('greenHills', 'assets/music/Green_Hills.mp3');
+
+		this.load.audiosprite('sfx', 'assets/sound/sfx.ogg', 'assets/sound/sfx.json');
 
 
 	},

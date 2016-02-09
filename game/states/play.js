@@ -120,6 +120,7 @@ Play.prototype = {
 		this.music.play();
 
 
+
 		this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
 
@@ -182,6 +183,10 @@ Play.prototype = {
 
 		this.particles = new Particles(this);
 		this.game.customParticles = this.particles;
+
+		this.fx = this.game.add.audioSprite('sfx');
+		this.fx.allowMultiple = true;
+		this.game.customSounds = this.fx;
 
 		//Us
 		var spawn = this.map.objects.spawn[0];
