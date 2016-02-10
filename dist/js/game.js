@@ -1254,6 +1254,8 @@ Menu.prototype = {
 
 		this.game.add.text(10, 500, "Q: Show/Hide debug", { font: "40px Arial", fill: "#bb00ff", align: "center"});
 
+		this.game.add.text(500, 500, "I/O: Unmute/mute", { font: "40px Arial", fill: "#bb00ff", align: "center"});
+
 	},
 	update: function() {
 
