@@ -345,7 +345,7 @@ Dolphin.prototype.addGravity = function(blockLayer, overlapLayer, listWater) {
 
 
 			//Detect if it will be a block
-			if (listWater.indexOf(blockLayer.layer.data[pos.y][pos.x].index) === -1) {
+			if (blockLayer.layer.data[pos.y][pos.x].index !== -1) {
 				this.reverseGravity();
 				break;
 			}
@@ -359,7 +359,7 @@ Dolphin.prototype.addGravity = function(blockLayer, overlapLayer, listWater) {
 			}
 
 			//Stop if he hits water again
-			if (listWater.indexOf(overlapLayer.layer.data[pos.y][pos.x].index) !== -1)
+			if (listWater.indexOf(overlapLayer.layer.data[pos.y][pos.x].index) === -1)
 				break
 
 

@@ -401,19 +401,7 @@ Play.prototype = {
 
 		if (tile.index === tileIndex.invisibleGravity || tile.index === tileIndex.visibleGravity) {
 			if(sprite.addGravity !== undefined)
-				sprite.addGravity(this.blockLayer, this.overlapLayer, [tileIndex.empty,
-					tileIndex.waterCurrentUpLow,
-					tileIndex.waterCurrentUpMedium,
-					tileIndex.waterCurrentUpHigh,
-					tileIndex.waterCurrentDownLow,
-					tileIndex.waterCurrentDownMedium,
-					tileIndex.waterCurrentDownHigh,
-					tileIndex.waterCurrentLeftLow,
-					tileIndex.waterCurrentLeftMedium,
-					tileIndex.waterCurrentLeftHigh,
-					tileIndex.waterCurrentRightLow,
-					tileIndex.waterCurrentRightMedium,
-					tileIndex.waterCurrentRightHigh]);
+				sprite.addGravity(this.blockLayer, this.overlapLayer, [tileIndex.visibleGravity, tileIndex.invisibleGravity]);
 		}
 		else if (tile.index === tileIndex.waterCurrentUpLow) {
 			sprite.body.gravity.x = 0;
