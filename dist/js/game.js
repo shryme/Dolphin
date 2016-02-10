@@ -56,6 +56,24 @@ Audio.prototype.playSharkAttack = function() {
 	this.fx.play('shark_attack');
 }
 
+Audio.prototype.mute = function() {
+
+	for(var key in this.fx.markers){
+		var m = this.fx.markers[key];
+		m.volume = 0;
+	}
+
+}
+
+Audio.prototype.unmute = function() {
+
+	for(var key in this.fx.markers){
+		var m = this.fx.markers[key];
+		m.volume = 1;
+	}
+
+}
+
 
 module.exports = Audio;
 
@@ -1636,10 +1654,12 @@ Play.prototype = {
 
 	muteMusic: function() {
 		this.music.volume = 0;
+		this.game.customAudio.mute();
 	},
 
 	unmuteMusic: function() {
 		this.music.volume = 1;
+		this.game.customAudio.unmute();
 	},
 
 	addGravity: function(sprite, tile) {

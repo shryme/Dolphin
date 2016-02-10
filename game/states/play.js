@@ -389,10 +389,12 @@ Play.prototype = {
 
 	muteMusic: function() {
 		this.music.volume = 0;
+		this.game.customAudio.mute();
 	},
 
 	unmuteMusic: function() {
 		this.music.volume = 1;
+		this.game.customAudio.unmute();
 	},
 
 	addGravity: function(sprite, tile) {
