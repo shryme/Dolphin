@@ -140,7 +140,7 @@ Dolphin.prototype.attack = function(x, y) {
 
 	if (!this.isAttacking) {
 
-		this.game.customSounds.play('dolphin_attack');
+		this.game.customAudio.playDolphinAttack();
 
 		this.isAttacking = true;
 		this.animations.play('attack');
@@ -287,7 +287,7 @@ Dolphin.prototype.addGravity = function(blockLayer, overlapLayer, listWater) {
 
 
 		this.game.customParticles.splash(this);
-		this.game.customSounds.play('water_splash');
+		this.game.customAudio.playSplash();
 
 		this.isInGravity = true;
 		this.currentWpJump = 0;

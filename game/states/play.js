@@ -10,6 +10,8 @@ var Powerup = require('../objects/sprites/powerup');
 
 var Particles = require('../objects/particle/particles');
 
+var Audio = require('../audio');
+
 
 var tileIndex = {
 	empty: -1,
@@ -116,40 +118,8 @@ Play.prototype = {
 		this.music.play();
 
 
+		this.audio = new Audio(this.game);
 
-		this.fx = this.game.add.audio('sfx');
-		this.fx.allowMultiple = true;
-
-
-		var jsonAudio = {
-			"water_splash": {
-				"start": 0,
-				"end": 4.7542857142857144,
-				"loop": false
-			},
-			"dolphin_attack": {
-				"start": 6,
-				"end": 7.885260770975057,
-				"loop": false
-			},
-			"shark_attack": {
-				"start": 9,
-				"end": 10,
-				"loop": false
-			},
-			"waterfall": {
-				"start": 15,
-				"end": 23.7902947845805,
-				"loop": false
-			}
-		}
-
-		for(var key in jsonAudio){
-			var s = jsonAudio[key];
-			this.fx.addMarker(key, s.start, s.end - s.start);
-		}
-
-		this.game.customSounds = this.fx;
 
 	},
 

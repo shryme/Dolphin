@@ -80,7 +80,7 @@ Shark.prototype.attack = function(target) {
 	this.isAttacking = true;
 	this.animations.play('attack');
 
-	this.game.customSounds.play('shark_attack');
+	this.game.customAudio.playSharkAttack();
 }
 
 Shark.prototype.move = function(target, speed) {

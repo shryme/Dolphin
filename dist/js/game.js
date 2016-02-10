@@ -1,4 +1,74 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+
+var jsonAudio = {
+	"water_splash": {
+		"start": 0,
+		"end": 4.7542857142857144,
+		"loop": false
+	},
+	"dolphin_attack": {
+		"start": 6,
+		"end": 7.885260770975057,
+		"loop": false
+	},
+	"shark_attack": {
+		"start": 9,
+		"end": 10,
+		"loop": false
+	},
+	"waterfall": {
+		"start": 15,
+		"end": 23.7902947845805,
+		"loop": false
+	}
+}
+
+function Audio(game) {
+
+	this.game = game;
+
+	this.fx = this.game.add.audio('sfx');
+	this.fx.allowMultiple = true;
+
+
+	for(var key in jsonAudio){
+		var s = jsonAudio[key];
+		this.fx.addMarker(key, s.start, s.end - s.start);
+	}
+
+	this.game.customAudio = this;
+
+}
+
+Audio.prototype.play = function(name) {
+	this.fx.play(name);
+}
+
+Audio.prototype.playSplash = function() {
+	this.fx.play('water_splash');
+}
+
+Audio.prototype.playDolphinAttack = function() {
+	this.fx.play('dolphin_attack');
+}
+
+Audio.prototype.playSharkAttack = function() {
+	this.fx.play('shark_attack');
+}
+
+
+module.exports = Audio;
+
+
+
+
+
+
+
+
+
+
+},{}],2:[function(require,module,exports){
 'use strict';
 
 //global variables
@@ -15,7 +85,7 @@ window.onload = function () {
 
   game.state.start('boot');
 };
-},{"./states/boot":14,"./states/gameover":15,"./states/menu":16,"./states/play":17,"./states/preload":18}],2:[function(require,module,exports){
+},{"./states/boot":15,"./states/gameover":16,"./states/menu":17,"./states/play":18,"./states/preload":19}],3:[function(require,module,exports){
 
 var Shark = require('../sprites/shark');
 
@@ -107,7 +177,7 @@ BasicEnemy.prototype = {
 
 module.exports = BasicEnemy;
 
-},{"../sprites/shark":12}],3:[function(require,module,exports){
+},{"../sprites/shark":13}],4:[function(require,module,exports){
 
 var Dolphin = require('../sprites/dolphin');
 
@@ -158,7 +228,7 @@ Friend.prototype = {
 
 module.exports = Friend;
 
-},{"../sprites/dolphin":9}],4:[function(require,module,exports){
+},{"../sprites/dolphin":10}],5:[function(require,module,exports){
 
 var Orca = require('../sprites/orca');
 
@@ -209,7 +279,7 @@ FriendOrca.prototype = {
 
 module.exports = FriendOrca;
 
-},{"../sprites/orca":10}],5:[function(require,module,exports){
+},{"../sprites/orca":11}],6:[function(require,module,exports){
 
 var Turtle = require('../sprites/turtle');
 
@@ -260,7 +330,7 @@ FriendTurtle.prototype = {
 
 module.exports = FriendTurtle;
 
-},{"../sprites/turtle":13}],6:[function(require,module,exports){
+},{"../sprites/turtle":14}],7:[function(require,module,exports){
 
 var Dolphin = require('../sprites/dolphin');
 
@@ -300,7 +370,7 @@ Player.prototype = {
 
 module.exports = Player;
 
-},{"../sprites/dolphin":9}],7:[function(require,module,exports){
+},{"../sprites/dolphin":10}],8:[function(require,module,exports){
 
 var Splash = require('./splash');
 
@@ -330,7 +400,7 @@ module.exports = Particles;
 
 
 
-},{"./splash":8}],8:[function(require,module,exports){
+},{"./splash":9}],9:[function(require,module,exports){
 
 function Splash(game) {
 	this.emitter = game.add.emitter(0, 0, 1000);
@@ -367,7 +437,7 @@ module.exports = Splash;
 
 
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 
 function Dolphin(game, x, y, entity) {
 
@@ -510,7 +580,7 @@ Dolphin.prototype.attack = function(x, y) {
 
 	if (!this.isAttacking) {
 
-		this.game.customSounds.play('dolphin_attack');
+		this.game.customAudio.playDolphinAttack();
 
 		this.isAttacking = true;
 		this.animations.play('attack');
@@ -657,7 +727,7 @@ Dolphin.prototype.addGravity = function(blockLayer, overlapLayer, listWater) {
 
 
 		this.game.customParticles.splash(this);
-		this.game.customSounds.play('water_splash');
+		this.game.customAudio.playSplash();
 
 		this.isInGravity = true;
 		this.currentWpJump = 0;
@@ -754,7 +824,7 @@ module.exports = Dolphin;
 
 
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 
 function Orca(game, x, y, entity) {
 
@@ -836,7 +906,7 @@ module.exports = Orca;
 
 
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 
 function Powerup(game, x, y, useless, prop) {
 
@@ -902,7 +972,7 @@ module.exports = Powerup;
 
 
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 
 function Shark(game, x, y, entity) {
 
@@ -985,7 +1055,7 @@ Shark.prototype.attack = function(target) {
 	this.isAttacking = true;
 	this.animations.play('attack');
 
-	this.game.customSounds.play('shark_attack');
+	this.game.customAudio.playSharkAttack();
 }
 
 Shark.prototype.move = function(target, speed) {
@@ -1019,7 +1089,7 @@ Shark.prototype.removeGravity = function() {
 module.exports = Shark;
 
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 
 function Turtle(game, x, y, entity) {
 
@@ -1098,7 +1168,7 @@ module.exports = Turtle;
 
 
 
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 
 'use strict';
 
@@ -1117,7 +1187,7 @@ Boot.prototype = {
 
 module.exports = Boot;
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 
 'use strict';
 function GameOver() {}
@@ -1139,7 +1209,7 @@ GameOver.prototype = {
 };
 module.exports = GameOver;
 
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 
 'use strict';
 function Menu() {}
@@ -1174,7 +1244,7 @@ Menu.prototype = {
 
 module.exports = Menu;
 
-},{}],17:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 'use strict';
 
 var Player = require('../objects/entity/player');
@@ -1186,6 +1256,8 @@ var Turtle = require('../objects/entity/friendTurtle');
 var Powerup = require('../objects/sprites/powerup');
 
 var Particles = require('../objects/particle/particles');
+
+var Audio = require('../audio');
 
 
 var tileIndex = {
@@ -1293,40 +1365,8 @@ Play.prototype = {
 		this.music.play();
 
 
+		this.audio = new Audio(this.game);
 
-		this.fx = this.game.add.audio('sfx');
-		this.fx.allowMultiple = true;
-
-
-		var jsonAudio = {
-			"water_splash": {
-				"start": 0,
-				"end": 4.7542857142857144,
-				"loop": false
-			},
-			"dolphin_attack": {
-				"start": 6,
-				"end": 7.885260770975057,
-				"loop": false
-			},
-			"shark_attack": {
-				"start": 9,
-				"end": 10,
-				"loop": false
-			},
-			"waterfall": {
-				"start": 15,
-				"end": 23.7902947845805,
-				"loop": false
-			}
-		}
-
-		for(var key in jsonAudio){
-			var s = jsonAudio[key];
-			this.fx.addMarker(key, s.start, s.end - s.start);
-		}
-
-		this.game.customSounds = this.fx;
 
 	},
 
@@ -1693,7 +1733,7 @@ module.exports = Play;
 
 
 
-},{"../objects/entity/basicEnemy":2,"../objects/entity/friend":3,"../objects/entity/friendOrca":4,"../objects/entity/friendTurtle":5,"../objects/entity/player":6,"../objects/particle/particles":7,"../objects/sprites/powerup":11}],18:[function(require,module,exports){
+},{"../audio":1,"../objects/entity/basicEnemy":3,"../objects/entity/friend":4,"../objects/entity/friendOrca":5,"../objects/entity/friendTurtle":6,"../objects/entity/player":7,"../objects/particle/particles":8,"../objects/sprites/powerup":12}],19:[function(require,module,exports){
 
 'use strict';
 function Preload() {
@@ -1750,4 +1790,4 @@ Preload.prototype = {
 
 module.exports = Preload;
 
-},{}]},{},[1])
+},{}]},{},[2])
