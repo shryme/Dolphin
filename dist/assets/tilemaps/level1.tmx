@@ -335,4 +335,5 @@
    </properties>
   </object>
  </objectgroup>
+ <objectgroup name="others"/>
 </map>

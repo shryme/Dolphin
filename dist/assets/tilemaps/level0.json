@@ -868,8 +868,35 @@
          "width":0,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "height":100,
+         "name":"others",
+         "objects":[
+                {
+                 "height":168,
+                 "id":46,
+                 "name":"next",
+                 "properties":
+                    {
+                     "level":"1"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":285.333333333333,
+                 "x":2816,
+                 "y":904
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "width":100,
+         "x":0,
+         "y":0
         }],
- "nextobjectid":46,
+ "nextobjectid":47,
  "orientation":"orthogonal",
  "properties":
     {
