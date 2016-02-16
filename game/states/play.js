@@ -125,6 +125,26 @@ Play.prototype = {
 
 	},
 
+	preload: function() {
+		console.log('PRELOAD');
+		this.background = this.game.add.sprite(0, 0, 'preloader_background');
+		this.background.z = 9999;
+
+		this.background.height = this.game.height;
+		this.background.width = this.game.width;
+
+		this.asset = this.add.sprite(0, this.game.height/2, 'preloader');
+		this.asset.anchor.setTo(0.5, 0.5);
+
+		this.load.onLoadComplete.addOnce(this.onLoadComplete, this);
+		this.load.setPreloadSprite(this.asset);
+
+	},
+
+	onLoadComplete: function() {
+		this.ready = true;
+	},
+
 	create: function() {
 		console.log('create');
 
@@ -234,8 +254,6 @@ Play.prototype = {
 				this.groupLevels.add(level);
 			}
 
-			// debugger;
-			console.log(cur);
 		}
 
 		this.createObject(this.map.objects.dolphins, Friend, this.groupDolphins, this.list);
@@ -287,6 +305,7 @@ Play.prototype = {
 					this.overlapLayer.layer.data[i][j].alpha = 0;
 
 
+		console.log('Finished');
 	},
 
 	update: function() {
