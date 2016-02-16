@@ -385,9 +385,9 @@
   </object>
  </objectgroup>
  <objectgroup name="others">
-  <object id="46" name="next" x="2816" y="904" width="285.333" height="168">
+  <object id="46" name="level" x="2816" y="904" width="285.333" height="168">
    <properties>
-    <property name="level" value="1"/>
+    <property name="level" value="level1"/>
    </properties>
   </object>
  </objectgroup>
