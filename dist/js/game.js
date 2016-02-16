@@ -1255,6 +1255,7 @@ function Boot() {
 Boot.prototype = {
   preload: function() {
     this.load.image('preloader', 'assets/preloader.gif');
+    this.load.image('preloader_background', 'assets/background.png');
   },
   create: function() {
     this.game.input.maxPointers = 1;
@@ -1560,8 +1561,6 @@ Play.prototype = {
 				this.groupLevels.add(level);
 			}
 
-			// debugger;
-			console.log(cur);
 		}
 
 		this.createObject(this.map.objects.dolphins, Friend, this.groupDolphins, this.list);
@@ -1613,6 +1612,7 @@ Play.prototype = {
 					this.overlapLayer.layer.data[i][j].alpha = 0;
 
 
+		console.log('Finished');
 	},
 
 	update: function() {
@@ -1839,11 +1839,19 @@ function Preload() {
 
 Preload.prototype = {
 	preload: function() {
-		this.asset = this.add.sprite(this.width/2,this.height/2, 'preloader');
+		this.background = this.game.add.sprite(0, 0, 'preloader_background');
+
+		this.background.height = this.game.height;
+		this.background.width = this.game.width;
+
+		this.asset = this.add.sprite(0, this.game.height/2, 'preloader');
 		this.asset.anchor.setTo(0.5, 0.5);
 
 		this.load.onLoadComplete.addOnce(this.onLoadComplete, this);
 		this.load.setPreloadSprite(this.asset);
+
+
+
 
 		this.load.image('menu', 'assets/background.png');
 		this.load.image('background', 'assets/background.png');
