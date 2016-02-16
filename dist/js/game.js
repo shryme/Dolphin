@@ -103,7 +103,7 @@ window.onload = function () {
 
   game.state.start('boot');
 };
-},{"./states/boot":15,"./states/gameover":16,"./states/menu":17,"./states/play":18,"./states/preload":19}],3:[function(require,module,exports){
+},{"./states/boot":16,"./states/gameover":17,"./states/menu":18,"./states/play":19,"./states/preload":20}],3:[function(require,module,exports){
 
 var Shark = require('../sprites/shark');
 
@@ -195,7 +195,7 @@ BasicEnemy.prototype = {
 
 module.exports = BasicEnemy;
 
-},{"../sprites/shark":13}],4:[function(require,module,exports){
+},{"../sprites/shark":14}],4:[function(require,module,exports){
 
 var Dolphin = require('../sprites/dolphin');
 
@@ -297,7 +297,7 @@ FriendOrca.prototype = {
 
 module.exports = FriendOrca;
 
-},{"../sprites/orca":11}],6:[function(require,module,exports){
+},{"../sprites/orca":12}],6:[function(require,module,exports){
 
 var Turtle = require('../sprites/turtle');
 
@@ -348,7 +348,7 @@ FriendTurtle.prototype = {
 
 module.exports = FriendTurtle;
 
-},{"../sprites/turtle":14}],7:[function(require,module,exports){
+},{"../sprites/turtle":15}],7:[function(require,module,exports){
 
 var Dolphin = require('../sprites/dolphin');
 
@@ -844,6 +844,65 @@ module.exports = Dolphin;
 
 },{}],11:[function(require,module,exports){
 
+function NextLevel(game, x, y, next) {
+
+	if (x === undefined && y === undefined) {
+		x = 0;
+		y = 0;
+	}
+
+	Phaser.Sprite.call(this, game, x, y, 'powerup', 'p1.png');
+
+	this.initialize();
+
+	this.next = next;
+
+	this.game.physics.arcade.enableBody(this);
+	this.body.gravity.y = 0;
+	this.body.collideWorldBounds = true;
+
+	this.body.allowRotation = false;
+	this.anchor.setTo(.5, .5);
+
+	this.body.setSize(75, 50, 0, 0);
+
+
+	var listImages = new Array();
+
+	for (var i = 1; i <= 8; i++) {
+		listImages.push('p' + i + '.png');
+	}
+
+	this.animations.add('idle', listImages, 10, true, false);
+	this.animations.play('idle');
+
+	game.add.existing(this);
+
+
+
+}
+
+NextLevel.prototype = Object.create(Phaser.Sprite.prototype);
+NextLevel.prototype.constructor = NextLevel;
+
+NextLevel.prototype.create = function() {
+
+}
+
+
+module.exports = NextLevel;
+
+
+
+
+
+
+
+
+
+
+},{}],12:[function(require,module,exports){
+
 function Orca(game, x, y, entity) {
 
 	this.entity = entity;
@@ -924,7 +983,7 @@ module.exports = Orca;
 
 
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 
 function Powerup(game, x, y, useless, prop) {
 
@@ -990,7 +1049,7 @@ module.exports = Powerup;
 
 
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 
 function Shark(game, x, y, entity) {
 
@@ -1107,7 +1166,7 @@ Shark.prototype.removeGravity = function() {
 module.exports = Shark;
 
 
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 
 function Turtle(game, x, y, entity) {
 
@@ -1186,7 +1245,7 @@ module.exports = Turtle;
 
 
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 
 'use strict';
 
@@ -1205,7 +1264,7 @@ Boot.prototype = {
 
 module.exports = Boot;
 
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 
 'use strict';
 function GameOver() {}
@@ -1227,7 +1286,7 @@ GameOver.prototype = {
 };
 module.exports = GameOver;
 
-},{}],17:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 
 'use strict';
 function Menu() {}
@@ -1264,7 +1323,7 @@ Menu.prototype = {
 
 module.exports = Menu;
 
-},{}],18:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 'use strict';
 
 var Player = require('../objects/entity/player');
@@ -1276,6 +1335,8 @@ var Turtle = require('../objects/entity/friendTurtle');
 var Powerup = require('../objects/sprites/powerup');
 
 var Particles = require('../objects/particle/particles');
+
+var NextLevel = require('../objects/sprites/nextLevel');
 
 var Audio = require('../audio');
 
@@ -1455,6 +1516,9 @@ Play.prototype = {
 		//Group of powerups
 		this.groupPowerups = this.game.add.group();
 
+		//Group of level
+		this.groupLevels = this.game.add.group();
+
 
 		this.particles = new Particles(this);
 		this.game.customParticles = this.particles;
@@ -1484,6 +1548,20 @@ Play.prototype = {
 			}
 
 			this.listWaypoints[cur.name] = listWpUpdated;
+		}
+
+		var listObjectsOthers = this.map.objects.others;
+
+		for (var i = 0; i < listObjectsOthers.length;  i++) {
+			var cur = listObjectsOthers[i];
+
+			if (cur.name === 'level') {
+				var level = new NextLevel(this.game, cur.x, cur.y, cur.properties.level);
+				this.groupLevels.add(level);
+			}
+
+			// debugger;
+			console.log(cur);
 		}
 
 		this.createObject(this.map.objects.dolphins, Friend, this.groupDolphins, this.list);
@@ -1589,6 +1667,9 @@ Play.prototype = {
 
 		//Detect powerup collision
 		this.game.physics.arcade.overlap(this.groupPowerups, this.player.sprite, undefined, this.powerupCollision, this);
+
+		//Detect level collision
+		this.game.physics.arcade.overlap(this.groupLevels, this.player.sprite, undefined, this.levelCollision, this);
 
 
 
@@ -1732,6 +1813,11 @@ Play.prototype = {
 	powerupCollision: function(dolphin, powerup) {
 		dolphin.items[powerup.powerupType] = true;
 		powerup.destroy();
+	},
+
+	levelCollision: function(dolphin, level) {
+		this.music.stop();
+		this.game.state.start('play', true, false, level.next);
 	}
 
 
@@ -1743,7 +1829,7 @@ module.exports = Play;
 
 
 
-},{"../audio":1,"../objects/entity/basicEnemy":3,"../objects/entity/friend":4,"../objects/entity/friendOrca":5,"../objects/entity/friendTurtle":6,"../objects/entity/player":7,"../objects/particle/particles":8,"../objects/sprites/powerup":12}],19:[function(require,module,exports){
+},{"../audio":1,"../objects/entity/basicEnemy":3,"../objects/entity/friend":4,"../objects/entity/friendOrca":5,"../objects/entity/friendTurtle":6,"../objects/entity/player":7,"../objects/particle/particles":8,"../objects/sprites/nextLevel":11,"../objects/sprites/powerup":13}],20:[function(require,module,exports){
 
 'use strict';
 function Preload() {

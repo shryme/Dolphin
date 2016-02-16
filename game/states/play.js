@@ -10,6 +10,8 @@ var Powerup = require('../objects/sprites/powerup');
 
 var Particles = require('../objects/particle/particles');
 
+var NextLevel = require('../objects/sprites/nextLevel');
+
 var Audio = require('../audio');
 
 
@@ -188,6 +190,9 @@ Play.prototype = {
 		//Group of powerups
 		this.groupPowerups = this.game.add.group();
 
+		//Group of level
+		this.groupLevels = this.game.add.group();
+
 
 		this.particles = new Particles(this);
 		this.game.customParticles = this.particles;
@@ -217,6 +222,20 @@ Play.prototype = {
 			}
 
 			this.listWaypoints[cur.name] = listWpUpdated;
+		}
+
+		var listObjectsOthers = this.map.objects.others;
+
+		for (var i = 0; i < listObjectsOthers.length;  i++) {
+			var cur = listObjectsOthers[i];
+
+			if (cur.name === 'level') {
+				var level = new NextLevel(this.game, cur.x, cur.y, cur.properties.level);
+				this.groupLevels.add(level);
+			}
+
+			// debugger;
+			console.log(cur);
 		}
 
 		this.createObject(this.map.objects.dolphins, Friend, this.groupDolphins, this.list);
@@ -322,6 +341,9 @@ Play.prototype = {
 
 		//Detect powerup collision
 		this.game.physics.arcade.overlap(this.groupPowerups, this.player.sprite, undefined, this.powerupCollision, this);
+
+		//Detect level collision
+		this.game.physics.arcade.overlap(this.groupLevels, this.player.sprite, undefined, this.levelCollision, this);
 
 
 
@@ -465,6 +487,11 @@ Play.prototype = {
 	powerupCollision: function(dolphin, powerup) {
 		dolphin.items[powerup.powerupType] = true;
 		powerup.destroy();
+	},
+
+	levelCollision: function(dolphin, level) {
+		this.music.stop();
+		this.game.state.start('play', true, false, level.next);
 	}
 
 
