@@ -1397,6 +1397,7 @@ Play.prototype = {
 	init: function(level) {
 		console.log('init', level);
 		this.currentLevel = level;
+		this.isReady = false;
 	},
 
 	createAnimation: function(tile, animation, listAnim, speed, next) {
@@ -1460,19 +1461,9 @@ Play.prototype = {
 		this.background.height = this.game.height;
 		this.background.width = this.game.width;
 
-		this.asset = this.add.sprite(0, this.game.height/2, 'preloader');
-		this.asset.anchor.setTo(0.5, 0.5);
-
-		this.load.onLoadComplete.addOnce(this.onLoadComplete, this);
-		this.load.setPreloadSprite(this.asset);
-
 	},
 
-	onLoadComplete: function() {
-		this.ready = true;
-	},
-
-	create: function() {
+	loadEverything: function() {
 		console.log('create');
 
 		this.showDebug = true;
@@ -1633,9 +1624,19 @@ Play.prototype = {
 
 
 		console.log('Finished');
+		this.isReady = true;
+	},
+
+	create: function() {
+		var fctLoadEverything = this.loadEverything.bind(this);
+		setTimeout(fctLoadEverything, 0);
+
 	},
 
 	update: function() {
+
+		if (!this.isReady)
+			return;
 
 		this.particles.update();
 
