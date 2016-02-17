@@ -298,11 +298,18 @@ Play.prototype = {
 
 		console.log('Finished');
 		this.isReady = true;
+		this.loadingSprite.kill();
 	},
 
 	create: function() {
 		var fctLoadEverything = this.loadEverything.bind(this);
 		setTimeout(fctLoadEverything, 0);
+
+		this.loadingSprite = this.add.sprite(this.game.width/2, this.game.height/2, 'dolphin');
+		this.loadingSprite.anchor.setTo(0.5, 0.5);
+
+		this.game.add.tween(this.loadingSprite).to( { angle: 360 }, 1000, Phaser.Easing.Linear.None, true, 0, -1);
+
 
 	},
 
