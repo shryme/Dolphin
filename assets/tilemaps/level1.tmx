@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" nextobjectid="53">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" nextobjectid="54">
  <tileset firstgid="1" name="basic" tilewidth="32" tileheight="32" tilecount="900">
   <image source="tileset.png" width="960" height="960"/>
  </tileset>
@@ -341,5 +341,6 @@
     <property name="level" value="level0"/>
    </properties>
   </object>
+  <object id="53" name="rock" x="2244.45" y="1008" width="32" height="32"/>
  </objectgroup>
 </map>

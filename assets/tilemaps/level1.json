@@ -168,7 +168,7 @@
          "name":"others",
          "objects":[
                 {
-                 "height":111.575757575758,
+                 "height":111.576,
                  "id":52,
                  "name":"level",
                  "properties":
@@ -178,9 +178,24 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":98.4846818181818,
-                 "x":69.5153181818182,
-                 "y":1006.42424242424
+                 "width":98.4847,
+                 "x":69.5153,
+                 "y":1006.42
+                }, 
+                {
+                 "height":32,
+                 "id":53,
+                 "name":"rock",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":2244.45445,
+                 "y":1008
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -189,7 +204,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":53,
+ "nextobjectid":54,
  "orientation":"orthogonal",
  "properties":
     {
