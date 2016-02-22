@@ -1764,6 +1764,7 @@ Play.prototype = {
 		//Detect rock collision
 		this.game.physics.arcade.collide(this.groupRocks, this.player.sprite);
 		this.game.physics.arcade.collide(this.groupRocks, this.blockLayer);
+		this.game.physics.arcade.collide(this.groupRocks);
 
 
 
