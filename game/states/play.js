@@ -7,6 +7,7 @@ var Orca = require('../objects/entity/friendOrca');
 var Turtle = require('../objects/entity/friendTurtle');
 
 var Powerup = require('../objects/sprites/powerup');
+var Rock = require('../objects/sprites/rock');
 
 var Particles = require('../objects/particle/particles');
 
@@ -204,6 +205,11 @@ Play.prototype = {
 		//Group of level
 		this.groupLevels = this.game.add.group();
 
+		//Group of rocks
+		this.groupRocks = this.game.add.group();
+
+
+
 
 		this.particles = new Particles(this);
 		this.game.customParticles = this.particles;
@@ -243,6 +249,10 @@ Play.prototype = {
 			if (cur.name === 'level') {
 				var level = new NextLevel(this.game, cur.x, cur.y, cur.properties.level);
 				this.groupLevels.add(level);
+			}
+			else if (cur.name === 'rock') {
+				var rock = new Rock(this.game, cur.x, cur.y);
+				this.groupRocks.add(rock);
 			}
 
 		}
@@ -371,6 +381,11 @@ Play.prototype = {
 
 		//Detect level collision
 		this.game.physics.arcade.overlap(this.groupLevels, this.player.sprite, undefined, this.levelCollision, this);
+
+		//Detect rock collision
+		this.game.physics.arcade.collide(this.groupRocks, this.player.sprite);
+		this.game.physics.arcade.collide(this.groupRocks, this.blockLayer);
+
 
 
 

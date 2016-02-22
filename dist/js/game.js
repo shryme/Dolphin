@@ -103,7 +103,7 @@ window.onload = function () {
 
   game.state.start('boot');
 };
-},{"./states/boot":16,"./states/gameover":17,"./states/menu":18,"./states/play":19,"./states/preload":20}],3:[function(require,module,exports){
+},{"./states/boot":17,"./states/gameover":18,"./states/menu":19,"./states/play":20,"./states/preload":21}],3:[function(require,module,exports){
 
 var Shark = require('../sprites/shark');
 
@@ -195,7 +195,7 @@ BasicEnemy.prototype = {
 
 module.exports = BasicEnemy;
 
-},{"../sprites/shark":14}],4:[function(require,module,exports){
+},{"../sprites/shark":15}],4:[function(require,module,exports){
 
 var Dolphin = require('../sprites/dolphin');
 
@@ -348,7 +348,7 @@ FriendTurtle.prototype = {
 
 module.exports = FriendTurtle;
 
-},{"../sprites/turtle":15}],7:[function(require,module,exports){
+},{"../sprites/turtle":16}],7:[function(require,module,exports){
 
 var Dolphin = require('../sprites/dolphin');
 
@@ -1051,6 +1051,58 @@ module.exports = Powerup;
 
 },{}],14:[function(require,module,exports){
 
+function Rock(game, x, y) {
+
+	if (x === undefined && y === undefined) {
+		x = 0;
+		y = 0;
+	}
+
+	Phaser.Sprite.call(this, game, x, y, 'objects', 'rock.png');
+
+	this.initialize();
+
+
+	this.game.physics.arcade.enableBody(this);
+	this.body.gravity.x = 0;
+	this.body.gravity.y = 1000;
+	this.body.drag.x = 5;
+
+	this.body.collideWorldBounds = true;
+
+	this.body.allowRotation = false;
+	this.anchor.setTo(.5, .5);
+
+	this.body.setSize(32, 32, 0, 0);
+
+
+	game.add.existing(this);
+
+
+
+}
+
+Rock.prototype = Object.create(Phaser.Sprite.prototype);
+Rock.prototype.constructor = Rock;
+
+Rock.prototype.create = function() {
+
+}
+
+
+module.exports = Rock;
+
+
+
+
+
+
+
+
+
+
+},{}],15:[function(require,module,exports){
+
 function Shark(game, x, y, entity) {
 
 	this.entity = entity;
@@ -1166,7 +1218,7 @@ Shark.prototype.removeGravity = function() {
 module.exports = Shark;
 
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 
 function Turtle(game, x, y, entity) {
 
@@ -1245,7 +1297,7 @@ module.exports = Turtle;
 
 
 
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 
 'use strict';
 
@@ -1265,7 +1317,7 @@ Boot.prototype = {
 
 module.exports = Boot;
 
-},{}],17:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 
 'use strict';
 function GameOver() {}
@@ -1287,7 +1339,7 @@ GameOver.prototype = {
 };
 module.exports = GameOver;
 
-},{}],18:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 
 'use strict';
 function Menu() {}
@@ -1324,7 +1376,7 @@ Menu.prototype = {
 
 module.exports = Menu;
 
-},{}],19:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 'use strict';
 
 var Player = require('../objects/entity/player');
@@ -1334,6 +1386,7 @@ var Orca = require('../objects/entity/friendOrca');
 var Turtle = require('../objects/entity/friendTurtle');
 
 var Powerup = require('../objects/sprites/powerup');
+var Rock = require('../objects/sprites/rock');
 
 var Particles = require('../objects/particle/particles');
 
@@ -1531,6 +1584,11 @@ Play.prototype = {
 		//Group of level
 		this.groupLevels = this.game.add.group();
 
+		//Group of rocks
+		this.groupRocks = this.game.add.group();
+
+
+
 
 		this.particles = new Particles(this);
 		this.game.customParticles = this.particles;
@@ -1570,6 +1628,10 @@ Play.prototype = {
 			if (cur.name === 'level') {
 				var level = new NextLevel(this.game, cur.x, cur.y, cur.properties.level);
 				this.groupLevels.add(level);
+			}
+			else if (cur.name === 'rock') {
+				var rock = new Rock(this.game, cur.x, cur.y);
+				this.groupRocks.add(rock);
 			}
 
 		}
@@ -1698,6 +1760,11 @@ Play.prototype = {
 
 		//Detect level collision
 		this.game.physics.arcade.overlap(this.groupLevels, this.player.sprite, undefined, this.levelCollision, this);
+
+		//Detect rock collision
+		this.game.physics.arcade.collide(this.groupRocks, this.player.sprite);
+		this.game.physics.arcade.collide(this.groupRocks, this.blockLayer);
+
 
 
 
@@ -1857,7 +1924,7 @@ module.exports = Play;
 
 
 
-},{"../audio":1,"../objects/entity/basicEnemy":3,"../objects/entity/friend":4,"../objects/entity/friendOrca":5,"../objects/entity/friendTurtle":6,"../objects/entity/player":7,"../objects/particle/particles":8,"../objects/sprites/nextLevel":11,"../objects/sprites/powerup":13}],20:[function(require,module,exports){
+},{"../audio":1,"../objects/entity/basicEnemy":3,"../objects/entity/friend":4,"../objects/entity/friendOrca":5,"../objects/entity/friendTurtle":6,"../objects/entity/player":7,"../objects/particle/particles":8,"../objects/sprites/nextLevel":11,"../objects/sprites/powerup":13,"../objects/sprites/rock":14}],21:[function(require,module,exports){
 
 'use strict';
 function Preload() {
@@ -1895,6 +1962,7 @@ Preload.prototype = {
 		this.load.atlasJSONHash('orca', 'assets/sprites/tara.png', 'assets/sprites/tara.json');
 		this.load.atlasJSONHash('turtle', 'assets/sprites/turtle.png', 'assets/sprites/turtle.json');
 		this.load.atlasJSONHash('powerup', 'assets/sprites/powerup.png', 'assets/sprites/powerup.json');
+		this.load.atlasJSONHash('objects', 'assets/sprites/objects.png', 'assets/sprites/objects.json');
 
 		this.load.atlasJSONHash('waterdrops', 'assets/sprites/water_drops.png', 'assets/sprites/water_drops.json');
 		this.load.atlasJSONHash('waterwave', 'assets/sprites/water_wave.png', 'assets/sprites/water_wave.json');
