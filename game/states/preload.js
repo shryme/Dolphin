@@ -45,6 +45,7 @@ Preload.prototype = {
 
 
 		this.load.audio('greenHills', 'assets/music/Green_Hills.mp3');
+		this.load.audio('ecco1_cd_02', 'assets/music/ecco1_cd_02.mp3');
 
 		this.load.audio('sfx', 'assets/sound/sfx.ogg');
 

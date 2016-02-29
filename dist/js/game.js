@@ -1539,9 +1539,9 @@ Play.prototype = {
 
 	},
 
-	initializeAudio: function() {
+	initializeAudio: function(song) {
 
-		this.music = this.game.add.audio('greenHills');
+		this.music = this.game.add.audio(song);
 		this.music.play();
 
 
@@ -1637,7 +1637,26 @@ Play.prototype = {
 		this.particles = new Particles(this);
 		this.game.customParticles = this.particles;
 
-		this.initializeAudio();
+		var listObjectsOthers = this.map.objects.others;
+
+		for (var i = 0; i < listObjectsOthers.length;  i++) {
+			var cur = listObjectsOthers[i];
+
+			if (cur.name === 'level') {
+				var level = new NextLevel(this.game, cur.x, cur.y, cur.properties.level);
+				this.groupLevels.add(level);
+			}
+			else if (cur.name === 'rock') {
+				var rock = new Rock(this.game, cur.x, cur.y);
+				this.groupRocks.add(rock);
+			}
+			else if (cur.name === 'music') {
+				this.initializeAudio(cur.properties.song);
+			}
+
+		}
+
+		// this.initializeAudio();
 
 		//Us
 		var spawn = this.map.objects.spawn[0];
@@ -1664,21 +1683,6 @@ Play.prototype = {
 			this.listWaypoints[cur.name] = listWpUpdated;
 		}
 
-		var listObjectsOthers = this.map.objects.others;
-
-		for (var i = 0; i < listObjectsOthers.length;  i++) {
-			var cur = listObjectsOthers[i];
-
-			if (cur.name === 'level') {
-				var level = new NextLevel(this.game, cur.x, cur.y, cur.properties.level);
-				this.groupLevels.add(level);
-			}
-			else if (cur.name === 'rock') {
-				var rock = new Rock(this.game, cur.x, cur.y);
-				this.groupRocks.add(rock);
-			}
-
-		}
 
 		this.createObject(this.map.objects.dolphins, Friend, this.groupDolphins, this.list);
 		this.createObject(this.map.objects.sharks, Shark, this.groupSharks, this.listEnemy);
@@ -1740,6 +1744,9 @@ Play.prototype = {
 		this.txtPaused.cameraOffset.setTo(this.game.width / 2, this.game.height / 2);
 		this.txtPaused.visible = false;
 
+
+
+		this.map.createLayer('foreground');
 
 
 	},
@@ -2039,6 +2046,7 @@ Preload.prototype = {
 
 
 		this.load.audio('greenHills', 'assets/music/Green_Hills.mp3');
+		this.load.audio('ecco1_cd_02', 'assets/music/ecco1_cd_02.mp3');
 
 		this.load.audio('sfx', 'assets/sound/sfx.ogg');
 
