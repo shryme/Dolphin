@@ -97,6 +97,7 @@ Shark.prototype.move = function(target, speed) {
 Shark.prototype.hurt = function(dmg) {
 	this.hp -= dmg;
 	if (this.hp <= 0) {
+		this.game.customParticles.sparkle(this);
 		this.destroy();
 	}
 }

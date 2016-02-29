@@ -41,6 +41,8 @@ Preload.prototype = {
 		this.load.atlasJSONHash('waterwave', 'assets/sprites/water_wave.png', 'assets/sprites/water_wave.json');
 		this.load.atlasJSONHash('waterfall', 'assets/sprites/waterfall.png', 'assets/sprites/waterfall.json');
 
+		this.load.atlasJSONHash('sparkle', 'assets/sprites/sparkle.png', 'assets/sprites/sparkle.json');
+
 
 		this.load.audio('greenHills', 'assets/music/Green_Hills.mp3');
 
