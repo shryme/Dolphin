@@ -1,0 +1,52 @@
+{"frames": [
+
+{
+	"filename": "sparkle1.png",
+	"frame": {"x":2,"y":2,"w":15,"h":15},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":15,"h":15},
+	"sourceSize": {"w":15,"h":15}
+},
+{
+	"filename": "sparkle2.png",
+	"frame": {"x":19,"y":2,"w":15,"h":15},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":15,"h":15},
+	"sourceSize": {"w":15,"h":15}
+},
+{
+	"filename": "sparkle3.png",
+	"frame": {"x":25,"y":19,"w":7,"h":7},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":7,"h":7},
+	"sourceSize": {"w":7,"h":7}
+},
+{
+	"filename": "sparkle4.png",
+	"frame": {"x":14,"y":19,"w":9,"h":9},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":9,"h":9},
+	"sourceSize": {"w":9,"h":9}
+},
+{
+	"filename": "sparkle5.png",
+	"frame": {"x":2,"y":19,"w":10,"h":11},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":10,"h":11},
+	"sourceSize": {"w":10,"h":11}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "sparkle.png",
+	"format": "RGBA8888",
+	"size": {"w":36,"h":32},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:d113b2cce30b79abc7706b730e4c01dd:bd09a2782ae003dee1aac9aa2f561ddf:8d978bad4c3f82a9eaac116b284e702d$"
+}
+}
