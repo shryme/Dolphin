@@ -290,7 +290,8 @@ Play.prototype = {
 		this.unmuteMusicKey = this.game.input.keyboard.addKey(Phaser.Keyboard.I);
 		this.unmuteMusicKey.onDown.add(this.unmuteMusic, this);
 
-
+		this.pauseKey = this.game.input.keyboard.addKey(Phaser.Keyboard.P);
+		this.pauseKey.onDown.add(this.togglePause, this);
 
 
 
@@ -306,9 +307,18 @@ Play.prototype = {
 					this.overlapLayer.layer.data[i][j].alpha = 0;
 
 
-		console.log('Finished');
 		this.isReady = true;
 		this.loadingSprite.kill();
+
+		this.txtPaused = this.game.add.text(0, 0, 'PAUSE', { font: '137px Arial', fill: '#bb00ff' });
+
+		this.txtPaused.anchor.setTo(0.5, 0.5);
+		this.txtPaused.fixedToCamera = true;
+		this.txtPaused.cameraOffset.setTo(this.game.width / 2, this.game.height / 2);
+		this.txtPaused.visible = false;
+
+
+
 	},
 
 	create: function() {
@@ -324,6 +334,11 @@ Play.prototype = {
 	},
 
 	update: function() {
+
+		if (this.game.paused) {
+
+			return;
+		}
 
 		if (!this.isReady)
 			return;
@@ -460,6 +475,13 @@ Play.prototype = {
 	unmuteMusic: function() {
 		this.music.volume = 1;
 		this.game.customAudio.unmute();
+	},
+
+	togglePause: function() {
+		this.game.physics.arcade.isPaused = (this.game.physics.arcade.isPaused) ? false : true;
+		this.game.paused = this.game.physics.arcade.isPaused;
+		this.txtPaused.visible = this.game.paused;
+
 	},
 
 	addGravity: function(sprite, tile) {

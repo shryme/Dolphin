@@ -103,7 +103,7 @@ window.onload = function () {
 
   game.state.start('boot');
 };
-},{"./states/boot":17,"./states/gameover":18,"./states/menu":19,"./states/play":20,"./states/preload":21}],3:[function(require,module,exports){
+},{"./states/boot":18,"./states/gameover":19,"./states/menu":20,"./states/play":21,"./states/preload":22}],3:[function(require,module,exports){
 
 var Shark = require('../sprites/shark');
 
@@ -195,7 +195,7 @@ BasicEnemy.prototype = {
 
 module.exports = BasicEnemy;
 
-},{"../sprites/shark":15}],4:[function(require,module,exports){
+},{"../sprites/shark":16}],4:[function(require,module,exports){
 
 var Dolphin = require('../sprites/dolphin');
 
@@ -246,7 +246,7 @@ Friend.prototype = {
 
 module.exports = Friend;
 
-},{"../sprites/dolphin":10}],5:[function(require,module,exports){
+},{"../sprites/dolphin":11}],5:[function(require,module,exports){
 
 var Orca = require('../sprites/orca');
 
@@ -297,7 +297,7 @@ FriendOrca.prototype = {
 
 module.exports = FriendOrca;
 
-},{"../sprites/orca":12}],6:[function(require,module,exports){
+},{"../sprites/orca":13}],6:[function(require,module,exports){
 
 var Turtle = require('../sprites/turtle');
 
@@ -348,7 +348,7 @@ FriendTurtle.prototype = {
 
 module.exports = FriendTurtle;
 
-},{"../sprites/turtle":16}],7:[function(require,module,exports){
+},{"../sprites/turtle":17}],7:[function(require,module,exports){
 
 var Dolphin = require('../sprites/dolphin');
 
@@ -388,14 +388,16 @@ Player.prototype = {
 
 module.exports = Player;
 
-},{"../sprites/dolphin":10}],8:[function(require,module,exports){
+},{"../sprites/dolphin":11}],8:[function(require,module,exports){
 
 var Splash = require('./splash');
+var Sparkle = require('./sparkle');
 
 
 function Particles(game) {
 
 	this.splashParticle = new Splash(game);
+	this.sparkleParticle = new Sparkle(game);
 
 }
 
@@ -403,8 +405,13 @@ Particles.prototype.splash = function(sprite) {
 	this.splashParticle.start(sprite);
 }
 
+Particles.prototype.sparkle = function(sprite) {
+	this.sparkleParticle.start(sprite);
+}
+
 Particles.prototype.update = function() {
 	this.splashParticle.update();
+	this.sparkleParticle.update();
 }
 
 
@@ -418,7 +425,43 @@ module.exports = Particles;
 
 
 
-},{"./splash":9}],9:[function(require,module,exports){
+},{"./sparkle":9,"./splash":10}],9:[function(require,module,exports){
+
+function Sparkle(game) {
+	this.emitter = game.add.emitter(0, 0, 1000);
+	this.emitter.makeParticles('sparkle', ['sparkle1.png','sparkle2.png', 'sparkle3.png', 'sparkle4.png', 'sparkle5.png']);
+	this.emitter.minParticleSpeed.setTo(-200, -300);
+	this.emitter.maxParticleSpeed.setTo(200, -100);
+	this.emitter.gravity = 500;
+	this.emitter.alpha = 1;
+}
+
+Sparkle.prototype.start = function(sprite) {
+	this.emitter.x = sprite.x;
+	this.emitter.y = sprite.y;
+	this.emitter.start(true, 5000, null, 100);
+}
+
+Sparkle.prototype.update = function() {
+	var emitter = this.emitter;
+	this.emitter.forEachAlive( function(p) {
+		p.alpha = p.lifespan / emitter.lifespan;
+	});
+}
+
+
+module.exports = Sparkle;
+
+
+
+
+
+
+
+
+
+
+},{}],10:[function(require,module,exports){
 
 function Splash(game) {
 	this.emitter = game.add.emitter(0, 0, 1000);
@@ -455,7 +498,7 @@ module.exports = Splash;
 
 
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 
 function Dolphin(game, x, y, entity) {
 
@@ -842,7 +885,7 @@ module.exports = Dolphin;
 
 
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 
 function NextLevel(game, x, y, next) {
 
@@ -901,7 +944,7 @@ module.exports = NextLevel;
 
 
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 
 function Orca(game, x, y, entity) {
 
@@ -983,7 +1026,7 @@ module.exports = Orca;
 
 
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 
 function Powerup(game, x, y, useless, prop) {
 
@@ -1049,7 +1092,7 @@ module.exports = Powerup;
 
 
 
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 
 function Rock(game, x, y) {
 
@@ -1101,7 +1144,7 @@ module.exports = Rock;
 
 
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 
 function Shark(game, x, y, entity) {
 
@@ -1201,6 +1244,7 @@ Shark.prototype.move = function(target, speed) {
 Shark.prototype.hurt = function(dmg) {
 	this.hp -= dmg;
 	if (this.hp <= 0) {
+		this.game.customParticles.sparkle(this);
 		this.destroy();
 	}
 }
@@ -1218,7 +1262,7 @@ Shark.prototype.removeGravity = function() {
 module.exports = Shark;
 
 
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 
 function Turtle(game, x, y, entity) {
 
@@ -1297,7 +1341,7 @@ module.exports = Turtle;
 
 
 
-},{}],17:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 
 'use strict';
 
@@ -1317,7 +1361,7 @@ Boot.prototype = {
 
 module.exports = Boot;
 
-},{}],18:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 
 'use strict';
 function GameOver() {}
@@ -1339,7 +1383,7 @@ GameOver.prototype = {
 };
 module.exports = GameOver;
 
-},{}],19:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 
 'use strict';
 function Menu() {}
@@ -1376,7 +1420,7 @@ Menu.prototype = {
 
 module.exports = Menu;
 
-},{}],20:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 'use strict';
 
 var Player = require('../objects/entity/player');
@@ -1669,7 +1713,8 @@ Play.prototype = {
 		this.unmuteMusicKey = this.game.input.keyboard.addKey(Phaser.Keyboard.I);
 		this.unmuteMusicKey.onDown.add(this.unmuteMusic, this);
 
-
+		this.pauseKey = this.game.input.keyboard.addKey(Phaser.Keyboard.P);
+		this.pauseKey.onDown.add(this.togglePause, this);
 
 
 
@@ -1685,9 +1730,18 @@ Play.prototype = {
 					this.overlapLayer.layer.data[i][j].alpha = 0;
 
 
-		console.log('Finished');
 		this.isReady = true;
 		this.loadingSprite.kill();
+
+		this.txtPaused = this.game.add.text(0, 0, 'PAUSE', { font: '137px Arial', fill: '#bb00ff' });
+
+		this.txtPaused.anchor.setTo(0.5, 0.5);
+		this.txtPaused.fixedToCamera = true;
+		this.txtPaused.cameraOffset.setTo(this.game.width / 2, this.game.height / 2);
+		this.txtPaused.visible = false;
+
+
+
 	},
 
 	create: function() {
@@ -1703,6 +1757,11 @@ Play.prototype = {
 	},
 
 	update: function() {
+
+		if (this.game.paused) {
+
+			return;
+		}
 
 		if (!this.isReady)
 			return;
@@ -1841,6 +1900,13 @@ Play.prototype = {
 		this.game.customAudio.unmute();
 	},
 
+	togglePause: function() {
+		this.game.physics.arcade.isPaused = (this.game.physics.arcade.isPaused) ? false : true;
+		this.game.paused = this.game.physics.arcade.isPaused;
+		this.txtPaused.visible = this.game.paused;
+
+	},
+
 	addGravity: function(sprite, tile) {
 
 		if (tile.index === tileIndex.invisibleGravity || tile.index === tileIndex.visibleGravity) {
@@ -1925,7 +1991,7 @@ module.exports = Play;
 
 
 
-},{"../audio":1,"../objects/entity/basicEnemy":3,"../objects/entity/friend":4,"../objects/entity/friendOrca":5,"../objects/entity/friendTurtle":6,"../objects/entity/player":7,"../objects/particle/particles":8,"../objects/sprites/nextLevel":11,"../objects/sprites/powerup":13,"../objects/sprites/rock":14}],21:[function(require,module,exports){
+},{"../audio":1,"../objects/entity/basicEnemy":3,"../objects/entity/friend":4,"../objects/entity/friendOrca":5,"../objects/entity/friendTurtle":6,"../objects/entity/player":7,"../objects/particle/particles":8,"../objects/sprites/nextLevel":12,"../objects/sprites/powerup":14,"../objects/sprites/rock":15}],22:[function(require,module,exports){
 
 'use strict';
 function Preload() {
@@ -1968,6 +2034,8 @@ Preload.prototype = {
 		this.load.atlasJSONHash('waterdrops', 'assets/sprites/water_drops.png', 'assets/sprites/water_drops.json');
 		this.load.atlasJSONHash('waterwave', 'assets/sprites/water_wave.png', 'assets/sprites/water_wave.json');
 		this.load.atlasJSONHash('waterfall', 'assets/sprites/waterfall.png', 'assets/sprites/waterfall.json');
+
+		this.load.atlasJSONHash('sparkle', 'assets/sprites/sparkle.png', 'assets/sprites/sparkle.json');
 
 
 		this.load.audio('greenHills', 'assets/music/Green_Hills.mp3');
