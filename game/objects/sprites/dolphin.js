@@ -275,7 +275,7 @@ Dolphin.prototype.updateGravity = function() {
 
 Dolphin.prototype.addGravity = function(blockLayer, overlapLayer, listWater) {
 
-	if (!this.items.jump) {
+	if (!this.items.jump || (!this.isInGravity && Math.abs(this.body.velocity.y) < 200)) {
 		this.body.gravity.y = 50000;
 		return
 	}
