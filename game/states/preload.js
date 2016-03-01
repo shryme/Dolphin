@@ -61,7 +61,7 @@ Preload.prototype = {
 	},
 	update: function() {
 		//This wait until the sound is fully loaded, can comment to start faster without the sound ready!
-		if (this.cache.isSoundDecoded('ecco1_01') && this.ready === true)
+		// if (this.cache.isSoundDecoded('ecco1_01') && this.ready === true)
 			this.state.start('menu');
 	},
 	onLoadComplete: function() {
