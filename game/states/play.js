@@ -5,6 +5,8 @@ var Friend = require('../objects/entity/friend');
 var Shark = require('../objects/entity/basicEnemy');
 var Orca = require('../objects/entity/friendOrca');
 var Turtle = require('../objects/entity/friendTurtle');
+var GroupFish = require('../objects/entity/groupFish');
+
 
 var Powerup = require('../objects/sprites/powerup');
 var Rock = require('../objects/sprites/rock');
@@ -219,6 +221,9 @@ Play.prototype = {
 			else if (cur.name === 'music') {
 				this.music = this.game.add.audio(cur.properties.song);
 				this.music.play();
+			}
+			else if (cur.name === 'group_fish') {
+				new GroupFish(this.game, cur, cur.properties);
 			}
 
 		}
