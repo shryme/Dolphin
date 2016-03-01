@@ -1,0 +1,124 @@
+{"frames": [
+
+{
+	"filename": "fish10_1.png",
+	"frame": {"x":2,"y":19,"w":20,"h":11},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":20,"h":11},
+	"sourceSize": {"w":20,"h":11}
+},
+{
+	"filename": "fish11_1.png",
+	"frame": {"x":2,"y":2,"w":22,"h":15},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":22,"h":15},
+	"sourceSize": {"w":22,"h":15}
+},
+{
+	"filename": "fish12_1.png",
+	"frame": {"x":135,"y":2,"w":18,"h":7},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":7},
+	"sourceSize": {"w":18,"h":7}
+},
+{
+	"filename": "fish13_1.png",
+	"frame": {"x":26,"y":2,"w":23,"h":14},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":23,"h":14},
+	"sourceSize": {"w":23,"h":14}
+},
+{
+	"filename": "fish14_1.png",
+	"frame": {"x":51,"y":2,"w":23,"h":14},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":23,"h":14},
+	"sourceSize": {"w":23,"h":14}
+},
+{
+	"filename": "fish1_1.png",
+	"frame": {"x":61,"y":18,"w":16,"h":12},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":12},
+	"sourceSize": {"w":16,"h":12}
+},
+{
+	"filename": "fish2_1.png",
+	"frame": {"x":117,"y":2,"w":16,"h":8},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":8},
+	"sourceSize": {"w":16,"h":8}
+},
+{
+	"filename": "fish3_1.png",
+	"frame": {"x":120,"y":12,"w":19,"h":15},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":19,"h":15},
+	"sourceSize": {"w":19,"h":15}
+},
+{
+	"filename": "fish4_1.png",
+	"frame": {"x":76,"y":2,"w":19,"h":14},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":19,"h":14},
+	"sourceSize": {"w":19,"h":14}
+},
+{
+	"filename": "fish5_1.png",
+	"frame": {"x":79,"y":18,"w":19,"h":8},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":19,"h":8},
+	"sourceSize": {"w":19,"h":8}
+},
+{
+	"filename": "fish6_1.png",
+	"frame": {"x":97,"y":2,"w":18,"h":14},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":14},
+	"sourceSize": {"w":18,"h":14}
+},
+{
+	"filename": "fish7_1.png",
+	"frame": {"x":100,"y":18,"w":18,"h":8},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":8},
+	"sourceSize": {"w":18,"h":8}
+},
+{
+	"filename": "fish8_1.png",
+	"frame": {"x":42,"y":18,"w":17,"h":12},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":17,"h":12},
+	"sourceSize": {"w":17,"h":12}
+},
+{
+	"filename": "fish9_1.png",
+	"frame": {"x":24,"y":19,"w":16,"h":11},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":11},
+	"sourceSize": {"w":16,"h":11}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "fish.png",
+	"format": "RGBA8888",
+	"size": {"w":155,"h":32},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:a64afe2bdb4bbb7fa798efab8382e546:77c654ee08d9a511935f7359ddd757ca:8d6d90e8f48b9264619fb7c7934eace4$"
+}
+}
