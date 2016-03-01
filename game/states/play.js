@@ -116,17 +116,6 @@ Play.prototype = {
 
 	},
 
-	initializeAudio: function(song) {
-
-		this.music = this.game.add.audio(song);
-		this.music.play();
-
-
-		this.audio = new Audio(this.game);
-
-
-	},
-
 	preload: function() {
 		console.log('PRELOAD');
 		this.background = this.game.add.sprite(0, 0, 'preloader_background');
@@ -228,12 +217,13 @@ Play.prototype = {
 				this.groupRocks.add(rock);
 			}
 			else if (cur.name === 'music') {
-				this.initializeAudio(cur.properties.song);
+				this.music = this.game.add.audio(cur.properties.song);
+				this.music.play();
 			}
 
 		}
 
-		// this.initializeAudio();
+		this.audio = new Audio(this.game);
 
 		//Us
 		var spawn = this.map.objects.spawn[0];
