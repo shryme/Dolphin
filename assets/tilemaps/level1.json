@@ -244,14 +244,14 @@
                  "name":"music",
                  "properties":
                     {
-                     "song":"ecco1_cd_02"
+                     "song":"ecco1_04"
                     },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":142.667,
                  "x":11.6665,
-                 "y":29.33335
+                 "y":29.3333
                 }],
          "opacity":1,
          "type":"objectgroup",

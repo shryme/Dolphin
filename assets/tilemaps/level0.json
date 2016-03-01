@@ -1021,19 +1021,19 @@
                  "y":1274.33
                 }, 
                 {
-                 "height":41.3333333333333,
+                 "height":41.3333,
                  "id":55,
                  "name":"music",
                  "properties":
                     {
-                     "song":"ecco1_cd_02"
+                     "song":"ecco1_03"
                     },
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":142.666666666667,
-                 "x":8.66666666666666,
-                 "y":22.6666666666667
+                 "width":142.667,
+                 "x":8.66667,
+                 "y":22.6667
                 }],
          "opacity":1,
          "type":"objectgroup",

@@ -504,7 +504,7 @@
   <object id="54" name="rock" x="1376" y="1274.33" width="32" height="32"/>
   <object id="55" name="music" x="8.66667" y="22.6667" width="142.667" height="41.3333">
    <properties>
-    <property name="song" value="ecco1_cd_02"/>
+    <property name="song" value="ecco1_03"/>
    </properties>
   </object>
  </objectgroup>
