@@ -46,6 +46,11 @@ Preload.prototype = {
 
 		this.load.audio('greenHills', 'assets/music/Green_Hills.mp3');
 		this.load.audio('ecco1_cd_02', 'assets/music/ecco1_cd_02.mp3');
+		this.load.audio('ecco1_01', 'assets/music/ecco1_01.ogg');
+		this.load.audio('ecco1_02', 'assets/music/ecco1_02.ogg');
+		this.load.audio('ecco1_03', 'assets/music/ecco1_03.ogg');
+		this.load.audio('ecco1_04', 'assets/music/ecco1_04.ogg');
+
 
 		this.load.audio('sfx', 'assets/sound/sfx.ogg');
 
@@ -55,9 +60,9 @@ Preload.prototype = {
 		this.asset.cropEnabled = false;
 	},
 	update: function() {
-		if(!!this.ready) {
-			this.game.state.start('menu');
-		}
+		//This wait until the sound is fully loaded, can comment to start faster without the sound ready!
+		if (this.cache.isSoundDecoded('ecco1_01') && this.ready === true)
+			this.state.start('menu');
 	},
 	onLoadComplete: function() {
 		this.ready = true;
