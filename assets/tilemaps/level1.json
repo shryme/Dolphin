@@ -252,6 +252,57 @@
                  "width":142.667,
                  "x":11.6665,
                  "y":29.3333
+                }, 
+                {
+                 "height":147,
+                 "id":57,
+                 "name":"group_fish",
+                 "properties":
+                    {
+                     "count":"10",
+                     "nervous":"false",
+                     "sprite":"fish1_1"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":239,
+                 "x":560,
+                 "y":606
+                }, 
+                {
+                 "height":304.833333333333,
+                 "id":59,
+                 "name":"group_fish",
+                 "properties":
+                    {
+                     "count":"30",
+                     "nervous":"false",
+                     "sprite":"fish3_1"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":528.5,
+                 "x":571.5,
+                 "y":916.5
+                }, 
+                {
+                 "height":185.749833333333,
+                 "id":60,
+                 "name":"group_fish",
+                 "properties":
+                    {
+                     "count":"10",
+                     "nervous":"false",
+                     "sprite":"fish14_1"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":364.25,
+                 "x":722.416666666667,
+                 "y":1306.66666666667
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -260,7 +311,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":57,
+ "nextobjectid":61,
  "orientation":"orthogonal",
  "properties":
     {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" nextobjectid="57">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" nextobjectid="61">
  <tileset firstgid="1" name="basic" tilewidth="32" tileheight="32" tilecount="1800">
   <image source="tileset.png" width="960" height="1920"/>
  </tileset>
@@ -451,6 +451,27 @@
   <object id="56" name="music" x="11.6665" y="29.3333" width="142.667" height="41.3333">
    <properties>
     <property name="song" value="ecco1_04"/>
+   </properties>
+  </object>
+  <object id="57" name="group_fish" x="560" y="606" width="239" height="147">
+   <properties>
+    <property name="count" value="10"/>
+    <property name="nervous" value="false"/>
+    <property name="sprite" value="fish1_1"/>
+   </properties>
+  </object>
+  <object id="59" name="group_fish" x="571.5" y="916.5" width="528.5" height="304.833">
+   <properties>
+    <property name="count" value="30"/>
+    <property name="nervous" value="false"/>
+    <property name="sprite" value="fish3_1"/>
+   </properties>
+  </object>
+  <object id="60" name="group_fish" x="722.417" y="1306.67" width="364.25" height="185.75">
+   <properties>
+    <property name="count" value="10"/>
+    <property name="nervous" value="false"/>
+    <property name="sprite" value="fish14_1"/>
    </properties>
   </object>
  </objectgroup>
