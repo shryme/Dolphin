@@ -36,6 +36,7 @@ Preload.prototype = {
 		this.load.atlasJSONHash('turtle', 'assets/sprites/turtle.png', 'assets/sprites/turtle.json');
 		this.load.atlasJSONHash('powerup', 'assets/sprites/powerup.png', 'assets/sprites/powerup.json');
 		this.load.atlasJSONHash('objects', 'assets/sprites/objects.png', 'assets/sprites/objects.json');
+		this.load.atlasJSONHash('fish', 'assets/sprites/fish.png', 'assets/sprites/fish.json');
 
 		this.load.atlasJSONHash('waterdrops', 'assets/sprites/water_drops.png', 'assets/sprites/water_drops.json');
 		this.load.atlasJSONHash('waterwave', 'assets/sprites/water_wave.png', 'assets/sprites/water_wave.json');
