@@ -87,6 +87,16 @@ module.exports = function (grunt) {
           inline : true
         }
       },
+    },
+    uglify: {
+      options: {
+        mangle: false
+      },
+      my_target: {
+        files: {
+          '../DolphinCrx/dist/js/game.js': ['../DolphinCrx/dist/js/game.js']
+        }
+      }
     }
 
   });
@@ -95,7 +105,7 @@ module.exports = function (grunt) {
   grunt.registerTask('serve', ['build', 'connect:livereload', 'open', 'watch']);
   grunt.registerTask('default', ['serve']);
   grunt.registerTask('prod', ['build', 'copy']);
-  grunt.registerTask('gen', ['clean', 'copy', 'preprocess']);
+  grunt.registerTask('gen', ['clean', 'copy', 'preprocess', 'uglify']);
 
   grunt.registerTask('buildBootstrapper', 'builds the bootstrapper file correctly', function() {
     var stateFiles = grunt.file.expand('game/states/*.js');
