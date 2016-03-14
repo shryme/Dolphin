@@ -91,7 +91,7 @@ module.exports = Audio;
 
 //global variables
 window.onload = function () {
-  var game = new Phaser.Game(900, 600, Phaser.AUTO, 'netmag-phaser');
+  var game = new Phaser.Game(900, 600, Phaser.CANVAS, 'netmag-phaser');
 
   // Game States
   game.state.add('boot', require('./states/boot'));
@@ -103,6 +103,7 @@ window.onload = function () {
 
   game.state.start('boot');
 };
+
 },{"./states/boot":20,"./states/gameover":21,"./states/menu":22,"./states/play":23,"./states/preload":24}],3:[function(require,module,exports){
 
 var Shark = require('../sprites/shark');
@@ -1682,6 +1683,8 @@ Play.prototype = {
 		this.background.height = this.game.height;
 		this.background.width = this.game.width;
 
+		this.game.time.advancedTiming = true;
+
 	},
 
 	loadEverything: function() {
@@ -1981,6 +1984,8 @@ Play.prototype = {
 
 	render: function() {
 
+		this.game.debug.text('FPS: ' + this.game.time.fps, 795, 32, '#bb00ff');
+
 		if (this.showDebug) {
 
 			this.game.debug.bodyInfo(this.player.sprite, 32, 32);
@@ -1996,6 +2001,7 @@ Play.prototype = {
 			});
 
 		}
+
 
 	},
 
