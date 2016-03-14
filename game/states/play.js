@@ -18,6 +18,7 @@ var NextLevel = require('../objects/sprites/nextLevel');
 var Audio = require('../audio');
 
 
+
 var tileIndex = {
 	empty: -1,
 	invisibleGravity: 900,
@@ -133,8 +134,9 @@ Play.prototype = {
 	loadEverything: function() {
 		console.log('create');
 
+		//@exclude
 		this.showDebug = true;
-
+		//@endexclude
 
 		this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
@@ -268,8 +270,10 @@ Play.prototype = {
 		//Add camera to follow our player
 		this.game.camera.follow(this.player.sprite);
 
+		//@exclude
 		this.debugKey = this.game.input.keyboard.addKey(Phaser.Keyboard.Q);
 		this.debugKey.onDown.add(this.toggleDebug, this);
+		//@endexclude
 
 		this.resetKey = this.game.input.keyboard.addKey(Phaser.Keyboard.R);
 		this.resetKey.onDown.add(this.resetGame, this);
@@ -427,6 +431,7 @@ Play.prototype = {
 
 	render: function() {
 
+		//@exclude
 		this.game.debug.text('FPS: ' + this.game.time.fps, 795, 32, '#bb00ff');
 
 		if (this.showDebug) {
@@ -444,6 +449,7 @@ Play.prototype = {
 			});
 
 		}
+		//@endexclude
 
 
 	},
@@ -452,12 +458,14 @@ Play.prototype = {
 		return dolphin.processCallback(enemy);
 	},
 
+	//@exclude
 	toggleDebug: function() {
 		this.showDebug = !this.showDebug;
 
 		if (!this.showDebug)
 			this.game.debug.reset();
 	},
+	//@endexclude
 
 	resetGame: function() {
 		this.music.stop();
