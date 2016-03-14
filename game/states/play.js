@@ -126,6 +126,8 @@ Play.prototype = {
 		this.background.height = this.game.height;
 		this.background.width = this.game.width;
 
+		this.game.time.advancedTiming = true;
+
 	},
 
 	loadEverything: function() {
@@ -425,6 +427,8 @@ Play.prototype = {
 
 	render: function() {
 
+		this.game.debug.text('FPS: ' + this.game.time.fps, 795, 32, '#bb00ff');
+
 		if (this.showDebug) {
 
 			this.game.debug.bodyInfo(this.player.sprite, 32, 32);
@@ -440,6 +444,7 @@ Play.prototype = {
 			});
 
 		}
+
 
 	},
 
